@@ -1,87 +1,60 @@
+Q1-C7
+Question: What type of MAC address is 01-00-5e-00-00-01? A. Unicast MAC address B. Multicast MAC address C. Broadcast MAC address D. Anycast MAC address Correct Answer: B
 
----
+Explanation: MAC addresses are categorized by their first octet:
 
-## 1. Switch Forwarding Behaviors
+Unicast: The least significant bit of the first octet is 0.
 
-**Question:** Which of the following are the basic data frame forwarding behaviors of a layer 2 switch?
-**Correct Answer: A, B, and C**
+Multicast: The least significant bit of the first octet is 1. Specifically, IPv4 multicast MAC addresses always start with the prefix 01-00-5e.
 
-### Why A, B, and C are correct:
+Broadcast: All bits are 1 (FF-FF-FF-FF-FF-FF).
 
-A Layer 2 switch makes decisions based on the MAC address table:
+The address 01-00-5e-00-00-01 is the standard multicast MAC used for "All Systems on this Subnet" (mapping to IP 224.0.0.1).
 
-* **A (Flooding):** If the destination MAC is not in the table, or if it is a broadcast/multicast frame, the switch sends it out of all ports except the one it arrived on.
-* **B (Forwarding):** If the destination MAC is known and associated with a specific port, the switch sends it directly to that port.
-* **C (Discarding):** If the destination MAC is on the same port the frame arrived from (common in legacy hub connections), the switch drops the frame to prevent loops.
+Q2-C7
+Question: Which of the following actions does a switch take by default after it receives an unknown unicast frame? A. Learns the mapping... and discards this data frame. B. Learns the mapping between the source MAC address and interface that receives this data frame, and floods this data frame. C. Learns the mapping... and forwards this data frame based on the MAC address table. D. Does not learn... Correct Answer: B
 
----
+Explanation: A switch performs three main operations when a frame arrives:
 
-## 2. Default VLAN (PVID)
+Learning: It records the Source MAC and the incoming port in its MAC Address Table.
 
-**Question:** By default, what is the default VLAN (PVID) for all interfaces on a Huawei switch?
-**Correct Answer: A. 1**
+Lookup: It looks for the Destination MAC in its table.
 
-### Why A is correct:
+Forwarding/Flooding: Since the Destination MAC is "Unknown" (not in the table), the switch must flood the frame out of all ports except the one it arrived on to ensure it reaches the destination.
 
-Out of the box, every Huawei switch is configured with **VLAN 1** as the default management VLAN. Every physical port is assigned a Port VLAN ID (PVID) of 1 until an administrator manually changes it.
+Q3-C7
+Question: Which of the following ARP packets is used to request the MAC address corresponding to an IP address? A. ARP Request B. ARP Reply C. RARP Request D. RARP Reply Correct Answer: A
 
----
+Explanation: As covered in earlier chapters, the ARP Request is the "question" sent by a host asking for a MAC address.
 
-## 3. Access Port Tagging Behavior
+ARP Request: "I have IP X, who has IP Y? Send me your MAC." (Broadcast)
 
-**Question:** When an Access interface receives a frame with a VLAN tag that matches its PVID, what does it do?
-**Correct Answer: A. Strip the tag and forward the frame.**
+ARP Reply: "I am IP Y, here is my MAC." (Unicast)
 
-### Why A is correct:
+RARP: Reverse ARP is used to find an IP if you only have a MAC (mostly obsolete).
 
-**Access ports** are designed to connect to end-user devices (PCs, printers) that do not understand VLAN tags.
+Q4-C7
+Question: Which of the following fields are contained in an Ethernet frame in the IEEE 802.3 format? (Multiple Choice) A. Length B. Destination MAC C. Source MAC D. FCS Correct Answer: ABCD
 
-1. The port checks if the tag matches its assigned PVID.
-2. If it matches, it **removes (strips)** the tag before sending the raw Ethernet frame to the host.
-3. This ensures the end-host receives a standard, readable frame.
+Explanation: The IEEE 802.3 frame structure includes:
 
----
+Destination MAC (6 bytes): Where the frame is going.
 
-## 4. Trunk Port Functionality
+Source MAC (6 bytes): Where the frame came from.
 
-**Question:** Which of the following statements regarding Trunk interfaces are true?
-**Correct Answer: B and C**
+Length (2 bytes): In 802.3, this field indicates the length of the data (In Ethernet II, this is the "Type" field).
 
-### Why these are correct:
+Data/Payload: The encapsulated packet.
 
-* **B:** A Trunk port can carry traffic for **multiple VLANs** simultaneously, allowing different VLANs to communicate across multiple switches over a single physical link.
-* **C:** When a frame is sent over a Trunk link, the switch adds a **VLAN tag** (802.1Q) so the receiving switch knows which VLAN the frame belongs to.
+FCS (Frame Check Sequence): A 4-byte CRC used to detect errors during transmission.
 
-### Why the others are incorrect:
+Q5-C7
+Question: A switch floods unknown unicast frames and frames whose destination MAC address is a broadcast MAC address. A. Right B. Wrong Correct Answer: Right
 
-* **A:** Trunk ports are generally used to connect **switches to switches** or switches to routers, not directly to terminal hosts (PCs).
-* **D:** Trunk ports do not strip tags by default for all VLANs; they only strip the tag for the **Native VLAN** (the PVID).
+Explanation: This is a fundamental rule of switch behavior called BUM traffic handling (Broadcast, Unknown Unicast, and Multicast).
 
----
+Broadcast: Must go to everyone.
 
-## 5. VLAN ID Range
+Unknown Unicast: The switch doesn't know where the destination is, so it must flood it to find it.
 
-**Question:** What is the maximum number of VLANs that can be defined in the IEEE 802.1Q standard?
-**Correct Answer: B. 4094**
-
-### Why B is correct:
-
-The VLAN ID field in the 802.1Q header is **12 bits** long.
-
-*  possible values.
-* **VLAN 0** and **VLAN 4095** are reserved for system use.
-* This leaves **4094** usable VLAN IDs (1–4094).
-
----
-
-## 6. Layer 3 Switching (VLANIF)
-
-**Question:** To enable communication between different VLANs, a Layer 3 device (like a Layer 3 switch or router) is required.
-**Correct Answer: Right**
-
-### Why "Right" is correct:
-
-VLANs are Layer 2 broadcast domains. By design, traffic cannot move from one VLAN to another at Layer 2. To bridge the gap, you need a **Layer 3** device to route the packets. On a switch, this is typically done using a **VLANIF interface**, which acts as a virtual gateway for each VLAN.
-
----
-
+Multicast: By default (without IGMP Snooping), a switch treats multicast like a broadcast and floods it.

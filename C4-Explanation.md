@@ -1,83 +1,102 @@
+Based on the screenshot and your specific request, here is the explanation for **Q1-C4**.
 
----
-
-## 1. Configurable Host Addresses
-
-**Question:** Which of the following IP addresses can be manually configured on a host interface?
-**Correct Answer: A and C**
-
-### Why A and C are correct:
-
-A host interface can be configured with standard **Unicast** addresses that belong to Class A, B, or C.
-
-* **A (192.168.1.1):** This is a standard Private Class C address. It is perfectly valid for local network host configuration.
-* **C (10.0.0.1):** This is a standard Private Class A address. It is commonly used in large enterprise local networks.
-
-### Why the others are incorrect:
-
-* **B (127.0.0.1):** This is the **Loopback address**. It is reserved by the system to refer to "localhost" and cannot be manually assigned as the primary IP of a physical network interface.
-* **D (224.0.0.18):** This is a **Multicast address** (specifically used for VRRP). Multicast addresses (224.0.0.0 to 239.255.255.255) are used for group communication and cannot be assigned as a host's unique interface address.
-
----
-
-## 2. Private IP Address Ranges
+### **Q1-C4**
 
 **Question:** Which of the following is a private IP address?
-**Correct Answer: A, B, and D**
-
-### Why these are correct:
-
-RFC 1918 defines three specific blocks of IPv4 addresses for private use:
-
-* **A (10.0.0.0 – 10.255.255.255):** The Class A private range.
-* **B (172.16.0.0 – 172.31.255.255):** The Class B private range.
-* **D (192.168.0.0 – 192.168.255.255):** The Class C private range.
-
-### Why C is incorrect:
-
-* **C (192.172.0.0):** This address falls outside of the 192.168.x.x range. It is a **Public** IP address and cannot be used for private internal networking without potentially causing conflicts on the internet.
+**A.** 192.169.16.1
+**B.** 172.17.1.254
+**C.** 239.0.0.8
+**D.** 172.32.16.254
+**Correct Answer: B**
 
 ---
 
-## 3. Subnet Host Calculation (/30)
+### **Detailed Explanation**
 
-**Question:** How many usable host IP addresses are there in a subnet with the mask 255.255.255.252?
-**Correct Answer: B. 2**
+To identify the correct answer, you must remember the three specific ranges reserved by **RFC 1918** for private internal networks. Any IP address falling outside these ranges is considered a Public address (routable on the internet) or a Multicast address.
 
-### Why B is correct:
+#### **The Reserved Private IP Ranges:**
 
-The mask 255.255.255.252 (or /30 in CIDR) leaves only **2 bits** for the host portion of the address.
-
-* **Total addresses:** .
-* **Usable addresses:** To find usable hosts, you must subtract **2** (one for the Network ID and one for the Broadcast address).
-* **Calculation:** .
-This subnet is commonly used for point-to-point links between two routers where only two IPs are needed.
+1. **Class A:** `10.0.0.0` to `10.255.255.255`
+2. **Class B:** `172.16.0.0` to `172.31.255.255`
+3. **Class C:** `192.168.0.0` to `192.168.255.255`
 
 ---
 
-## 4. ICMP Echo Packets
+#### **Analysis of Options:**
 
-**Question:** The `ping` command uses ICMP Echo Request and Echo Reply packets to test the reachability of a destination host.
+* **A. 192.169.16.1:** This is **Public**. The private Class C range ends at 192.168.x.x. Since this is 169, it is outside the private range.
+* **B. 172.17.1.254 (Correct):** This is **Private**. It falls within the Class B private range (`172.16.x.x` through `172.31.x.x`). 17 is between 16 and 31.
+* **C. 239.0.0.8:** This is a **Multicast** address (Class D). Class D ranges from `224.0.0.0` to `239.255.255.255`.
+* **D. 172.32.16.254:** This is **Public**. The private Class B range ends exactly at 172.**31**.x.x. Therefore, 172.32 is a public address.
+
+---
+
+### **Q2-C4**
+
+**Question:** How many IP addresses are available in network segment 172.16.0.0/30?
+**A.** 1
+**B.** 4
+**C.** 2
+**D.** 8
+**Correct Answer: C**
+
+**Explanation:**
+To find the number of **available** (usable) host addresses, we use the formula , where  is the number of host bits.
+
+1. A **/30** prefix means 30 bits are for the network, leaving **2 bits** for hosts ().
+2. Total addresses = .
+3. We must subtract **2** (one for the Network ID `172.16.0.0` and one for the Broadcast address `172.16.0.3`).
+4. Available host addresses = .
+*Note: /30 subnets are commonly used for point-to-point links between two routers.*
+
+---
+
+### **Q3-C4**
+
+**Question:** Which of the following ICMP packets is used to detect the connectivity between the source and destination IP addresses?
+**A.** ICMP Redirect
+**B.** ICMP Echo
+**C.** ICMP port unreachable
+**D.** ICMP host unreachable
+**Correct Answer: B**
+
+**Explanation:**
+The `ping` utility uses **ICMP Echo** messages to test reachability.
+
+* The source sends an **ICMP Echo Request**.
+* The destination responds with an **ICMP Echo Reply**.
+If the Echo Reply is received, connectivity is confirmed. Options C and D are "Destination Unreachable" error messages, and Option A is used by routers to inform a host of a better path, not to test connectivity.
+
+---
+
+### **Q4-C4**
+
+**Question:** Which of the following IP addresses can be manually configured and used by host interfaces? (Multiple Choice)
+**A.** 10.2.3.4
+**B.** 127.0.0.1
+**C.** 224.0.0.18
+**D.** 192.168.100.254
+**Correct Answer: AD**
+
+**Explanation:**
+
+* **A (10.2.3.4):** This is a standard Class A private unicast address. It is valid for a host.
+* **B (127.0.0.1):** This is the **Loopback** address. It is reserved for internal testing within a device and cannot be assigned to a physical host interface.
+* **C (224.0.0.18):** This is a **Multicast** address (Class D). These are used for sending data to a group and cannot be assigned as a unique IP to a host interface.
+* **D (192.168.100.254):** This is a standard Class C private unicast address. It is valid for a host.
+
+---
+
+### **Q5-C4**
+
+**Question:** The router discards packets with a TTL value of 0.
+**A.** Right
+**B.** Wrong
 **Correct Answer: Right**
 
-### Why "Right" is correct:
-
-The `ping` utility is the most common diagnostic tool for network connectivity. It works by sending an **ICMP Echo Request** (Type 8) to a target. If the target is active and reachable, it responds with an **ICMP Echo Reply** (Type 0). Successful completion of this exchange confirms basic Layer 3 connectivity.
-
----
-
-## 5. TTL and Packet Discarding
-
-**Question:** When a router receives an IP packet with a TTL (Time to Live) value of 1, it will discard the packet and send an ICMP "Time Exceeded" message to the source.
-**Correct Answer: Right**
-
-### Why "Right" is correct:
-
-The TTL field is a safety mechanism to prevent packets from looping infinitely.
-
-1. Every time a packet passes through a router, the router **decrements** the TTL by 1.
-2. If a router receives a packet with **TTL = 1**, it decrements it to **0**.
-3. Since a packet cannot be forwarded with a TTL of 0, the router **discards** it and notifies the sender using an ICMP "Time Exceeded" error message.
+**Explanation:**
+The **TTL (Time to Live)** field is a mechanism to prevent packets from looping infinitely in a network. Every router that processes a packet decrements (subtracts 1) the TTL value. If a router receives a packet and the TTL becomes **0**, the router must discard the packet and typically sends an **ICMP Time Exceeded** message back to the source.
 
 ---
 

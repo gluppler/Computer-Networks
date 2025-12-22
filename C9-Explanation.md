@@ -1,84 +1,96 @@
 
 ---
 
-## 1. ACL Matching Order
+### **Q1-C9**
 
-**Question:** When a router processes an ACL, in what order does it match the rules?
-**Correct Answer: A. Based on the rule ID in ascending order.**
+**Question:** The bridge IDs of SW1, SW2, SW3, and SW4 are 4096.4c1f-aabc-102a, 4096.4c1f-aabc-102b, 4096.4c1f-aabc-001a and 8192.4c1f-aabc-112b, respectively. If the four switches are on the same Layer 2 network and have STP enabled, which switch acts as the root bridge?
+**A.** SW1
+**B.** SW3
+**C.** SW2
+**D.** SW4
+**Correct Answer: B**
 
-### Why A is correct:
+**Explanation:**
+The **Root Bridge** is elected based on the **lowest Bridge ID (BID)**. The BID consists of two parts: **Priority** and **MAC Address**.
 
-By default, Huawei devices process ACL rules based on the **Rule ID** (usually increments of 5 or 10, such as 5, 10, 15). The router starts with the smallest ID and moves upward. Once a packet matches a rule, the action (Permit or Deny) is taken, and the router stops checking further rules for that packet.
+1. **Compare Priorities:** SW1, SW2, and SW3 all have a priority of **4096**. SW4 has **8192**, so it is immediately eliminated.
+2. **Compare MAC Addresses:** Since the priorities tie, we look at the MAC addresses:
+* SW1: `4c1f-aabc-102a`
+* SW2: `4c1f-aabc-102b`
+* SW3: **`4c1f-aabc-001a`**
 
-### Why the others are incorrect:
 
-* **B:** Rules are not processed in descending order; that would ignore the priority of the first-created rules.
-* **C:** While many systems use "Top-to-Bottom," the technical mechanism in VRP is the numerical value of the Rule ID.
-* **D:** Random matching would make security policies unpredictable and ineffective.
-
----
-
-## 2. Basic ACL vs. Advanced ACL
-
-**Question:** What is the range for a basic ACL?
-**Correct Answer: B. 2000–2999**
-
-### Why B is correct:
-
-Huawei VRP categorizes ACLs by number to define their capabilities:
-
-* **2000–2999:** **Basic ACLs.** These can only filter based on the **Source IP Address**.
-* **3000–3999:** **Advanced ACLs.** These can filter based on Source IP, Destination IP, Protocol (TCP/UDP), and Port numbers.
-* **4000–4999:** Layer 2 ACLs (based on MAC addresses).
+3. SW3 has the lowest MAC address (001a is smaller than 102a/102b). Therefore, **SW3** is elected as the Root Bridge.
 
 ---
 
-## 3. NAT Functionality
+### **Q2-C9**
 
-**Question:** Which of the following are advantages of NAT?
-**Correct Answer: A, B, and C**
+**Question:** What is the default Forward Delay value in STP?
+**A.** 30s
+**B.** 15s
+**C.** 20s
+**D.** 2s
+**Correct Answer: B**
 
-### Why these are correct:
+**Explanation:**
+STP uses specific timers to ensure the network is loop-free before forwarding data:
 
-* **A (Address Conservation):** NAT allows hundreds of internal devices to use just one (or a few) public IP addresses, slowing the exhaustion of IPv4 addresses.
-* **B (Security):** By hiding internal private IP addresses from the public internet, NAT provides a level of "security through obscurity."
-* **C (Flexibility):** NAT allows internal networks to use any private addressing scheme without needing to change it if the ISP or public IP changes.
-
----
-
-## 4. NAPT (Network Address Port Translation)
-
-**Question:** NAPT allows multiple private IP addresses to be mapped to the same public IP address.
-**Correct Answer: Right**
-
-### Why "Right" is correct:
-
-NAPT (also known as "PAT" or "NAT Overload") is the most common form of NAT. It uses **Layer 4 Port Numbers** to keep track of which internal device belongs to which session. This allows an almost unlimited number of internal hosts to "hide" behind a single public IP simultaneously.
+* **Hello Time:** 2 seconds (interval between BPDUs).
+* **Max Age:** 20 seconds (how long a switch waits before declaring a neighbor down).
+* **Forward Delay:** **15 seconds**.
+* *Note:* A port spends 15s in the **Listening** state and 15s in the **Learning** state, totaling 30 seconds of "Forward Delay" before reaching the Forwarding state.
 
 ---
 
-## 5. NAT Server (Port Forwarding)
+### **Q3-C9**
 
-**Question:** The `nat server` command is used to allow external users to access an internal server.
-**Correct Answer: Right**
+**Question:** The root ID, bridge ID, interface ID, and root path cost (RPC) are the main fields used to determine priorities of configuration BPDUs. To select a superior configuration BPDU, in which of the following sequences does a switch compare these fields?
+**A.** Interface ID, root ID, bridge ID, and RPC
+**B.** RPC, root ID, bridge ID, and interface ID
+**C.** Root ID, bridge ID, interface ID, and RPC
+**D.** Root ID, RPC, bridge ID, and interface ID
+**Correct Answer: D**
 
-### Why "Right" is correct:
+**Explanation:**
+When a switch receives a BPDU, it uses the **"Best BPDU Algorithm"** (also called the 4-step decision process). It compares fields in this strict order until a tie is broken:
 
-Normally, NAT blocks unsolicited incoming traffic. To host a web server or mail server inside a private network, you must configure a **NAT Server** (Static NAT/Port Forwarding). This tells the router: "If traffic arrives on Public Port 80, send it specifically to Internal IP 192.168.1.10."
+1. **Root ID:** Lowest Root BID wins.
+2. **RPC:** Lowest Root Path Cost (shortest path to the root) wins.
+3. **Bridge ID:** Lowest Sender BID (if costs are equal) wins.
+4. **Interface ID:** Lowest Sender Port ID (if everything else ties) wins.
+
+---
+
+### **Q4-C9**
+
+**Question:** Which of the following fields are contained in a configuration BPDU? (Multiple Choice)
+**A.** Forward Delay
+**B.** Port ID
+**C.** Root ID
+**D.** Bridge ID
+**Correct Answer: ABCD**
+
+**Explanation:**
+A **Configuration BPDU** is the heartbeat of STP. It contains all the necessary parameters to elect the root and calculate the topology:
+
+* **Root ID:** ID of the current Root Bridge.
+* **Bridge ID:** ID of the switch sending the BPDU.
+* **Port ID:** ID of the port sending the BPDU.
+* **RPC:** Cost to reach the Root.
+* **Timers:** Hello Time, Max Age, and **Forward Delay**.
 
 ---
 
-## 6. Wildcard Masks in ACLs
+### **Q5-C9**
 
-**Question:** In an ACL rule, what does a wildcard mask bit of "0" mean?
-**Correct Answer: A. The corresponding bit must be checked (must match).**
+**Question:** By default, a switch runs RSTP.
+**A.** Right
+**B.** Wrong
+**Correct Answer: Wrong**
 
-### Why A is correct:
-
-Wildcard masks are the opposite of subnet masks:
-
-* **0:** "Check" — The bit in the IP address must exactly match the bit in the rule.
-* **1:** "Ignore" — Any value in this bit position is acceptable.
-* Example: `192.168.1.0 0.0.0.255` means the router checks the first three octets exactly but ignores the last one.
+**Explanation:**
+On many Huawei switches (VRP), the default Spanning Tree mode is actually **MSTP (Multiple Spanning Tree Protocol)**. While MSTP is compatible with RSTP, it is a different mode. Therefore, the statement that it runs RSTP "by default" is incorrect. You must use the command `stp mode rstp` to specifically enable RSTP.
 
 ---
+

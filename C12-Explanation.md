@@ -1,83 +1,90 @@
 
+---
+
+### **Q1-C12**
+
+**Question:** What is the default increment of ACL rule IDs?
+**A.** 20
+**B.** 15
+**C.** 5
+**D.** 10
+**Correct Answer: C**
+
+**Explanation:**
+In Huawei VRP, ACL rules are identified by IDs (e.g., rule 5, rule 10). The **default increment is 5**.
+
+* This gap allows administrators to insert new rules between existing ones (for example, inserting a rule with ID 7 between 5 and 10) without having to delete and recreate the entire list.
+* This is crucial because ACLs are processed from top to bottom.
 
 ---
 
-## 1. Traditional vs. Automated Management
+### **Q2-C12**
 
-**Question:** Which of the following is a disadvantage of traditional network management (manual CLI configuration)?
-**Correct Answer: A. High risk of human error and low efficiency.**
+**Question:** What is the number range of advanced ACLs?
+**A.** 4000-4999
+**B.** 3000-3999
+**C.** 2000-2999
+**D.** 6000-6999
+**Correct Answer: B**
 
-### Why A is correct:
+**Explanation:**
+Huawei classifies ACLs into specific number ranges based on their capabilities:
 
-In traditional networking, administrators log into devices one by one to type commands. This process is:
-
-* **Error-Prone:** A single typo in a critical command can take down an entire network segment.
-* **Slow:** Scaling a configuration change across 100 routers manually takes hours or days.
-* **Inconsistent:** Manual entry often leads to "configuration drift," where different devices end up with slightly different settings over time.
-
-### Why the others are incorrect:
-
-* **B & C:** These usually describe **Automation** or **SDN** advantages (centralized control and fast deployment).
-* **D:** Traditional management actually has *lower* initial software costs compared to expensive automation platforms, though the labor cost is much higher.
+* **2000–2999: Basic ACLs** (Filters based only on Source IP).
+* **3000–3999: Advanced ACLs** (Filters based on Source/Destination IP, Protocol, and Port numbers).
+* **4000–4999: Layer 2 ACLs** (Filters based on Source/Destination MAC and Ethernet Type).
 
 ---
 
-## 2. Python in Networking
+### **Q3-C12**
 
-**Question:** Why is Python the most popular language for network automation?
-**Correct Answer: A, B, and C**
+**Question:** If the number of an ACL is 4010, which of the following fields can the ACL match?
+**A.** Source IP address
+**B.** Source IP address and destination IP address
+**C.** Source MAC address, destination MAC address, and Layer 2 protocol type
+**D.** Packet header and offset
+**Correct Answer: C**
 
-### Why these are correct:
-
-Python has become the industry standard for "NetDevOps" because:
-
-* **A (Simplicity):** It has a clean, readable syntax that is easy for traditional network engineers (who may not be programmers) to learn.
-* **B (Libraries):** It has powerful libraries specifically for networking, such as **Netmiko** (for CLI), **NAPALM**, and **PyEZ**.
-* **C (Platform Support):** Almost all modern network operating systems (like Huawei VRP, Cisco IOS XE) support Python scripts or provide APIs that Python can easily interact with.
-
----
-
-## 3. RESTful APIs
-
-**Question:** What does a RESTful API use to communicate between a controller and a network device?
-**Correct Answer: B. HTTP/HTTPS**
-
-### Why B is correct:
-
-REST (Representational State Transfer) is a set of rules for web-based communication. It uses standard web protocols—**HTTP** and **HTTPS**—to send and receive data. This allows network controllers to manage devices using common web methods like `GET` (to read config), `POST` (to create config), and `DELETE`.
+**Explanation:**
+As noted in Q2, the range **4000–4999** is reserved for **Layer 2 ACLs**. Unlike Basic or Advanced ACLs which look at Layer 3 (IP) and Layer 4 (Port) information, Layer 2 ACLs focus on the Ethernet frame header. They are used to permit or deny traffic based on physical hardware addresses (MAC) and the protocol type field in the frame.
 
 ---
 
-## 4. JSON and XML Data Formats
+### **Q4-C12**
 
-**Question:** JSON and XML are commonly used to format data sent via APIs because they are machine-readable.
+**Question:** Which of the following packets can match the ACL rule: `rule 1 permit tcp source any destination 192.168.1.1 0.0.0.0 destination-port eq 80`? (Multiple Choice)
+**A.** Source IP: 10.1.1.1; Dest IP: 192.168.1.2; Dest Port: 80; Protocol: TCP
+**B.** Source IP: 10.1.1.1; Dest IP: 192.168.1.1; Dest Port: 80; Protocol: UDP
+**C.** Source IP: 10.1.1.1; Dest IP: 192.168.1.1; Dest Port: 80; Protocol: TCP
+**D.** Source IP: 10.0.0.1; Dest IP: 192.168.1.1; Dest Port: 80; Protocol: TCP
+**Correct Answer: CD**
+
+**Explanation:**
+Let's break down the rule requirements:
+
+1. **Protocol:** Must be **TCP**. (Eliminates B, which is UDP).
+2. **Source:** `any` (Any source IP is fine).
+3. **Destination IP:** `192.168.1.1 0.0.0.0` (Must be exactly 192.168.1.1. Eliminates A, which is 192.168.1.2).
+4. **Destination Port:** `eq 80` (Must be exactly port 80).
+
+* **C matches all:** TCP + 192.168.1.1 + Port 80.
+* **D matches all:** TCP + 192.168.1.1 + Port 80 (Different source IP is allowed because of `source any`).
+
+
+---
+
+### **Q5-C12**
+
+**Question:** An advanced ACL can match the source and destination port numbers of packets, enabling it to filter TCP packets with a specified destination port number.
+**A.** Right
+**B.** Wrong
 **Correct Answer: Right**
 
-### Why "Right" is correct:
+**Explanation:**
+This is one of the primary differences between Basic and Advanced ACLs.
 
-Computers struggle to parse the raw text output of a `display ip interface brief` command because the spacing might change. **JSON** and **XML** provide a structured, "tagged" format. This ensures that an automation script always knows exactly where to find the IP address or the interface status, regardless of the device model.
-
----
-
-## 5. Intent-Based Networking (IBN)
-
-**Question:** What is the core concept of Intent-Based Networking (IBN)?
-**Correct Answer: A. The network automatically translates business goals into network configurations.**
-
-### Why A is correct:
-
-IBN is the next evolution of SDN. Instead of an engineer telling the network *how* to route traffic (CLI), the engineer tells the network *what* the goal is (e.g., "Ensure Video Conferencing has the highest priority"). The IBN controller then automatically calculates and pushes the necessary configurations to every device to achieve that goal.
-
----
-
-## 6. SSH vs. Telnet for Management
-
-**Question:** Why is SSH preferred over Telnet for managing network devices?
-**Correct Answer: B. SSH encrypts the management session, whereas Telnet sends data in cleartext.**
-
-### Why B is correct:
-
-Security is paramount in management. If you use **Telnet**, anyone with a packet sniffer (like Wireshark) on the path can see your username and password. **SSH (Secure Shell)** creates an encrypted tunnel, ensuring that even if the packets are intercepted, the credentials and configuration data cannot be read.
+* **Basic ACLs (2000-2999):** Can only check the Source IP address.
+* **Advanced ACLs (3000-3999):** Have "deep" inspection capabilities. They can look into the Layer 4 header to identify the protocol (TCP, UDP, ICMP, etc.) and specific **Source and Destination Port numbers** (such as Port 80 for HTTP or Port 443 for HTTPS). This allows for granular traffic control, such as allowing web browsing while blocking FTP.
 
 ---
 
