@@ -1,16 +1,18 @@
 ---
-
-## 1. False Command Functions
+### **Q1-C3**
 
 **Question:** Which of the following statements about command functions is false?
+**A.** `<Huawei>undo //Deletes a file.`
+**B.** `<Huawei>pwd //Displays the path of the current directory.`
+**C.** `<Huawei>dir //Lists files and subdirectories.`
+**D.** `<Huawei>more //Reads the contents of a text file.`
+**Correct Answer: A**
 
-**Correct Answer: A. <Huawei>undo //Deletes a file.**
-
-### Why A is correct (False Statement):
+**Explanation:**
 
 The `undo` command is used to restore default settings, disable a function, or delete a specific configuration line. It is **not** used for file system management. To delete a file on a Huawei device, the command used is typically `delete`.
 
-### Why the others are true:
+**Why the others are true:**
 
 * **B:** The `pwd` (Print Working Directory) command correctly displays the path of the directory you are currently in.
 * **C:** The `dir` command is standard for listing files and subdirectories within the current directory.
@@ -18,30 +20,37 @@ The `undo` command is used to restore default settings, disable a function, or d
 
 ---
 
-## 2. Storage Device Types
+### **Q2-C3**
 
 **Question:** Which of the following are types of storage device?
-
+**A.** SDRAM
+**B.** Flash
+**C.** NVRAM
+**D.** SD card
+**E.** USB
 **Correct Answer: A, B, C, D, E (All of them)**
 
-### Why these are all correct:
+**Explanation:**
 
 Network devices utilize various types of memory and storage to function:
 
 * **A (SDRAM):** Synchronous Dynamic Random Access Memory, used as the main system memory for running processes.
 * **B (Flash):** Used to store the system software (VRP image) and configuration files.
 * **C (NVRAM):** Non-Volatile RAM, used to store critical data that must survive a reboot, such as the startup configuration.
-* **D & E (SD card / USB):** Removable storage media used for easy file transfers, software upgrades, or log exports.
+* **D and E (SD card / USB):** Removable storage media used for easy file transfers, software upgrades, or log exports.
 
 ---
 
-## 3. VRP Functions
+### **Q3-C3**
 
 **Question:** Which of the following functions are provided by the VRP?
-
+**A.** Providing a consistent user interface
+**B.** Managing the control plane and forwarding plane
+**C.** Ensuring communication between hardware and software
+**D.** Abstracting the underlying hardware
 **Correct Answer: A, B, C, D (All of them)**
 
-### Why these are all correct:
+**Explanation:**
 
 The Versatile Routing Platform (VRP) is the network operating system for Huawei devices. Its functions include:
 
@@ -52,13 +61,14 @@ The Versatile Routing Platform (VRP) is the network operating system for Huawei 
 
 ---
 
-## 4. Device Management Modes
+### **Q4-C3**
 
 **Question:** There are two commonly used device management modes: CLI and web system.
-
+**A.** Right
+**B.** Wrong
 **Correct Answer: Right**
 
-### Why "Right" is correct:
+**Explanation:**
 
 Most modern network devices offer these two primary interfaces:
 
@@ -66,4 +76,3 @@ Most modern network devices offer these two primary interfaces:
 2. **Web System (GUI):** A browser-based interface that is more intuitive for beginners or for performing visual monitoring and basic tasks.
 
 ---
-
