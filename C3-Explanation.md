@@ -1,22 +1,21 @@
+
+
 ---
+
 ### **Q1-C3**
 
 **Question:** Which of the following statements about command functions is false?
-**A.** `<Huawei>undo //Deletes a file.`
-**B.** `<Huawei>pwd //Displays the path of the current directory.`
-**C.** `<Huawei>dir //Lists files and subdirectories.`
-**D.** `<Huawei>more //Reads the contents of a text file.`
+**A.** `<Huawei>undo` //Deletes a file.
+**B.** `<Huawei>pwd` //Displays the current directory.
+**C.** `<Huawei>dir` //Displays information about files in the current directory.
+**D.** `<Huawei>more` //Displays the content of a text file.
 **Correct Answer: A**
 
 **Explanation:**
+The `undo` command is one of the most used commands in Huawei VRP, but its function is to **reverse or cancel a configuration command** (like "no" in Cisco), not to delete files.
 
-The `undo` command is used to restore default settings, disable a function, or delete a specific configuration line. It is **not** used for file system management. To delete a file on a Huawei device, the command used is typically `delete`.
-
-**Why the others are true:**
-
-* **B:** The `pwd` (Print Working Directory) command correctly displays the path of the directory you are currently in.
-* **C:** The `dir` command is standard for listing files and subdirectories within the current directory.
-* **D:** The `more` command is used to read the contents of a text file (like a configuration file) directly in the terminal.
+* To delete a file in VRP, you use the `delete` command.
+* `pwd`, `dir`, and `more` are standard file system commands similar to those found in Linux/Unix.
 
 ---
 
@@ -27,37 +26,34 @@ The `undo` command is used to restore default settings, disable a function, or d
 **B.** Flash
 **C.** NVRAM
 **D.** SD card
-**E.** USB
-**Correct Answer: A, B, C, D, E (All of them)**
+**E.** USB flash drive
+**Correct Answer: ABCDE**
 
 **Explanation:**
+Huawei network devices utilize various memory types for different roles:
 
-Network devices utilize various types of memory and storage to function:
-
-* **A (SDRAM):** Synchronous Dynamic Random Access Memory, used as the main system memory for running processes.
-* **B (Flash):** Used to store the system software (VRP image) and configuration files.
-* **C (NVRAM):** Non-Volatile RAM, used to store critical data that must survive a reboot, such as the startup configuration.
-* **D and E (SD card / USB):** Removable storage media used for easy file transfers, software upgrades, or log exports.
+* **SDRAM:** Running memory (RAM); loses data when powered off.
+* **Flash:** Stores the system software (the OS image) and configuration files.
+* **NVRAM:** Non-volatile memory often used to store small amounts of persistent data.
+* **SD/USB:** External storage used for easy software upgrades or log exports.
 
 ---
 
 ### **Q3-C3**
 
-**Question:** Which of the following functions are provided by the VRP?
-**A.** Providing a consistent user interface
-**B.** Managing the control plane and forwarding plane
-**C.** Ensuring communication between hardware and software
-**D.** Abstracting the underlying hardware
-**Correct Answer: A, B, C, D (All of them)**
+**Question:** Which of the following functions are provided by the VRP? (Multiple Choice)
+**A.** Provides a unified user interface and a unified management interface.
+**B.** Implements functions of the control plane and defines interface standards of the forwarding plane.
+**C.** Implements communication between the device forwarding plane and VRP control plane.
+**D.** Eliminates the differences between the link layer and network layer of each product.
+**Correct Answer: ABCD**
 
 **Explanation:**
+VRP is the "brain" of the device. It creates a **consistent user experience** across different hardware (switches, routers, firewalls).
 
-The Versatile Routing Platform (VRP) is the network operating system for Huawei devices. Its functions include:
-
-* **A:** Providing a consistent User Interface (CLI) and management experience across different hardware.
-* **B:** Managing the **Control Plane** (routing logic) and standardizing how data is handled by the **Forwarding Plane** (actual data movement).
-* **C:** Ensuring seamless communication between the hardware's forwarding engine and the software's control logic.
-* **D:** Abstracting the underlying hardware so that different products can use the same link layer and network layer features.
+* It manages the **Control Plane** (deciding where traffic should go, like building a routing table).
+* It communicates with the **Forwarding Plane** (the hardware specialized for moving packets at high speed).
+* By providing a unified software layer, it hides the hardware differences, allowing a network admin to use the same commands on an AR router as they would on an S-series switch.
 
 ---
 
@@ -69,10 +65,10 @@ The Versatile Routing Platform (VRP) is the network operating system for Huawei 
 **Correct Answer: Right**
 
 **Explanation:**
+Network administrators typically manage devices in two ways:
 
-Most modern network devices offer these two primary interfaces:
-
-1. **CLI (Command Line Interface):** Preferred by experts for fast, detailed, and scriptable configuration via Console, Telnet, or SSH.
-2. **Web System (GUI):** A browser-based interface that is more intuitive for beginners or for performing visual monitoring and basic tasks.
+1. **CLI (Command Line Interface):** Preferred by experts for speed and advanced configuration (via Console, Telnet, or SSH).
+2. **Web System (GUI):** A user-friendly, browser-based interface often used for basic monitoring or simplified configuration.
 
 ---
+

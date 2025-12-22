@@ -1,41 +1,37 @@
+
+
 ---
+
 ### **Q1-C1**
 
 **Question:** What is the disadvantage of a tree network?
 **A.** Nodes at higher layers will cause more serious network problems if they become faulty.
-**B.** Tree networks are built by connecting star networks.
-**C.** Tree networks are built by connecting bus networks.
-**D.** Tree networks are highly scalable.
+**B.** The tree network uses a hierarchical star structure.
+**C.** The tree network can quickly connect multiple star networks together.
+**D.** It is easy to expand the network scale.
 **Correct Answer: A**
 
 **Explanation:**
-
-A tree topology is hierarchical. It has a "root" node and subsequent layers of child nodes. Because the lower layers depend on the connectivity provided by the upper layers, a failure at the top (the root or a core switch) disconnects every single node beneath it. This is known as a **single point of failure** for the branches below.
-
-**Why the others are incorrect:**
-
-* **B and C:** These describe structural characteristics or advantages (how a tree is built by connecting star networks), not disadvantages.
-* **D:** This is actually an **advantage**. Tree networks are considered highly scalable because you can easily add new "branches" (hubs/switches) to expand the network.
+A tree topology is essentially a hierarchy. While it is great for scalability (D) and organization (B), it creates a high level of dependency. If a "root" node or a high-level distribution switch fails, every node branching off from it loses connectivity. This is known as a **single point of failure** for all downstream branches.
 
 ---
 
 ### **Q2-C1**
 
 **Question:** Which functions does a firewall provide?
-**A.** Network isolation
-**B.** Security policies
-**C.** Remote access
-**D.** VPN
-**E.** NAT
-**Correct Answer: A, B, C, D, E (All of them)**
+**A.** Isolates networks of different security levels.
+**B.** Uses security policies to implement access control.
+**C.** Implements remote access.
+**D.** Implements data encryption and VPN services.
+**E.** Implements network address translation (NAT).
+**Correct Answer: ABCDE**
 
 **Explanation:**
+Modern firewalls (especially Next-Generation Firewalls or NGFWs) are multi-functional security appliances:
 
-Modern "Next-Generation" Firewalls (NGFW) are multi-functional security appliances:
-
-* **A and B (Isolation and Policies):** This is the core job of a firewall—segmenting a "Trusted" network (Internal) from an "Untrusted" one (Internet) using rules.
-* **C and D (Remote Access and VPN):** Most enterprise firewalls act as VPN gateways, allowing remote employees to securely tunnel into the office network with encrypted data.
-* **E (NAT):** Firewalls almost always perform Network Address Translation (NAT) to allow multiple devices on a private network to share a single public IP address.
+* **Isolation & Access Control (A, B):** The core job of a firewall is to define "Trust" (Internal) and "Untrust" (External/Internet) zones and filter traffic between them.
+* **Remote Access & VPN (C, D):** Firewalls often act as VPN gateways, allowing remote employees to securely connect to the office using encrypted tunnels.
+* **NAT (E):** Firewalls typically perform NAT to hide internal private IP addresses behind a single public IP.
 
 ---
 
@@ -47,11 +43,7 @@ Modern "Next-Generation" Firewalls (NGFW) are multi-functional security applianc
 **Correct Answer: Wrong**
 
 **Explanation:**
-
-While a star network is better than a "Bus" network (where one cable break kills everything), it has a critical vulnerability: the **Central Hub/Switch**.
-
-* If a single peripheral cable fails, only one computer goes down.
-* **However**, if the central switch fails, the **entire network** fails. Because the whole network relies on one central piece of hardware, it cannot be described as "not prone to faults."
+While a star network is better than a bus network (because one cable break only affects one PC), it has a major vulnerability: the **Central Node** (usually a switch or hub). If the central switch fails, the entire network goes down. Therefore, it is not "fault-proof."
 
 ---
 
@@ -63,10 +55,7 @@ While a star network is better than a "Bus" network (where one cable break kills
 **Correct Answer: Right**
 
 **Explanation:**
-
-In networking, a "Broadcast" is a message sent to every device on a segment (like a shout in a room).
-
-* **Switches** forward broadcasts to every port; they create one large "Broadcast Domain."
-* **Routers** do not forward Layer 2 broadcasts by default. When a router receives a broadcast, it stops it. This "breaks" the domain into smaller, more manageable pieces, preventing network congestion (broadcast storms).
+By default, Layer 2 switches forward broadcast frames to every port in a VLAN. However, a router (Layer 3) does not forward broadcast traffic from one interface to another. This "breaks" or limits the broadcast traffic to a local segment, which improves network performance and security.
 
 ---
+

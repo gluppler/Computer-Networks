@@ -13,10 +13,16 @@
 - Protocols: Rules and standards (TCP/IP, Ethernet)
 
 **Key Exam Points:**
-- Tree network disadvantage: Nodes at higher layers cause more serious network problems if they become faulty (single point of failure)
-- Firewall functions: Isolation, security policies, remote access/VPN, NAT
-- Star network: Not robust - central hub/switch is a single point of failure
-- Routers break broadcast domains (switches forward broadcasts, routers do not)
+- **Tree network disadvantage**: Nodes at higher layers cause more serious network problems if they become faulty. A tree topology is essentially a hierarchy. While it is great for scalability and organization, it creates a high level of dependency. If a "root" node or a high-level distribution switch fails, every node branching off from it loses connectivity. This is known as a **single point of failure** for all downstream branches.
+
+- **Firewall functions**: Modern firewalls (especially Next-Generation Firewalls or NGFWs) are multi-functional security appliances:
+  - **Isolation & Access Control**: The core job of a firewall is to define "Trust" (Internal) and "Untrust" (External/Internet) zones and filter traffic between them.
+  - **Remote Access & VPN**: Firewalls often act as VPN gateways, allowing remote employees to securely connect to the office using encrypted tunnels.
+  - **NAT**: Firewalls typically perform NAT to hide internal private IP addresses behind a single public IP.
+
+- **Star network**: While a star network is better than a bus network (because one cable break only affects one PC), it has a major vulnerability: the **Central Node** (usually a switch or hub). If the central switch fails, the entire network goes down. Therefore, it is not "fault-proof."
+
+- **Routers break broadcast domains**: By default, Layer 2 switches forward broadcast frames to every port in a VLAN. However, a router (Layer 3) does not forward broadcast traffic from one interface to another. This "breaks" or limits the broadcast traffic to a local segment, which improves network performance and security.
 
 ### How many different network types according to geographical coverage?
 
@@ -104,8 +110,9 @@ Data is defined and transmitted through **encapsulation** following layered mode
 - Multicast: One-to-many (01:XX:XX:XX:XX:XX)
 
 **Key Exam Points:**
-- ARP Reply packets are **unicast**, not broadcast (ARP Request is broadcast)
-- MAC address: 48 bits (6 bytes), 12 hexadecimal digits
+- **ARP Reply packets**: This is a common point of confusion. **ARP Request** is a **Broadcast** (sent to everyone) because the sender doesn't know who has the target IP. **ARP Reply** is a **Unicast** (sent directly back to the requester) because the responder now knows the requester's MAC address from the initial request.
+
+- **MAC address**: A MAC address is a hardware address. It is written in hexadecimal (e.g., `00-0C-29-4F-8B-3C`). Since each hex digit is 4 bits, 12 × 4 = 48 bits. The first 24 bits are the **OUI** (Manufacturer ID) and the last 24 are assigned by the vendor.
 
 ### What are the five layers in the TCP/IP reference model?
 
@@ -127,8 +134,21 @@ The TCP/IP reference model consists of five layers (bottom to top):
 7. Application
 
 **Key Exam Points:**
-- Network layer functions: Logical addressing, routing, forwarding (NOT setting up connections between processes - that's Transport layer)
-- Each OSI layer has specific responsibilities (Application closest to user, Session manages dialogue, Network defines IP addressing, Transport handles transmission methods)
+- **Network layer functions**: The Network Layer (Layer 3) is primarily about **routing**:
+  - It uses **logical addresses** (IP addresses) to identify devices.
+  - It determines the best path for **packets** to travel from source to destination (route and forward).
+  - Setting up connections between "processes" (like browser to web server) is the responsibility of the **Transport Layer (Layer 4)** using port numbers.
+
+- **OSI model layers**: The correct order from **Layer 1 (bottom)** to **Layer 7 (top)** is:
+  1. **Physical** (Cables, bits)
+  2. **Data Link** (Frames, MAC addresses)
+  3. **Network** (Packets, IP addresses)
+  4. **Transport** (Segments, TCP/UDP)
+  5. **Session** (Managing connections)
+  6. **Presentation** (Data format, encryption)
+  7. **Application** (Network services for software)
+  
+  All statements about layers are true: Application layer provides network services for applications; Session layer establishes, manages, and terminates sessions; Network layer defines logical addresses for routers to determine paths; Transport layer implements data transmission and error detection.
 
 ### What are the common standard protocols in each layer?
 
@@ -152,8 +172,9 @@ The TCP/IP reference model consists of five layers (bottom to top):
 - Fiber standards, Wireless (802.11)
 
 **Key Exam Points:**
-- Telnet uses port **23**
-- Common data link protocols: Ethernet, PPPoE, PPP
+- **Telnet port**: Port **23** is used by Telnet (Remote terminal access, unencrypted). Port 21 is used by FTP (File Transfer Protocol). Note: Port 6 and 17 are actually the protocol numbers for TCP and UDP, respectively, in the IP header, rather than standard application port numbers.
+
+- **Data Link Layer protocols**: The Data Link Layer (Layer 2) handles how data is placed on the physical medium. **Ethernet** is the standard for wired LANs, while **PPP** and **PPPoE** are commonly used for Point-to-Point wide area network (WAN) connections, like your home DSL or fiber link.
 
 ### How the data is encapsulated and decapsulated?
 
@@ -186,9 +207,19 @@ The TCP/IP reference model consists of five layers (bottom to top):
 - **VRP v5**: Previous generation (stable, widely used)
 
 **Key Exam Points:**
-- VRP functions: User interface, control/forwarding plane management, hardware abstraction
-- Storage devices: SDRAM, Flash, NVRAM, SD card, USB
-- Command functions: `pwd` (print working directory), `dir` (list files), `more` (read file), `undo` (NOT for deleting files - use `delete`)
+- **VRP functions**: VRP is the "brain" of the device. It creates a **consistent user experience** across different hardware (switches, routers, firewalls):
+  - It provides a unified user interface and a unified management interface.
+  - It implements functions of the control plane and defines interface standards of the forwarding plane.
+  - It implements communication between the device forwarding plane and VRP control plane.
+  - It eliminates the differences between the link layer and network layer of each product.
+
+- **Storage devices**: Huawei network devices utilize various memory types for different roles:
+  - **SDRAM**: Running memory (RAM); loses data when powered off.
+  - **Flash**: Stores the system software (the OS image) and configuration files.
+  - **NVRAM**: Non-volatile memory often used to store small amounts of persistent data.
+  - **SD/USB**: External storage used for easy software upgrades or log exports.
+
+- **Command functions**: The `undo` command is one of the most used commands in Huawei VRP, but its function is to **reverse or cancel a configuration command** (like "no" in Cisco), not to delete files. To delete a file in VRP, you use the `delete` command. `pwd`, `dir`, and `more` are standard file system commands similar to those found in Linux/Unix.
 
 ### What are the two commonly used device management modes?
 
@@ -242,8 +273,9 @@ VRP uses hierarchical command views:
 8. **Header Checksum**: Error detection for IP header
 
 **Key Exam Points:**
-- TTL = 1: Router discards packet and sends ICMP "Time Exceeded" message
-- `ping` uses ICMP Echo Request (Type 8) and Echo Reply (Type 0)
+- **TTL (Time to Live)**: The TTL field is a mechanism to prevent packets from looping infinitely in a network. Every router that processes a packet decrements (subtracts 1) the TTL value. If a router receives a packet and the TTL becomes **0**, the router must discard the packet and typically sends an **ICMP Time Exceeded** message back to the source.
+
+- **ICMP Echo (ping)**: The `ping` utility uses **ICMP Echo** messages to test reachability. The source sends an **ICMP Echo Request**, and the destination responds with an **ICMP Echo Reply**. If the Echo Reply is received, connectivity is confirmed. ICMP port unreachable and ICMP host unreachable are "Destination Unreachable" error messages, and ICMP Redirect is used by routers to inform a host of a better path, not to test connectivity.
 
 ### Whats the format of an IP Address?
 
@@ -271,8 +303,16 @@ VRP uses hierarchical command views:
 - 192.168.1.1, 10.0.0.1: Valid for host configuration
 
 **Key Exam Points:**
-- Private IP ranges: 10.0.0.0-10.255.255.255, 172.16.0.0-172.31.255.255, 192.168.0.0-192.168.255.255
-- Subnet mask 255.255.255.252 (/30): 2 usable host IPs (4 total - 2 reserved)
+- **Private IP addresses (RFC 1918)**: To identify private IP addresses, remember the three specific ranges:
+  1. **Class A:** `10.0.0.0` to `10.255.255.255`
+  2. **Class B:** `172.16.0.0` to `172.31.255.255` (Note: 172.17.1.254 is private, but 172.32.16.254 is public)
+  3. **Class C:** `192.168.0.0` to `192.168.255.255` (Note: 192.169.16.1 is public, not private)
+  
+  Any IP address falling outside these ranges is considered a Public address (routable on the internet) or a Multicast address (Class D: 224.0.0.0 to 239.255.255.255).
+
+- **Host interface IP addresses**: IP addresses that can be manually configured and used by host interfaces include standard private unicast addresses (like 10.2.3.4 and 192.168.100.254). However, **127.0.0.1** (Loopback) is reserved for internal testing within a device and cannot be assigned to a physical host interface. **224.0.0.18** (Multicast) cannot be assigned as a unique IP to a host interface.
+
+- **/30 subnet**: To find the number of **available** (usable) host addresses, use the formula 2^n - 2, where n is the number of host bits. A **/30** prefix means 30 bits are for the network, leaving **2 bits** for hosts (32 - 30 = 2). Total addresses = 2² = 4. We must subtract **2** (one for the Network ID and one for the Broadcast address). Available host addresses = 4 - 2 = 2. Note: /30 subnets are commonly used for point-to-point links between two routers.
 
 ### What is subnet? How to allocate IP addresses for subnets?
 
@@ -321,19 +361,20 @@ Router selects optimal route using routing table and decision rules:
 **1. Longest Prefix Match (Most Specific)**
 - Route with longest subnet mask wins
 
-**2. Administrative Distance (AD)**
-- Lower AD = higher priority
-- Direct: 0, Static: 1 (Huawei default: 60), OSPF: 110, RIP: 120
+**2. Administrative Distance (AD) / Route Preference**
+- Lower preference = higher priority
+- **Huawei VRP defaults**: Direct: 0, OSPF Internal: 10, Static: 60, OSPF External (ASE): 150, RIP: 100, BGP: 255
 
 **3. Route Metric**
 - If same AD, lower metric wins
 - OSPF: Cost, RIP: Hop count, EIGRP: Composite
 
 **Key Exam Points:**
-- Routing table fields: Destination/Mask, Proto, Pre, Cost, NextHop, Interface
-- **NOT included**: AdvRouter (that's in OSPF LSDB, not routing table)
-- Default static route preference on Huawei: **60**
-- Longest match rule: 10.1.1.1 matches 10.1.1.0/24 over 10.1.0.0/16
+- **Routing table fields**: When you run the `display ip routing-table` command on a Huawei VRP device, the brief output shows: Destination/Mask, Proto, Pre, Cost, Flags, NextHop, Interface. **AdvRouter** (Advertising Router) is a field found in specific protocol databases (like the OSPF LSDB) but is **not** part of the standard IP routing table's brief output.
+
+- **Route preference**: Preference (also known as Administrative Distance) determines which protocol is "trusted" most when multiple protocols provide a path to the same destination. **Lower values are preferred.** Huawei VRP defaults: Direct: 0, OSPF: 10, Static: **60**, RIP: 100, BGP: 255.
+
+- **Longest match rule**: The **Longest Match Rule** states that if a packet matches multiple entries in the routing table, the router will choose the one with the **highest mask length** (the most specific route). For example, a packet destined for 172.16.10.1 will match 172.16.10.0/24 over 172.16.0.0/16 because /24 is a longer (more specific) match.
 
 ### How to generate routing entries?
 
@@ -353,9 +394,12 @@ Router selects optimal route using routing table and decision rules:
 - EGP: BGP
 
 **Key Exam Points:**
-- Link-state protocols: **OSPF and IS-IS**
-- Static route priority CAN be manually specified (for floating static routes)
-- Default route (0.0.0.0/0): Used when no specific route matches, can be generated dynamically
+- **Link-state routing protocols**: Routing protocols are categorized by how they share information:
+  - **Link-State**: OSPF and IS-IS. These protocols share the entire "map" (topology) of the network. Every router calculates the best path independently using the SPF (Dijkstra) algorithm.
+  - **Distance-Vector**: RIP and BGP (BGP is technically Path-Vector). These protocols share their routing tables with neighbors ("routing by rumor").
+  - **Static**: Not a dynamic protocol at all; it is manually configured.
+
+- **Route summarization**: To summarize routes, look at the octets in binary. A /22 mask in the third octet covers a range of 4 (e.g., 0 to 3). For example, 172.16.0.0/22 covers `172.16.0.0` to `172.16.3.255`. If you need to include 172.16.5.0, you would need a /21 (which covers 0-7) to include all networks.
 
 ### How to do static routing configuration?
 
@@ -442,11 +486,15 @@ Router selects optimal route using routing table and decision rules:
 - Based on priority and Router ID
 
 **Key Exam Points:**
-- OSPF packet types: Hello, Database Description (DD), Link State Request (LSR), Link State Update (LSU), Link State Acknowledgment (LSAck)
-- DR/BDR: DR Other routers form full adjacencies only with DR and BDR
-- BDR takes over if DR fails
-- Router with HIGHEST priority (then highest RID) becomes DR
-- "Full" state means neighbor relationship established and databases synchronized
+- **OSPF packet types**: OSPF uses five types of packets, but only the **Hello packet** is used for discovery and maintenance. Hello packets are sent periodically (default every 10s on broadcast networks) to find neighbors and act as a "keepalive" to ensure they are still active. Other packet types: DD (Database Description), LSR (Link State Request), LSU (Link State Update), LSAck (Acknowledgment).
+
+- **OSPF cost calculation**: OSPF calculates cost using the formula: Cost = Reference Bandwidth / Interface Bandwidth. In Huawei VRP, the default **Reference Bandwidth** is **100 Mbit/s**. Serial (1.544 Mbit/s): 100 / 1.544 ≈ 64. Fast Ethernet (100 Mbit/s): 100 / 100 = 1. Gigabit Ethernet (1000 Mbit/s): 100 / 1000 = 0.1. Since the minimum cost is 1, it becomes **1**.
+
+- **OSPF LSDB**: OSPF maintains three distinct databases/tables: Peer Table (Neighbor Table), **LSDB (Link State Database)** which stores all received LSAs (this is where link status information lives), and Routing Table (the result of the SPF calculation).
+
+- **OSPF network types**: OSPF adapts its behavior based on the underlying Layer 2 technology: P2P (Point-to-Point), Broadcast (default for Ethernet, requires DR/BDR election), NBMA (Non-Broadcast Multi-Access), P2MP (Point-to-Multipoint).
+
+- **DR Others state**: On a Multi-Access (MA) network like Ethernet, routers only reach the **FULL** state with the **DR (Designated Router)** and the **BDR (Backup Designated Router)**. Two "ordinary" routers (known as **DR Others**) do not need to synchronize their entire databases with each other. They stop their state machine at **2-way**, meaning they know each other exists but they rely on the DR to pass them the routing updates.
 
 ### How to implement basic OSPF configurations?
 
@@ -493,11 +541,19 @@ Router selects optimal route using routing table and decision rules:
 - **Fragment-Free**: Reads first 64 bytes
 
 **Key Exam Points:**
-- Switch forwarding behaviors: Flooding, Forwarding, Discarding
-- Default VLAN (PVID) on Huawei switches: **VLAN 1**
-- Access port with matching VLAN tag: Strips tag and forwards frame
-- Trunk ports: Can carry multiple VLANs, add VLAN tags (except native VLAN)
-- Trunk ports connect switches to switches, not directly to end hosts
+- **MAC address types**: MAC addresses are categorized by their first octet:
+  - **Unicast**: The least significant bit of the first octet is 0.
+  - **Multicast**: The least significant bit of the first octet is 1. Specifically, IPv4 multicast MAC addresses always start with the prefix 01-00-5e. The address 01-00-5e-00-00-01 is the standard multicast MAC used for "All Systems on this Subnet" (mapping to IP 224.0.0.1).
+  - **Broadcast**: All bits are 1 (FF-FF-FF-FF-FF-FF).
+
+- **Switch operations**: A switch performs three main operations when a frame arrives:
+  1. **Learning**: It records the Source MAC and the incoming port in its MAC Address Table.
+  2. **Lookup**: It looks for the Destination MAC in its table.
+  3. **Forwarding/Flooding**: Since the Destination MAC is "Unknown" (not in the table), the switch must flood the frame out of all ports except the one it arrived on to ensure it reaches the destination.
+
+- **BUM traffic**: A switch floods unknown unicast frames and frames whose destination MAC address is a broadcast MAC address. This is a fundamental rule of switch behavior called BUM traffic handling (Broadcast, Unknown Unicast, and Multicast). Broadcast must go to everyone. Unknown Unicast: The switch doesn't know where the destination is, so it must flood it to find it. Multicast: By default (without IGMP Snooping), a switch treats multicast like a broadcast and floods it.
+
+- **Ethernet frame fields (IEEE 802.3)**: The IEEE 802.3 frame structure includes: Destination MAC (6 bytes), Source MAC (6 bytes), Length (2 bytes - in 802.3, this field indicates the length of the data; in Ethernet II, this is the "Type" field), Data/Payload, and FCS (Frame Check Sequence - a 4-byte CRC used to detect errors during transmission).
 - Maximum VLANs in 802.1Q: **4094** (12 bits, 4096 total - 2 reserved)
 
 ### What is the difference among a unicast Ethernet frame, a broadcast Ethernet frame and a multicast Ethernet frame?
@@ -578,7 +634,15 @@ Router selects optimal route using routing table and decision rules:
 - Use: Flexible deployments
 
 **Key Exam Points:**
-- Layer 3 device required for inter-VLAN communication (VLANIF on L3 switch or router sub-interfaces)
+- **TPID value**: The **TPID (Tag Protocol Identifier)** is a 16-bit field in an Ethernet frame that indicates that a VLAN tag (802.1Q) follows. The fixed value for this is **0x8100**. 0x0800 is for standard IPv4, 0x0806 is for ARP, 0x8847 is for MPLS unicast.
+
+- **Valid VLAN ID**: VLAN IDs are stored in a 12-bit field within the 802.1Q tag (2¹² = 4096). The range is **0 to 4095**. However, **0** and **4095** are reserved for system use. Therefore, the **usable** range for configuration is **1 to 4094**.
+
+- **VLAN assignment methods**: VLANs are typically assigned based on Layer 2 or Layer 3 information: Interface-based (most common), MAC-based, Subnet-based, Protocol-based (assigned based on the Network Layer protocol, e.g., IPv4 vs IPv6). There is no standard method for assigning VLANs based on **Transport-layer protocols** (TCP/UDP ports).
+
+- **Interface types for multiple VLAN tags**: **Trunk** and **Hybrid** interfaces can process data frames carrying multiple VLAN tags. Access interfaces can only belong to one VLAN. Trunk interfaces are designed to carry traffic for multiple VLANs over a single link (usually between switches). Hybrid is a Huawei-specific type that combines features of Access and Trunk. It can allow multiple tagged VLANs and multiple untagged VLANs.
+
+- **Access interface behavior**: When an Access interface receives a tagged frame: It checks if the **VLAN ID** in the tag matches its own **PVID** (Port Default VLAN ID). If the tag **matches** the PVID, the interface **accepts** and processes the frame. If the tag **does not match**, the frame is discarded. Because it *can* process them if the IDs match, the statement "cannot process... immediately discards" is incorrect.
 
 ### How to do basic VLAN configuration?
 
@@ -629,11 +693,15 @@ STP creates loop-free logical topology by:
 - Proposal/Agreement mechanism
 
 **Key Exam Points:**
-- "Discarding" is NOT an STP port state (it's RSTP/MSTP)
-- STP uses **Path Cost** to determine best path to Root Bridge (NOT hop count, IP address, or VLAN ID)
-- Root Bridge election: **Lowest Bridge ID** wins (NOT largest)
-- Eth-Trunk benefits: Increased bandwidth, higher reliability, load balancing
-- Eth-Trunk modes: Manual load balancing or LACP mode
+- **Root Bridge election**: The **Root Bridge** is elected based on the **lowest Bridge ID (BID)**. The BID consists of two parts: **Priority** and **MAC Address**. First, compare Priorities (lowest wins). If priorities tie, compare MAC Addresses (lowest MAC wins).
+
+- **STP Forward Delay**: STP uses specific timers to ensure the network is loop-free before forwarding data: Hello Time: 2 seconds, Max Age: 20 seconds, **Forward Delay: 15 seconds**. Note: A port spends 15s in the **Listening** state and 15s in the **Learning** state, totaling 30 seconds of "Forward Delay" before reaching the Forwarding state.
+
+- **BPDU comparison sequence**: When a switch receives a BPDU, it uses the **"Best BPDU Algorithm"** (also called the 4-step decision process). It compares fields in this strict order until a tie is broken: 1. **Root ID** (Lowest Root BID wins), 2. **RPC** (Lowest Root Path Cost wins), 3. **Bridge ID** (Lowest Sender BID wins), 4. **Interface ID** (Lowest Sender Port ID wins).
+
+- **Configuration BPDU fields**: A **Configuration BPDU** contains: Root ID, Bridge ID, Port ID, RPC (Cost to reach the Root), and Timers (Hello Time, Max Age, and Forward Delay).
+
+- **RSTP default**: On many Huawei switches (VRP), the default Spanning Tree mode is actually **MSTP (Multiple Spanning Tree Protocol)**. While MSTP is compatible with RSTP, it is a different mode. Therefore, the statement that it runs RSTP "by default" is incorrect. You must use the command `stp mode rstp` to specifically enable RSTP.
 - LACP: Can configure maximum number of active links (M:N backup)
 
 ### How to do STP configuration?
@@ -675,7 +743,13 @@ STP creates loop-free logical topology by:
 - Each VLAN uses separate physical interface
 
 **Key Exam Points:**
-- Router-on-a-Stick: Sub-interfaces with dot1q encapsulation
+- **Router-on-a-Stick (sub-interfaces)**: When using a router for inter-VLAN routing, the router's physical interface is divided into logical sub-interfaces. Since the switch sends tagged traffic to the router, the router must know which VLAN tag corresponds to which sub-interface. The command **`dot1q termination vid vlan-id`** tells the router to: 1. Remove the 802.1Q tag from incoming frames of that specific VLAN, 2. Add the 802.1Q tag to outgoing frames sent from that sub-interface.
+
+- **Layer 3 switch capabilities**: Layer 3 switches are "multi-layer" devices. They possess the hardware (ASICs) to perform **wire-speed Layer 2 switching** (using MAC tables) and **Layer 3 routing** (using IP routing tables). A Layer 3 switch can forward packets at both Layer 2 and Layer 3, not only at Layer 3.
+
+- **Layer 3 forwarding behavior**: Every time a packet is routed (moved from one subnet/VLAN to another), the Layer 2 Ethernet header must be rebuilt. The switch **must re-encapsulate** the frame with a new Source MAC (the MAC of the switch's outgoing interface) and a new Destination MAC (the MAC of the next hop or the end host). During Layer 3 communication, the source and destination MAC addresses of a packet are changed each time it passes through a Layer 3 device.
+
+- **Sub-interface connection requirements**: To support sub-interfaces on a router, the link between the switch and the router must be able to carry **tagged frames** from multiple VLANs. **Trunk** is the standard choice for carrying multiple tagged VLANs. **Hybrid** is a Huawei-specific port type that can also be configured to send and receive tagged traffic for multiple VLANs, making it a valid (though less common) alternative to a Trunk port.
 
 ### How to use Layer 3 switches to implement inter-VLAN communication?
 
@@ -729,7 +803,13 @@ STP creates loop-free logical topology by:
 - Passive: Responds to LACP PDUs
 
 **Key Exam Points:**
-- Can configure maximum number of active links in LACP mode (M:N backup)
+- **LACP interface priority**: In Huawei VRP, both the **LACP System Priority** and **LACP Interface Priority** use a default value of **32768**. The system uses this priority to elect the **Actor** (the "boss" device that makes the decisions). If priorities are identical, the device with the lower MAC address becomes the Actor. Interface priority is used to determine which physical links become "Active" and which stay as "Backup" (M:N mode).
+
+- **Eth-Trunk member interface requirements**: To form a stable Eth-Trunk, member interfaces must be consistent in their physical and basic Layer 2 attributes. **Must be the same**: Interface rate, Duplex mode, and VLAN configurations. If these differ, the interface will likely be placed in an "Unselected" or error state. **Can be different**: Spanning tree configurations. While not recommended for most designs, the STP costs or priorities on individual physical ports do not inherently prevent them from joining an Eth-Trunk.
+
+- **LACP Actor selection**: The **Actor** is the device that controls which links in the bundle are active. To decide which device is the Actor, LACP compares the **System ID**, which consists of: 1. **LACP System Priority** (The primary value compared. Lower is better), 2. **Device MAC Address** (Used as a tie-breaker if the priorities are equal). Interface-specific values are used later to select active links, but they do not determine which *device* is the Actor.
+
+- **Eth-Trunk lower threshold**: The `least active-linknumber` command sets a minimum requirement. If the number of "Up" physical links falls below this threshold, the entire Eth-Trunk interface goes "Down." This prevents a situation where an Eth-Trunk is technically "Up" but only has 1 functioning link, which might not be enough to handle the traffic load, leading to massive congestion. It's a safety mechanism to ensure quality of service.
 
 ### What are the differences between per-packet load balancing and per-flow load balancing?
 
@@ -809,10 +889,14 @@ STP creates loop-free logical topology by:
 - Match: User-based
 
 **Key Exam Points:**
-- ACL matching order: Based on rule ID in **ascending order**
-- Basic ACL range: **2000-2999**
-- Wildcard mask bit "0": Corresponding bit must be checked (must match)
-- Wildcard mask bit "1": Ignore (any value acceptable)
+- **ACL rule ID increment**: In Huawei VRP, ACL rules are identified by IDs (e.g., rule 5, rule 10). The **default increment is 5**. This gap allows administrators to insert new rules between existing ones (for example, inserting a rule with ID 7 between 5 and 10) without having to delete and recreate the entire list. This is crucial because ACLs are processed from top to bottom.
+
+- **ACL number ranges**: Huawei classifies ACLs into specific number ranges based on their capabilities:
+  - **2000–2999: Basic ACLs** (Filters based only on Source IP).
+  - **3000–3999: Advanced ACLs** (Filters based on Source/Destination IP, Protocol, and Port numbers).
+  - **4000–4999: Layer 2 ACLs** (Filters based on Source/Destination MAC and Ethernet Type).
+
+- **Advanced ACL capabilities**: An advanced ACL can match the source and destination port numbers of packets, enabling it to filter TCP packets with a specified destination port number. This is one of the primary differences between Basic and Advanced ACLs. Advanced ACLs have "deep" inspection capabilities. They can look into the Layer 4 header to identify the protocol (TCP, UDP, ICMP, etc.) and specific **Source and Destination Port numbers** (such as Port 80 for HTTP or Port 443 for HTTPS). This allows for granular traffic control, such as allowing web browsing while blocking FTP.
 
 ### What is the basic composition of ACLs and ACL rule ID matching order?
 
@@ -839,9 +923,13 @@ STP creates loop-free logical topology by:
 ```
 
 **Key Exam Points:**
-- NAT advantages: Address conservation, security, flexibility
-- NAPT allows multiple private IPs mapped to same public IP (uses port numbers)
-- NAT Server used to allow external users to access internal server
+- **Easy IP**: **Easy IP** is a special form of NAPT (Network Address Port Translation). It is specifically designed for scenarios where the public IP address of the egress interface is assigned dynamically (e.g., via DHCP or PPPoE). It can only use an interface address as the post-NAT public address.
+
+- **NAT Server**: **NAT Server** (also known as Port Forwarding or Static NAT with port mapping) allows you to map a specific public IP and port to an internal server's private IP and port. It can be deployed on egress network devices to enable external users to access only a TCP port of an intranet server. It can be used to enable external users to proactively access an intranet server.
+
+- **NAPT translation**: NAPT translates not only IP addresses but also port numbers to implement 1:N mappings between public and private addresses. By using the Layer 4 **Port Number** as an identifier, a single public IP address can support thousands of internal private hosts simultaneously. The router keeps a "NAT session table" to remember which unique port belongs to which internal PC.
+
+- **NAT types**: Most NAT types (Dynamic NAT, NAPT, Easy IP) are **unidirectional**—they only work if the internal host starts the conversation. NAT Server is bidirectional and allows external users to proactively access internal servers.
 
 ---
 
@@ -859,11 +947,15 @@ STP creates loop-free logical topology by:
 - Remote AAA: External server (RADIUS, TACACS+)
 
 **Key Exam Points:**
-- Authorization determines specific rights and resources user can access
-- Principle of Least Privilege: Users granted only minimum rights necessary
-- Local AAA disadvantage: Doesn't scale well in large networks
-- MAC address: 48 bits, 12 hexadecimal digits
-- Port Security: Prevents unauthorized devices based on MAC address
+- **AAA architecture**: The standard AAA architecture consists of three core components: 1. **User**: The client/device requesting access, 2. **NAS (Network Access Server)**: The gateway (like a switch, router, or AC) that intercepts user requests and communicates with the server, 3. **AAA Server**: The backend system (like a RADIUS or HWTACACS server) that stores credentials and makes decisions. While a **Portal Server** is often used in web-based authentication (like hotel Wi-Fi), it is considered an external auxiliary component and is not one of the three fundamental pillars of the primary AAA architecture.
+
+- **RADIUS protocol**: RADIUS (Remote Authentication Dial-In User Service) is the most common open-standard AAA protocol. **Protocol**: It uses **UDP** for speed and efficiency. **Authentication Port**: **1812**. **Accounting Port**: **1813**. (Note: Older versions of RADIUS sometimes used ports 1645 and 1646, but 1812/1813 are the modern RFC standards).
+
+- **AAA authorization modes**: AAA supports several ways to grant permissions: **Local**: The NAS (router/switch) checks its own internal database, **Remote**: The NAS asks a RADIUS or HWTACACS server what the user is allowed to do, **None (Non-authorization)**: Users are granted access without specific permission checks (rare but possible). **Mutual authorization** is not a standard AAA mode; while "Mutual Authentication" exists in security (where both client and server prove identity), it is not a categorized authorization mode in this context.
+
+- **AAA concepts**: AAA stands for: **Authentication**: **Who** are you? (Verifying identity via username/password), **Authorization**: **What** can you do? (Granting permissions/privileges), **Accounting**: **How much** did you use? (Logging session time, data usage, and actions). **Automation** is a separate network concept related to SDN and scripts, not a component of the AAA security framework.
+
+- **Domain-based management**: Huawei devices use a **domain-based** management system. When a user logs in (e.g., `user1@huawei`), the NAS looks at the string after the `@` symbol to identify the domain. Each domain is mapped to specific AAA schemes (e.g., use RADIUS for authentication but Local for authorization). This allows a single device to handle different types of users (e.g., internal staff vs. guests) using different security rules.
 - Security zones: Trust (Level 85), DMZ (Level 50), Untrust (Level 5), Local (Level 100)
 - Firewall security policies: Matched one by one from top to bottom
 - DDoS attack goal: Exhaust target's resources and make services unavailable
@@ -989,8 +1081,13 @@ STP creates loop-free logical topology by:
 - Provides: IP, subnet mask, gateway, DNS, lease time
 
 **Key Exam Points:**
-- DHCP Relay Agent: Allows clients to obtain IPs from server in different broadcast domain
-- DHCP client renews lease at 50% of lease time (T1 timer)
+- **DNS domain levels**: The Domain Name System (DNS) is structured as a hierarchy. The level of the domain '.com' in the URL www.huawei.com is **top-level domain (TLD)**. The hierarchy is: Root (.) → TLD (.com) → Second-level (huawei) → Subdomain (www).
+
+- **DHCP messages**: The DHCP process follows the **DORA** sequence: Discover, Offer, Request, Acknowledge. The message sent by a DHCP server to carry the IP address assigned to a client during DHCP interaction is the **DHCP Offer** message.
+
+- **DHCP server parameters**: DHCP is designed to make a device fully "network-ready" without manual configuration. A DHCP server can provide: IP address, Subnet mask, Default gateway, DNS server addresses, and other network parameters.
+
+- **FTP ports**: FTP (File Transfer Protocol) is unique because it uses two separate "channels" (connections): Control channel (default port **21**) and Data channel (port 20 in active mode, dynamic port in passive mode). FTP works in active or passive mode. TCP port 20 is used in both modes for the data channel. The default destination port number of the FTP control channel is **21**.
 
 ### Telnet?
 
@@ -1054,9 +1151,17 @@ STP creates loop-free logical topology by:
 - Security: WEP, WPA, WPA2, WPA3
 
 **Key Exam Points:**
-- Frequency bands: **2.4 GHz and 5 GHz**
-- Wireless uses **CSMA/CA** (Collision Avoidance), NOT CSMA/CD (that's wired Ethernet)
-- SSID: Used to identify specific wireless network
+- **802.11 frequency bands**: The IEEE 802.11 standards operate on different frequency bands. **802.11ac** and **802.11ax** work only on the 5 GHz frequency band. The standard unlicensed frequency bands for Wi-Fi are **2.4 GHz** and **5 GHz**. Note: 2.6 GHz is typically a licensed band used for mobile cellular networks (like LTE/4G), not standard WLAN/Wi-Fi.
+
+- **CAPWAP messages**: CAPWAP (Control and Provisioning of Wireless Access Points) protocol manages APs. The CAPWAP message type used by an AC to deliver configuration files to APs is the **Configuration Update** message.
+
+- **WLAN management frames**: WLAN management frames handle the "announcement" and "joining" of networks. The data frame used by an AP to periodically broadcast its SSID is the **Beacon frame**.
+
+- **AP discovery methods**: APs need to find their controller (AC) to establish a CAPWAP tunnel. **Dynamic** methods include: DHCP Option 43, DNS discovery, and Broadcast discovery.
+
+- **CAPWAP tunnels**: While it is true that CAPWAP establishes two tunnels (data tunnel and control tunnel), they use different "heartbeat" mechanisms. The control tunnel uses Keepalive messages, but the data tunnel may use different mechanisms depending on the implementation.
+
+- **AC deployment modes**: An AC (Access Controller) can be deployed in two physical modes: **In-path (Direct)**: All data traffic from the APs passes through the AC before going to the core network, **Off-path (Side-path/Bypass)**: The AC only handles the management/control traffic (CAPWAP). The actual user data traffic bypasses the AC and goes directly into the network switches, reducing the AC's workload.
 
 ### What is the different WLAN devices?
 
@@ -1134,8 +1239,13 @@ STP creates loop-free logical topology by:
 - Process: Discovery phase (PADI, PADO, PADR, PADS) → Session phase
 
 **Key Exam Points:**
-- PPP authentication protocols: **PAP and CHAP** (NOT MD5 standalone, NOT WEP)
-- PPP link establishment phases: **Dead, Establish, Authenticate, Network, Terminate**
+- **PPPoE termination**: PPPoE (Point-to-Point Protocol over Ethernet) has a specific termination phase. The packet type used by PPPoE to terminate a session is the **PADT (PPPoE Active Discovery Terminate)** packet.
+
+- **PPP LCP negotiation**: During the LCP (Link Control Protocol) phase, three types of responses exist for a Configuration Request: Configuration-Ack (accepts all parameters), Configuration-Nak (rejects some parameters but suggests alternatives), Configuration-Reject (rejects parameters that are not understood). If a packet with unmatched parameters is received during LCP negotiation, the packet type used by PPP to respond is the **Configuration-Nak**.
+
+- **PPP authentication protocols**: The two primary authentication methods defined for PPP are: **PAP (Password Authentication Protocol)**: Sends username and password in plaintext, **CHAP (Challenge Handshake Authentication Protocol)**: Uses a three-way handshake with encrypted challenges. During CHAP authentication, the password configured for a user is **NOT** carried by PPP packets in plaintext (unlike PAP). CHAP uses a challenge-response mechanism with hashing.
+
+- **PPP negotiation packets**: A successful PPP session involves multiple layers of negotiation. The packet types used during PPP negotiation include: LCP (Link Control Protocol) packets, Authentication packets (PAP/CHAP), NCP (Network Control Protocol) packets for IPCP, IPXCP, etc.
 
 ### How basic PPP and PPPoE configurations?
 
@@ -1186,11 +1296,17 @@ STP creates loop-free logical topology by:
 4. **Network Management Systems**: Centralized platforms (iMaster NCE, Cisco Prime)
 
 **Key Exam Points:**
-- SNMP versions: **SNMPv3** provides highest security (encryption, user-based authentication)
-- SNMP components: NMS, Agent, MIB (NOT "SNMP Server")
-- SNMP operations: Get (NMS asks), Set (NMS changes), **Trap** (Agent proactively sends)
-- Troubleshooting first step: **Check physical layer** (cables, ports, power)
-- `tracert` provides: **Specific path** (IP addresses of routers) - ping only shows reachability
+- **SNMP packet types**: SNMP allows devices to alert the **NMS (Network Management System)** when an event occurs. The packet type used by SNMPv2c to proactively send traps to an NMS and requires a response from the NMS is the **InformRequest**. Unlike a "Trap" (which is fire-and-forget), an "Inform" requires the NMS to send an acknowledgment. This makes event reporting reliable.
+
+- **SNMPv2c GetBulk**: SNMPv1 used `Get-Request` (get one value) and `Get-Next-Request` (walk through a table one-by-one). This was very slow for large tables (like a routing table). **SNMPv2c** introduced the **GetBulk** operation. It allows the NMS to request a large block of data in a single packet, significantly reducing network overhead and speeding up the management process.
+
+- **MIB attributes**: The **MIB (Management Information Base)** is like a structured dictionary or database for the device. Every object in the MIB has specific attributes defined: Object Identifier (OID), Data type, Access permissions (read-only, read-write), and Description.
+
+- **SNMPv3 security**: SNMPv1 and v2c are insecure because they use "community strings" (passwords) sent in **plaintext**. SNMPv3 introduced a robust security model: **Authentication**: Verifies the identity of the sender, **Encryption**: Protects data from eavesdropping, **Access Control**: Restricts what users can read or modify.
+
+- **SNMP architecture**: This describes the standard **Manager-Agent architecture**: Network devices enabled with SNMP run the agent process. The management process of an NMS interacts with the agent process through SNMP packets.
+
+- **SNMP protocol**: SNMP (Simple Network Management Protocol) primarily uses the **UDP** protocol for communication. NMS to Agent: UDP Port 161 (for queries like Get/Set). Agent to NMS: UDP Port 162 (for unsolicited Traps/Informs). While some specific implementations can support TCP for security reasons, the standard and most common deployment is UDP.
 - VRRP: Provides gateway redundancy (multiple routers share virtual IP)
 - "Request Timed Out" causes: Host down, firewall blocking, routing issue
 - Interface "Physical UP, Protocol DOWN": **Layer 2 mismatch** (encapsulation, STP blocking)
@@ -1250,11 +1366,15 @@ STP creates loop-free logical topology by:
 - Multicast: FF00::/8
 
 **Key Exam Points:**
-- IPv6 address: **128 bits**
-- Compressed format: Remove leading zeros, use `::` once for consecutive zeros
-- Example: `2001:0DB8:0000:0000:0000:0000:1234:5678` → `2001:DB8::1234:5678`
-- IPv6 Neighbor Discovery: **ICMPv6 (NDP)** replaces ARP
-- IPv6 transition: **Dual-Stack** (runs both IPv4 and IPv6 simultaneously)
+- **IPv6 address length**: An IPv6 address is **128 bits** long, which is four times the length of an IPv4 address (32 bits). This provides a massive address space—approximately 2¹²⁸ unique addresses—ensuring we will not run out of IP addresses in the foreseeable future.
+
+- **IPv6 abbreviation**: IPv6 abbreviation follows two main rules: 1. Remove leading zeros in each hextet (group of 4 hex digits), 2. Replace one or more consecutive groups of zeros with `::` (can only be used once). Example: `2001:0AF8:0000:1234:FB00:0000:5000:EF14` can be abbreviated to `2001:AF8:0:1234:FB00::5000:EF14` or `2001:AF8::1234:FB00:0:5000:EF14`. Note: You can only omit **leading** zeros; trailing zeros must remain.
+
+- **IPv6 header fields**: The **Flow Label** (20 bits) is a new field in the IPv6 header. It allows the source to label sequences of packets for which special handling is requested by IPv6 routers (such as real-time service or specific QoS). This field is used in a basic IPv6 header but not in an IPv4 header.
+
+- **IPv6 address types**: IPv6 uses three types of communication addresses: **Unicast**: One-to-one communication (Global unicast, Link-local, Unique local), **Multicast**: One-to-many communication, **Anycast**: One-to-nearest (multiple devices share the same address, router delivers to closest one).
+
+- **IPv6 unicast address structure**: By standard convention (and for features like SLAAC - Stateless Address Autoconfiguration to work), IPv6 addresses are split exactly in half: **Network Prefix**: 64 bits (identifies the network/subnet), **Interface ID**: 64 bits (identifies the specific host). Common IPv6 unicast addresses, such as global unicast addresses and link-local addresses, require the network prefix and interface ID to be 64 bits.
 
 ### what are the IPv6 address format and address types?
 
@@ -1327,8 +1447,15 @@ STP creates loop-free logical topology by:
 - OpenFlow Protocol: Communication protocol
 
 **Key Exam Points:**
-- SDN architecture: **Control Plane** makes decisions about where traffic is sent
-- NFV: Aims to replace traditional hardware appliances with software on standard servers
+- **NFV architecture**: The **NFVI (Network Functions Virtualization Infrastructure)** is the foundation of the NFV model. It consists of the physical hardware (compute, storage, and network) and the **virtualization layer** (Hypervisor). This layer abstracts the physical resources and presents them as virtual resources to run the virtual functions. In the standard NFV architecture, the module responsible for virtualization of the underlying hardware is the **NFVI**.
+
+- **SDN interfaces**: SDN uses a directional naming convention for its interfaces: **Northbound Interface**: Between applications and the controller (REST APIs, etc.), **Southbound Interface**: Between the controller and network devices. In the SDN architecture, the interface used for communication between the controller and an SDN switch is the **Southbound Interface** (commonly OpenFlow).
+
+- **OpenFlow packets**: The OpenFlow protocol defines three main categories of messages: **Controller-to-Switch**: Messages sent from the controller to a switch (like Flow-Mod to install flow rules, Packet-Out to send packets, Features-Request to query capabilities), **Asynchronous**: Messages sent from switch to controller (like Packet-In when no matching flow), **Symmetric**: Bidirectional messages (like Hello, Echo).
+
+- **NFV features**: NFV leverages standard IT virtualization features to transform networking: **Decoupling**: Network functions from dedicated hardware, **Scalability**: Easy to scale up/down, **Flexibility**: Deploy functions where needed, **Cost Reduction**: Use standard servers instead of specialized hardware.
+
+- **OpenFlow forwarding**: Traditional switches use separate tables for MACs and IPs. In contrast, an **OpenFlow switch** uses one or more **Flow Tables**. Each entry in the table contains "Match Fields" that can include Layer 2 info (MACs, VLANs), Layer 3 info (IPs), and even Layer 4 info (TCP/UDP ports). This allows for highly granular control over how specific "flows" of traffic are handled. An OpenFlow switch forwards packets based on the flow table, and matches the destination MAC and IP addresses and other fields in the packets.
 
 ### What is Huawei SDN solution?
 
@@ -1363,11 +1490,17 @@ STP creates loop-free logical topology by:
 4. **Lack of Visibility**: Limited monitoring, difficult event correlation
 
 **Key Exam Points:**
-- Traditional management disadvantage: **High risk of human error and low efficiency**
-- Python execution: **Both interactive and script mode**
-- Python data types: **Set** is unordered collection of unique elements
-- Netmiko: Simplifies SSH connections and command execution on multi-vendor devices
-- Automation advantages: Efficiency, accuracy, agility (NOT increased hardware costs)
+- **Python classes**: To improve code modularization and utilization, a **class** is used to describe a collection of objects with the same attributes and methods. In Object-Oriented Programming (OOP), a **class** is a blueprint or template. It defines the "attributes" (data) and "methods" (behaviors) that a group of objects will share.
+
+- **Python telnetlib**: The `telnetlib` module (historically used in Python for basic network automation) provides a `Telnet` class to interact with remote devices. The method used to write data to the telnetlib module is the **`write()`** method.
+
+- **Python identifiers**: An **identifier** is a name given to variables, functions, or classes. The rules for Python identifiers are: Can contain letters (a-z, A-Z), digits (0-9), and underscores (_), Must start with a letter or underscore (NOT a digit), Cannot be a Python keyword (like `if`, `for`, `class`), Case-sensitive.
+
+- **Compiled languages**: Languages are generally classified by how they are translated into machine code: **Compiled**: Source code is translated to machine code by a compiler before execution (C, C++, Go, Rust), **Interpreted**: Code is executed line-by-line by an interpreter at runtime (Python, JavaScript, Ruby). Python is an **interpreted** language, not compiled.
+
+- **Python indentation**: Unlike languages like C++ or Java that use curly braces `{ }` to group code, Python uses **indentation**. Python programs use indentation to represent code blocks. Statements in the same code block must have the same number of indented spaces. This is a fundamental syntax requirement in Python.
+
+- **Python execution modes**: Python can run in both interactive mode and non-interactive [script] mode. **Interactive Mode**: Allows you to type code line-by-line in the Python shell (REPL) and see immediate results. This is great for testing and debugging. **Script Mode**: Involves writing code into a file (e.g., `script.py`) and executing the entire file at once. This is the standard for building applications.
 - YAML: Highly human-readable and easy to write (used in Ansible)
 - RESTful API: Uses **HTTP/HTTPS** to communicate
 - JSON/XML: Machine-readable data formats
@@ -1476,11 +1609,19 @@ STP creates loop-free logical topology by:
 - Documentation
 
 **Key Exam Points:**
-- Troubleshooting "Input Errors" and CRC errors: **Faulty cable or electromagnetic interference**
-- OSPF Router ID conflicts: Neighbor relationship fails or routing table unstable
-- Asymmetric routing with stateful firewall: **TCP connections dropped** even though paths are up
-- DHCP exhaustion attack prevention: **DHCP Snooping**
-- STP best practice: Manually configure Core Switch with priority 0 or 4096 to ensure it's always Root Bridge
+- **IP address conservation**: To conserve IP addresses, what mask size is used for IP addresses on router-to-router connections on an enterprise network? Point-to-point links (router-to-router) only require two usable IP addresses (one for each interface). A **/30** subnet provides exactly 2 usable host addresses (4 total - 2 reserved), making it the standard choice for point-to-point links.
+
+- **DHCP Snooping**: **DHCP Snooping** is a security feature that acts like a firewall between untrusted hosts and trusted DHCP servers. On a campus network, DHCP Snooping can be enabled on access switches to prevent employees from accessing unauthorized DHCP-enabled routers. It prevents DHCP exhaustion attacks and rogue DHCP servers.
+
+- **Network reliability technologies**: Each of these technologies provides a different "layer" of redundancy: **Link Aggregation (Eth-Trunk)**: Prevents single link failure, **STP/RSTP**: Prevents loops and provides path redundancy, **VRRP/HSRP**: Provides gateway redundancy, **iStack/CSS**: Provides device-level redundancy.
+
+- **Campus network lifecycle**: A network is not just "built and forgotten." The standard lifecycle (PPDIOO or similar models) includes: **Planning**: Requirements analysis, **Design**: Network architecture, **Implementation**: Deployment, **Operation**: Day-to-day management, **Optimization**: Continuous improvement. These are all stages in the lifecycle of a campus network project.
+
+- **Static IP addresses**: Devices that provide services (like servers) or are shared resources (like printers) should have **Static (Fixed) IP addresses**. If a printer's IP changed via DHCP every day, users would constantly lose their connection to it. This can be done via manual configuration on the device or "DHCP Reservation" on the server.
+
+- **Switches vs Routers**: Switches (Layer 2) typically connect **homogeneous** networks (e.g., Ethernet to Ethernet). Connecting **heterogeneous** networks (like Ethernet to Frame Relay or ATM) is a function of a **Router** (Layer 3). By default, switches **forward** broadcasts to all ports. Only **Routers** (or VLANs configured on a switch) can isolate or "break" a broadcast domain.
+
+- **STP root ports**: In the Spanning Tree Protocol (STP), the rules for port selection are strict: **Root Bridge**: Has no root ports (all its ports are Designated), **Non-Root Bridge**: Must have **exactly one Root Port**. This is the port with the lowest path cost back to the Root Bridge. If multiple paths exist, STP chooses one and blocks the others to prevent loops. A non-root-bridge switch **cannot** have two root ports.
 - Project handover: Run **`save`** command to ensure configuration persists after power failure
 
 ### How to independently complete a campus network project?

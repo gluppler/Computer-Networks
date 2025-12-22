@@ -1,28 +1,26 @@
+
+
 ---
+
 ### **Q1-C2**
 
-**Question:** The Open System Interconnection (OSI) reference model divides a network into seven layers. Which of the following lists the seven layers in the correct order, from bottom to top?
-**A.** Physical layer, data link layer, network layer, transport layer, session layer, presentation layer, and application layer
-**B.** Physical layer, data link layer, network layer, session layer, transport layer, presentation layer, and application layer
-**C.** Physical layer, data link layer, transport layer, network layer, session layer, presentation layer, and application layer
-**D.** Physical layer, network layer, data link layer, transport layer, session layer, presentation layer, and application layer
+**Question:** The OSI reference model divides a network into seven layers. Which of the following lists the seven layers in the correct order, from bottom to top?
+**A.** Physical, Data Link, Network, Transport, Session, Presentation, Application
+**B.** Physical, Data Link, Network, Session, Transport, Presentation, Application
+**C.** Physical, Data Link, Network, Transport, Presentation, Session, Application
+**D.** Physical, Data Link, Transport, Network, Session, Presentation, Application
 **Correct Answer: A**
 
 **Explanation:**
+The OSI model is a conceptual framework that standardizes network functions. The correct order from **Layer 1 (bottom)** to **Layer 7 (top)** is:
 
-The OSI model is a standardized framework used to understand network interactions. The "bottom-to-top" order refers to moving from the physical hardware (Layer 1) up to the user interface (Layer 7):
-
-1. **Physical:** Binary transmission and cables.
-2. **Data Link:** Physical addressing (MAC).
-3. **Network:** Path determination and logical addressing (IP).
-4. **Transport:** End-to-end connections and reliability.
-5. **Session:** Interhost communication.
-6. **Presentation:** Data representation and encryption.
-7. **Application:** Network process to application.
-
-**Why the others are incorrect:**
-
-* **B, C, and D:** These options shuffle the middle layers (Network, Transport, Session, and Presentation) out of their standardized sequence.
+1. **Physical** (Cables, bits)
+2. **Data Link** (Frames, MAC addresses)
+3. **Network** (Packets, IP addresses)
+4. **Transport** (Segments, TCP/UDP)
+5. **Session** (Managing connections)
+6. **Presentation** (Data format, encryption)
+7. **Application** (Network services for software)
 
 ---
 
@@ -36,56 +34,43 @@ The OSI model is a standardized framework used to understand network interaction
 **Correct Answer: B**
 
 **Explanation:**
+Port numbers identify specific services at the Transport Layer.
 
-Telnet is a legacy protocol used for remote terminal access. In the standard TCP/IP port assignments, Port **23** is specifically reserved for Telnet traffic.
-
-**Why the others are incorrect:**
-
-* **A (6):** This is not a common well-known service port; 6 is actually the protocol number for TCP itself within an IP header.
-* **C (17):** Reserved for the "Quote of the Day" (QOTD) protocol.
-* **D (21):** This port is used by **FTP** (File Transfer Protocol) for control signals.
+* **23: Telnet** (Remote terminal access, unencrypted).
+* **21: FTP** (File Transfer Protocol).
+* *Note: Port 6 and 17 are actually the protocol numbers for TCP and UDP, respectively, in the IP header, rather than standard application port numbers.*
 
 ---
 
 ### **Q3-C2**
 
-**Question:** What are functions of the network layer?
-**A.** Providing logical addresses
-**B.** Setting up connections between processes
-**C.** Routing data packets
-**D.** Forwarding data packets
-**Correct Answer: A, C, and D**
+**Question:** What are functions of the network layer? (Multiple Choice)
+**A.** Provide logical addresses for network devices.
+**B.** Set up connections between processes on hosts.
+**C.** Send packets from source hosts to destination hosts.
+**D.** Route and forward data packets.
+**Correct Answer: ACD**
 
 **Explanation:**
+The Network Layer (Layer 3) is primarily about **routing**:
 
-The Network Layer (Layer 3) is responsible for routing data between different networks:
-
-* **A:** It provides **logical addresses** (such as IP addresses) so devices can be identified globally.
-* **C and D:** Its core purpose is to **route and forward data packets** from the source host to the destination host across interconnected networks.
-
-**Why B is incorrect:**
-
-* **B:** Setting up connections between **processes** is a function of the **Transport Layer** (Layer 4) using port numbers, not the Network Layer.
+* It uses **logical addresses** (IP addresses) to identify devices (A).
+* It determines the best path for **packets** to travel from source to destination (C, D).
+* **Option B is incorrect** because setting up connections between "processes" (like browser to web server) is the responsibility of the **Transport Layer (Layer 4)** using port numbers.
 
 ---
 
 ### **Q4-C2**
 
-**Question:** Which of the following statements are true about the layers in the OSI reference model?
-**A.** The application layer is the layer closest to the user.
-**B.** The session layer manages the start and end of communications.
-**C.** The network layer defines IP addressing and path selection for routers.
-**D.** The transport layer handles the transmission method and error recovery.
-**Correct Answer: A, B, C, and D (All of them)**
+**Question:** Which of the following statements are true about the layers in the OSI reference model? (Multiple Choice)
+**A.** Application layer: provides network services for applications.
+**B.** Session layer: establishes, manages, and terminates sessions.
+**C.** Network layer: defines logical addresses for routers to determine paths.
+**D.** Transport layer: implements data transmission and error detection.
+**Correct Answer: ABCD**
 
 **Explanation:**
-
-Each statement accurately describes the primary responsibility of that specific layer:
-
-* **A (Application):** It is indeed the layer closest to the user (e.g., a web browser).
-* **B (Session):** It acts as the "dialogue controller," managing the start and end of communications.
-* **C (Network):** It defines IP addressing and path selection for routers.
-* **D (Transport):** It handles the "how" of transmission, including connection-oriented (TCP) and connectionless (UDP) methods, and error recovery.
+All these statements accurately describe the primary responsibilities of the respective layers. The Transport Layer (D) is particularly important as it handles reliable (TCP) vs. unreliable (UDP) delivery and manages retransmission if data is lost.
 
 ---
 
@@ -97,8 +82,7 @@ Each statement accurately describes the primary responsibility of that specific 
 **Correct Answer: Right**
 
 **Explanation:**
-
-A Media Access Control (MAC) address is the permanent physical address of a network interface card (NIC). It is expressed as 12 hex characters (0-9, A-F), such as `00:1A:2B:3C:4D:5E`. Since each hex digit represents 4 bits, 12 × 4 = 48 bits total (which equals 6 bytes).
+A MAC address is a hardware address. It is written in hexadecimal (e.g., `00-0C-29-4F-8B-3C`). Since each hex digit is 4 bits,  bits. The first 24 bits are the **OUI** (Manufacturer ID) and the last 24 are assigned by the vendor.
 
 ---
 
@@ -110,11 +94,10 @@ A Media Access Control (MAC) address is the permanent physical address of a netw
 **Correct Answer: Wrong**
 
 **Explanation:**
+This is a common point of confusion:
 
-Address Resolution Protocol (ARP) works in two steps:
-
-1. **ARP Request:** This **is** a broadcast ("Who has IP X.X.X.X?").
-2. **ARP Reply:** This is a **Unicast** packet. Because the requester's MAC address was included in the original request, the replying device sends the answer directly to that specific host rather than bothering the entire network.
+* **ARP Request:** Is a **Broadcast** (sent to everyone) because the sender doesn't know who has the target IP.
+* **ARP Reply:** Is a **Unicast** (sent directly back to the requester) because the responder now knows the requester's MAC address from the initial request.
 
 ---
 
@@ -126,11 +109,7 @@ Address Resolution Protocol (ARP) works in two steps:
 **Correct Answer: Right**
 
 **Explanation:**
-
-The Data Link Layer (Layer 2) handles how data is framed for the physical wire:
-
-* **Ethernet:** The standard for local area networks (LANs).
-* **PPP (Point-to-Point Protocol):** Used for direct connections between two nodes.
-* **PPPoE (PPP over Ethernet):** Commonly used by ISPs to connect users to the internet via DSL.
+The Data Link Layer (Layer 2) handles how data is placed on the physical medium. **Ethernet** is the standard for wired LANs, while **PPP** and **PPPoE** are commonly used for Point-to-Point wide area network (WAN) connections, like your home DSL or fiber link.
 
 ---
+
