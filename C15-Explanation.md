@@ -1,86 +1,94 @@
 
+---
+
+### **Q1-C15**
+
+**Question:** What is the level of the domain '.com' in the URL [www.huawei.com](https://www.huawei.com)?
+**A.** Top-level domain
+**B.** Second-level domain
+**C.** Root domain
+**D.** Host name
+**Correct Answer: A**
+
+**Explanation:**
+The Domain Name System (DNS) is structured as a hierarchy:
+
+* **Root Domain:** Represented by a dot (`.`) at the very end (usually hidden).
+* **Top-Level Domain (TLD):** The suffix like **.com**, **.org**, or **.net**.
+* **Second-Level Domain:** The specific name registered by an entity, such as **huawei** in `huawei.com`.
+* **Host Name:** The specific service or machine, such as **www**.
 
 ---
 
-## 1. SNMP Components and Architecture
+### **Q2-C15**
 
-**Question:** Which of the following is NOT a component of the SNMP (Simple Network Management Protocol) architecture?
+**Question:** Which of the following messages is sent by a DHCP server to carry the IP address assigned to a client during DHCP interaction?
+**A.** DHCP Offer
+**B.** DHCP Discover
+**C.** DHCP Ack
+**D.** DHCP Request
+**Correct Answer: A**
 
-**Correct Answer: D. SNMP Server** ### Why D is correct:
-The standard SNMP architecture consists of three specific entities:
+**Explanation:**
+The DHCP process follows the **DORA** sequence:
 
-* **NMS (Network Management Station):** The "Manager" that runs management software to monitor and control devices.
-* **Agent:** A software module running on the **Managed Device** (the router or switch) that communicates with the NMS.
-* **MIB (Management Information Base):** A database/virtual information store on the agent that defines all the objects (like CPU usage or port status) that can be managed.
-* **Note:** While "SNMP Server" is a term sometimes used loosely, it is not the formal name for a component in the standard architecture.
-
----
-
-## 2. SNMP Operations (Get vs. Set vs. Trap)
-
-**Question:** An administrator wants to receive an immediate notification from a switch when a port goes down. Which SNMP message type is used for this?
-
-**Correct Answer: C. Trap**
-
-### Why C is correct:
-
-SNMP uses different message types depending on who starts the communication:
-
-* **Get:** The **NMS** asks the agent for information (e.g., "What is your uptime?").
-* **Set:** The **NMS** tells the agent to change a value (e.g., "Shut down interface G0/0/1").
-* **Trap:** The **Agent** proactively sends an unsolicited message to the NMS when a significant event occurs (e.g., "Warning! Port 5 just failed"). This allows for real-time monitoring without constant polling.
+1. **Discover:** The client broadcasts to find a server.
+2. **Offer:** The server responds with an available IP address and configuration. (**Answer A**)
+3. **Request:** The client asks to use that specific offered IP.
+4. **Ack (Acknowledgment):** The server confirms the lease and the client starts using the IP.
 
 ---
 
-## 3. Huawei iMaster NCE (The "Network Brain")
+### **Q3-C15**
 
-**Question:** What is the primary role of Huawei's **iMaster NCE** in a modern network?
+**Question:** Which of the following is the default destination port number of the FTP control channel?
+**A.** 20
+**B.** 22
+**C.** 23
+**D.** 21
+**Correct Answer: D**
 
-**Correct Answer: A, B, and C**
+**Explanation:**
+FTP (File Transfer Protocol) is unique because it uses two separate "channels" (connections):
 
-### Why these are correct:
-
-iMaster NCE is an intelligent management and control platform that integrates several key "engines":
-
-* **A (Management & Control):** It provides centralized management, allowing for full-lifecycle automation of campus and data center networks.
-* **B (Analysis Engine):** It uses **Telemetry** to collect network data in real-time, building a "digital twin" to visualize network health.
-* **C (Intelligence Engine):** It leverages **AI and Big Data** to perform predictive maintenance, identifying 85% of potential faults before they affect users.
-
----
-
-## 4. Network Design and Planning
-
-**Question:** Which phase is considered the first step in constructing a campus network?
-
-**Correct Answer: A. Network Design and Planning**
-
-### Why A is correct:
-
-Before any cables are plugged in or commands are typed, an engineer must perform **Planning**. This involves understanding business requirements, determining the number of users, choosing the right hardware (routers/switches/APs), and designing the IP addressing and VLAN structure. Skipping this leads to scalability and performance issues later.
+* **Control Channel (Port 21):** Used for sending commands (login, list files, delete).
+* **Data Channel (Port 20):** Used for the actual transfer of file data.
+* *Note: Port 22 is SSH/SFTP, and Port 23 is Telnet.*
 
 ---
 
-## 5. SDN Forwarding vs. Control Separation
+### **Q4-C15**
 
-**Question:** Which statement is true regarding Software-Defined Networking (SDN)?
+**Question:** Which of the following parameters can be assigned by a DHCP server to a DHCP client? (Multiple Choice)
+**A.** Local IP address
+**B.** Mask
+**C.** DNS server address
+**D.** Gateway address
+**Correct Answer: ABCD**
 
-**Correct Answer: B. SDN separates the forwarding plane from the control plane.**
+**Explanation:**
+DHCP is designed to make a device fully "network-ready" without manual configuration. A DHCP server can provide:
 
-### Why B is correct:
-
-Traditional routers make their own decisions. In SDN, the **Control Plane** (the "brain") is moved to a centralized controller (like iMaster NCE), while the **Forwarding Plane** (the physical switch) simply follows instructions to move packets. This centralized control makes the network more agile and easier to program.
+* **IP Address and Subnet Mask:** Essential for Layer 3 communication.
+* **Default Gateway:** So the device knows how to reach other networks.
+* **DNS Servers:** So the device can resolve names (like https://www.google.com/search?q=google.com) to IPs.
+* **Lease Time:** How long the device can keep the address.
 
 ---
 
-## 6. CampusInsight and Fault Location
+### **Q5-C15**
 
-**Question:** How does iMaster NCE-CampusInsight improve O&M (Operations and Maintenance)?
+**Question:** FTP works in active or passive mode. TCP port 20 is used in both modes.
+**A.** Right
+**B.** Wrong
+**Correct Answer: Wrong**
 
-**Correct Answer: D. By locating root causes of faults within minutes using AI.**
+**Explanation:**
+This is a tricky but important distinction:
 
-### Why D is correct:
-
-Traditional troubleshooting is "complaint-driven" (waiting for a user to call). **CampusInsight** is proactive. It monitors the "journey" of every user and application. When a fault occurs, it automatically analyzes the data to pinpoint the root cause—such as a specific AP interference or a DHCP failure—reducing troubleshooting time from hours to minutes.
+* **Active Mode:** The server initiates the data connection from its **Port 20** to a random port on the client.
+* **Passive Mode (PASV):** The client initiates the data connection to a **random high port** (above 1024) provided by the server.
+In Passive mode, Port 20 is **not** used. This mode was created to solve issues where client-side firewalls would block the incoming connection from the server in Active mode.
 
 ---
 

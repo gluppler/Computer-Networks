@@ -1311,87 +1311,111 @@ This prevents a situation where an Eth-Trunk is technically "Up" but only has 1 
 ### Q1-C12.png
 ![Q1-C12](C12-C17/C12/Q1-C12.png)
 
-#### Explanation: ACL Matching Order
+#### Explanation: Default ACL Rule ID Increment
 
-**Question:** When a router processes an ACL, in what order does it match the rules?
+**Question:** What is the default increment of ACL rule IDs?
+**A.** 20
+**B.** 15
+**C.** 5
+**D.** 10
 
-**Correct Answer: A. Based on the rule ID in ascending order.**
+**Correct Answer: C**
 
-**Why A is correct:**
+**Why C is correct:**
 
-By default, Huawei devices process ACL rules based on the **Rule ID** (usually increments of 5 or 10, such as 5, 10, 15). The router starts with the smallest ID and moves upward. Once a packet matches a rule, the action (Permit or Deny) is taken, and the router stops checking further rules for that packet.
+In Huawei VRP, ACL rules are identified by IDs (e.g., rule 5, rule 10). The **default increment is 5**.
 
-**Why the others are incorrect:**
-
-* **B:** Rules are not processed in descending order; that would ignore the priority of the first-created rules.
-* **C:** While many systems use "Top-to-Bottom," the technical mechanism in VRP is the numerical value of the Rule ID.
-* **D:** Random matching would make security policies unpredictable and ineffective.
+* This gap allows administrators to insert new rules between existing ones (for example, inserting a rule with ID 7 between 5 and 10) without having to delete and recreate the entire list.
+* This is crucial because ACLs are processed from top to bottom.
 
 ---
 
 ### Q2-C12.png
 ![Q2-C12](C12-C17/C12/Q2-C12.png)
 
-#### Explanation: Basic ACL vs. Advanced ACL
+#### Explanation: Advanced ACL Number Range
 
-**Question:** What is the range for a basic ACL?
+**Question:** What is the number range of advanced ACLs?
+**A.** 4000-4999
+**B.** 3000-3999
+**C.** 2000-2999
+**D.** 6000-6999
 
-**Correct Answer: B. 2000–2999**
+**Correct Answer: B**
 
 **Why B is correct:**
 
-Huawei VRP categorizes ACLs by number to define their capabilities:
+Huawei classifies ACLs into specific number ranges based on their capabilities:
 
-* **2000–2999:** **Basic ACLs.** These can only filter based on the **Source IP Address**.
-* **3000–3999:** **Advanced ACLs.** These can filter based on Source IP, Destination IP, Protocol (TCP/UDP), and Port numbers.
-* **4000–4999:** Layer 2 ACLs (based on MAC addresses).
+* **2000–2999: Basic ACLs** (Filters based only on Source IP).
+* **3000–3999: Advanced ACLs** (Filters based on Source/Destination IP, Protocol, and Port numbers).
+* **4000–4999: Layer 2 ACLs** (Filters based on Source/Destination MAC and Ethernet Type).
 
 ---
 
 ### Q3-C12.png
 ![Q3-C12](C12-C17/C12/Q3-C12.png)
 
-#### Explanation: NAT Functionality
+#### Explanation: Layer 2 ACL Matching Fields
 
-**Question:** Which of the following are advantages of NAT?
+**Question:** If the number of an ACL is 4010, which of the following fields can the ACL match?
+**A.** Source IP address
+**B.** Source IP address and destination IP address
+**C.** Source MAC address, destination MAC address, and Layer 2 protocol type
+**D.** Packet header and offset
 
-**Correct Answer: A, B, and C**
+**Correct Answer: C**
 
-**Why these are correct:**
+**Why C is correct:**
 
-* **A (Address Conservation):** NAT allows hundreds of internal devices to use just one (or a few) public IP addresses, slowing the exhaustion of IPv4 addresses.
-* **B (Security):** By hiding internal private IP addresses from the public internet, NAT provides a level of "security through obscurity."
-* **C (Flexibility):** NAT allows internal networks to use any private addressing scheme without needing to change it if the ISP or public IP changes.
+As noted in Q2, the range **4000–4999** is reserved for **Layer 2 ACLs**. Unlike Basic or Advanced ACLs which look at Layer 3 (IP) and Layer 4 (Port) information, Layer 2 ACLs focus on the Ethernet frame header. They are used to permit or deny traffic based on physical hardware addresses (MAC) and the protocol type field in the frame.
 
 ---
 
 ### Q4-C12.png
 ![Q4-C12](C12-C17/C12/Q4-C12.png)
 
-#### Explanation: NAPT (Network Address Port Translation)
+#### Explanation: ACL Rule Matching
 
-**Question:** NAPT allows multiple private IP addresses to be mapped to the same public IP address.
+**Question:** Which of the following packets can match the ACL rule: `rule 1 permit tcp source any destination 192.168.1.1 0.0.0.0 destination-port eq 80`? (Multiple Choice)
+**A.** Source IP: 10.1.1.1; Dest IP: 192.168.1.2; Dest Port: 80; Protocol: TCP
+**B.** Source IP: 10.1.1.1; Dest IP: 192.168.1.1; Dest Port: 80; Protocol: UDP
+**C.** Source IP: 10.1.1.1; Dest IP: 192.168.1.1; Dest Port: 80; Protocol: TCP
+**D.** Source IP: 10.0.0.1; Dest IP: 192.168.1.1; Dest Port: 80; Protocol: TCP
 
-**Correct Answer: Right**
+**Correct Answer: C and D**
 
-**Why "Right" is correct:**
+**Why C and D are correct:**
 
-NAPT (also known as "PAT" or "NAT Overload") is the most common form of NAT. It uses **Layer 4 Port Numbers** to keep track of which internal device belongs to which session. This allows an almost unlimited number of internal hosts to "hide" behind a single public IP simultaneously.
+Let's break down the rule requirements:
+
+1. **Protocol:** Must be **TCP**. (Eliminates B, which is UDP).
+2. **Source:** `any` (Any source IP is fine).
+3. **Destination IP:** `192.168.1.1 0.0.0.0` (Must be exactly 192.168.1.1. Eliminates A, which is 192.168.1.2).
+4. **Destination Port:** `eq 80` (Must be exactly port 80).
+
+* **C matches all:** TCP + 192.168.1.1 + Port 80.
+* **D matches all:** TCP + 192.168.1.1 + Port 80 (Different source IP is allowed because of `source any`).
 
 ---
 
 ### Q5-C12.png
 ![Q5-C12](C12-C17/C12/Q5-C12.png)
 
-#### Explanation: NAT Server (Port Forwarding)
+#### Explanation: Advanced ACL Port Matching
 
-**Question:** The `nat server` command is used to allow external users to access an internal server.
+**Question:** An advanced ACL can match the source and destination port numbers of packets, enabling it to filter TCP packets with a specified destination port number.
+**A.** Right
+**B.** Wrong
 
 **Correct Answer: Right**
 
 **Why "Right" is correct:**
 
-Normally, NAT blocks unsolicited incoming traffic. To host a web server or mail server inside a private network, you must configure a **NAT Server** (Static NAT/Port Forwarding). This tells the router: "If traffic arrives on Public Port 80, send it specifically to Internal IP 192.168.1.10."
+This is one of the primary differences between Basic and Advanced ACLs.
+
+* **Basic ACLs (2000-2999):** Can only check the Source IP address.
+* **Advanced ACLs (3000-3999):** Have "deep" inspection capabilities. They can look into the Layer 4 header to identify the protocol (TCP, UDP, ICMP, etc.) and specific **Source and Destination Port numbers** (such as Port 80 for HTTP or Port 443 for HTTPS). This allows for granular traffic control, such as allowing web browsing while blocking FTP.
 
 **Total Questions:** 5
 
@@ -1404,84 +1428,117 @@ Normally, NAT blocks unsolicited incoming traffic. To host a web server or mail 
 ### Q1-C13.png
 ![Q1-C13](C12-C17/C13/Q1-C13.png)
 
-#### Explanation: AAA Fundamentals
+#### Explanation: AAA Network Architecture Roles
 
-**Question:** What does the acronym AAA stand for in network security?
+**Question:** Which of the following roles is not included in the common AAA network architecture?
+**A.** User
+**B.** AAA server
+**C.** Network access server (NAS)
+**D.** Portal server
 
-**Correct Answer: B. Authentication, Authorization, and Accounting**
+**Correct Answer: D**
 
-**Why B is correct:**
+**Why D is correct:**
 
-AAA is a framework used to control access to computer resources and enforce policies:
+The standard AAA architecture consists of three core components:
 
-* **Authentication:** Verifying **who** the user is (e.g., username and password).
-* **Authorization:** Determining **what** the user is allowed to do (e.g., commands they can run).
-* **Accounting:** Measuring the resources the user consumes (e.g., **how long** they were logged in) for auditing.
+1. **User:** The client/device requesting access.
+2. **NAS (Network Access Server):** The gateway (like a switch, router, or AC) that intercepts user requests and communicates with the server.
+3. **AAA Server:** The backend system (like a RADIUS or HWTACACS server) that stores credentials and makes decisions.
+
+While a **Portal Server** is often used in web-based authentication (like hotel Wi-Fi), it is considered an external auxiliary component and is not one of the three fundamental pillars of the primary AAA architecture.
 
 ---
 
 ### Q2-C13.png
 ![Q2-C13](C12-C17/C13/Q2-C13.png)
 
-#### Explanation: Firewall Security Zones
+#### Explanation: RADIUS Protocol and Port
 
-**Question:** On a Huawei firewall, which of the following zones has the highest default security level?
+**Question:** What are the transport layer protocol and authentication port number used by RADIUS?
+**A.** UDP, 1813
+**B.** UDP, 1812
+**C.** TCP, 1813
+**D.** TCP, 1812
 
-**Correct Answer: A. Trust**
+**Correct Answer: B**
 
-**Why A is correct:**
+**Why B is correct:**
 
-Firewalls use security levels (0–100) to define trust:
+RADIUS (Remote Authentication Dial-In User Service) is the most common open-standard AAA protocol.
 
-* **Trust (Level 85):** Usually reserved for the internal, protected network.
-* **DMZ (Level 50):** The "Demilitarized Zone" for public-facing servers.
-* **Untrust (Level 5):** Usually represents the Internet or external networks.
-* **Local (Level 100):** Refers to the firewall itself; it is the most secure zone.
+* **Protocol:** It uses **UDP** for speed and efficiency.
+* **Authentication Port:** **1812**.
+* **Accounting Port:** **1813**.
+
+(Note: Older versions of RADIUS sometimes used ports 1645 and 1646, but 1812/1813 are the modern RFC standards).
 
 ---
 
 ### Q3-C13.png
 ![Q3-C13](C12-C17/C13/Q3-C13.png)
 
-#### Explanation: Security Policy Matching
+#### Explanation: AAA Authorization Modes
 
-**Question:** When a firewall receives a packet, how does it match it against security policies?
+**Question:** Which of the following authorization modes is not supported by AAA?
+**A.** Non-authorization
+**B.** Local authorization
+**C.** Mutual authorization
+**D.** Remote authorization
 
-**Correct Answer: B. It matches policies one by one from top to bottom.**
+**Correct Answer: C**
 
-**Why B is correct:**
+**Why C is correct:**
 
-Like ACLs, firewall security policies are processed sequentially. The device starts at the top of the list. Once a packet matches the criteria of a policy (Source/Destination Zone, IP, Port), the action (Permit or Deny) is taken immediately, and no further policies are checked.
+AAA supports several ways to grant permissions:
+
+* **Local:** The NAS (router/switch) checks its own internal database.
+* **Remote:** The NAS asks a RADIUS or HWTACACS server what the user is allowed to do.
+* **None (Non-authorization):** Users are granted access without specific permission checks (rare but possible).
+
+**Mutual authorization** is not a standard AAA mode; while "Mutual Authentication" exists in security (where both client and server prove identity), it is not a categorized authorization mode in this context.
 
 ---
 
 ### Q4-C13.png
 ![Q4-C13](C12-C17/C13/Q4-C13.png)
 
-#### Explanation: Port Security
+#### Explanation: AAA Concepts
 
-**Question:** Which feature can be used on a switch to prevent unauthorized devices from connecting to a specific port based on their MAC address?
+**Question:** Which of the following concepts are involved in AAA? (Multiple Choice)
+**A.** Accounting
+**B.** Authentication
+**C.** Authorization
+**D.** Automation
 
-**Correct Answer: C. Port Security**
+**Correct Answer: A, B, and C**
 
-**Why C is correct:**
+**Why A, B, and C are correct:**
 
-Port Security allows an administrator to limit the number of MAC addresses on a port or bind specific MAC addresses to a port. If an unauthorized device (with a different MAC) is plugged in, the switch can automatically shut down the port or discard the traffic.
+AAA stands for:
+
+* **Authentication:** **Who** are you? (Verifying identity via username/password).
+* **Authorization:** **What** can you do? (Granting permissions/privileges).
+* **Accounting:** **How much** did you use? (Logging session time, data usage, and actions).
+
+**Automation** is a separate network concept related to SDN and scripts, not a component of the AAA security framework.
 
 ---
 
 ### Q5-C13.png
 ![Q5-C13](C12-C17/C13/Q5-C13.png)
 
-#### Explanation: Security Threats: DDoS
+#### Explanation: AAA Domain-Based Management
 
-**Question:** What is the primary goal of a Distributed Denial of Service (DDoS) attack?
+**Question:** When receiving a user access request, the NAS determines the domain to which the user belongs based on the user name, and performs user management and control based on the AAA schemes configured for the domain.
+**A.** Right
+**B.** Wrong
 
-**Correct Answer: D. To exhaust the target's resources and make services unavailable.**
+**Correct Answer: Right**
 
-**Why D is correct:**
+**Why "Right" is correct:**
 
-A DDoS attack uses a large number of compromised systems (a "botnet") to flood a target with massive amounts of traffic. The goal is not to steal data, but to crash the server or clog the network so legitimate users cannot access the service.
+Huawei devices use a **domain-based** management system. When a user logs in (e.g., `user1@huawei`), the NAS looks at the string after the `@` symbol to identify the domain. Each domain is mapped to specific AAA schemes (e.g., use RADIUS for authentication but Local for authorization). This allows a single device to handle different types of users (e.g., internal staff vs. guests) using different security rules.
 
 **Total Questions:** 5
 
@@ -1494,35 +1551,107 @@ A DDoS attack uses a large number of compromised systems (a "botnet") to flood a
 ### Q1-C14.png
 ![Q1-C14](C12-C17/C14/Q1-C14.png)
 
-*[Explanation not available - C14-Explanation.md contains Network Automation content which belongs to Chapter 21]*
+#### Explanation: Easy IP NAT Technology
+
+**Question:** Which of the following NAT technologies can only use an interface address as the post-NAT public address?
+**A.** Easy IP
+**B.** NAT Server
+**C.** Dynamic NAT
+**D.** Static NAT
+
+**Correct Answer: A**
+
+**Why A is correct:**
+
+**Easy IP** is a special form of NAPT (Network Address Port Translation). It is specifically designed for scenarios where the public IP address of the egress interface is assigned dynamically (e.g., via DHCP or PPPoE).
+
+* Unlike other NAT types that require an "address pool," Easy IP directly uses the **current IP address of the interface** as the translation source.
+* It is the most common NAT implementation for small-to-medium offices and home routers.
 
 ---
 
 ### Q2-C14.png
 ![Q2-C14](C12-C17/C14/Q2-C14.png)
 
-*[Explanation not available - C14-Explanation.md contains Network Automation content which belongs to Chapter 21]*
+#### Explanation: NAT Server for External Access
+
+**Question:** Which of the following NAT technologies can be deployed on egress network devices to enable external users to access only a TCP port of an intranet server?
+**A.** Static NAT
+**B.** NAT Server
+**C.** Dynamic NAT
+**D.** NAPT
+
+**Correct Answer: B**
+
+**Why B is correct:**
+
+**NAT Server** (also known as Port Forwarding or Static NAT with port mapping) allows you to map a specific public IP and port to an internal server's private IP and port.
+
+* This is used when you want the outside world to "see" a service (like a Web Server on port 80) without exposing the entire server.
+* By specifying the port, you maintain better security by only allowing traffic to that one specific TCP/UDP service.
 
 ---
 
 ### Q3-C14.png
 ![Q3-C14](C12-C17/C14/Q3-C14.png)
 
-*[Explanation not available - C14-Explanation.md contains Network Automation content which belongs to Chapter 21]*
+#### Explanation: NAPT Translation Fields
+
+**Question:** Which of the following are not translated by NAPT? (Multiple Choice)
+**A.** Destination IP address
+**B.** Source port number
+**C.** Destination port number
+**D.** Source IP address
+
+**Correct Answer: A and C**
+
+**Why A and C are correct:**
+
+When an internal user accesses the internet:
+
+* **NAPT translates:** The **Source IP** (D) and the **Source Port** (B). It replaces the private IP with a public one and assigns a unique port number to keep track of the session.
+* **NAPT does NOT translate:** The **Destination IP** (A) or the **Destination Port** (C). The router needs to keep these original so the packet actually reaches the intended server on the internet (e.g., Google's IP and port 443).
 
 ---
 
 ### Q4-C14.png
 ![Q4-C14](C12-C17/C14/Q4-C14.png)
 
-*[Explanation not available - C14-Explanation.md contains Network Automation content which belongs to Chapter 21]*
+#### Explanation: NAT Technologies for External Proactive Access
+
+**Question:** Which of the following NAT technologies can be used to enable external users to proactively access an intranet server? (Multiple Choice)
+**A.** Static NAT
+**B.** NAT Server
+**C.** NAPT
+**D.** Easy IP
+
+**Correct Answer: A and B**
+
+**Why A and B are correct:**
+
+Most NAT types (Dynamic NAT, NAPT, Easy IP) are **unidirectional**—they only work if the internal host starts the conversation.
+
+* **Static NAT (A):** Creates a permanent 1-to-1 mapping. An external user can type in the public IP, and it always points to the same internal host.
+* **NAT Server (B):** Creates a static mapping for a specific service (IP + Port).
+
+Because these mappings are fixed in the NAT table, external users can "proactively" (initiate first) reach the internal server.
 
 ---
 
 ### Q5-C14.png
 ![Q5-C14](C12-C17/C14/Q5-C14.png)
 
-*[Explanation not available - C14-Explanation.md contains Network Automation content which belongs to Chapter 21]*
+#### Explanation: NAPT 1:N Mapping
+
+**Question:** NAPT translates not only IP addresses but also port numbers to implement 1:N mappings between public and private addresses.
+**A.** Right
+**B.** Wrong
+
+**Correct Answer: Right**
+
+**Why "Right" is correct:**
+
+This is the core definition of **NAPT** (Network Address Port Translation). By using the Layer 4 **Port Number** as an identifier, a single public IP address can support thousands of internal private hosts simultaneously. The router keeps a "NAT session table" to remember which unique port belongs to which internal PC.
 
 **Total Questions:** 5
 
@@ -1535,87 +1664,117 @@ A DDoS attack uses a large number of compromised systems (a "botnet") to flood a
 ### Q1-C15.png
 ![Q1-C15](C12-C17/C15/Q1-C15.png)
 
-#### Explanation: DHCP Working Principle
+#### Explanation: DNS Domain Level
 
-**Question:** Which of the following is the correct order of messages exchanged between a DHCP client and a DHCP server when a client requests an IP address for the first time?
+**Question:** What is the level of the domain '.com' in the URL www.huawei.com?
+**A.** Top-level domain
+**B.** Second-level domain
+**C.** Root domain
+**D.** Host name
 
-**Correct Answer: A. Discover, Offer, Request, ACK**
+**Correct Answer: A**
 
 **Why A is correct:**
 
-The DHCP process (often called **DORA**) follows a specific four-step handshake:
+The Domain Name System (DNS) is structured as a hierarchy:
 
-1. **Discover:** The client broadcasts a message to find available DHCP servers.
-2. **Offer:** The server responds with a proposed IP address and configuration.
-3. **Request:** The client selects an offer and asks the server to "reserve" that IP.
-4. **ACK (Acknowledgment):** The server confirms the lease and provides the final configuration details.
+* **Root Domain:** Represented by a dot (`.`) at the very end (usually hidden).
+* **Top-Level Domain (TLD):** The suffix like **.com**, **.org**, or **.net**.
+* **Second-Level Domain:** The specific name registered by an entity, such as **huawei** in `huawei.com`.
+* **Host Name:** The specific service or machine, such as **www**.
 
 ---
 
 ### Q2-C15.png
 ![Q2-C15](C12-C17/C15/Q2-C15.png)
 
-#### Explanation: DHCP Relay Agent
+#### Explanation: DHCP Offer Message
 
-**Question:** Why is a DHCP Relay Agent required in some network environments?
+**Question:** Which of the following messages is sent by a DHCP server to carry the IP address assigned to a client during DHCP interaction?
+**A.** DHCP Offer
+**B.** DHCP Discover
+**C.** DHCP Ack
+**D.** DHCP Request
 
-**Correct Answer: B. To allow DHCP clients to obtain IP addresses from a server located in a different broadcast domain.**
+**Correct Answer: A**
 
-**Why B is correct:**
+**Why A is correct:**
 
-DHCP "Discover" messages are Layer 2 broadcasts, which routers do not forward. If the DHCP server is not on the same local network as the client, the router acting as the **Relay Agent** intercepts the broadcast and forwards it as a **Unicast** message to the remote server.
+The DHCP process follows the **DORA** sequence:
+
+1. **Discover:** The client broadcasts to find a server.
+2. **Offer:** The server responds with an available IP address and configuration. (**Answer A**)
+3. **Request:** The client asks to use that specific offered IP.
+4. **Ack (Acknowledgment):** The server confirms the lease and the client starts using the IP.
 
 ---
 
 ### Q3-C15.png
 ![Q3-C15](C12-C17/C15/Q3-C15.png)
 
-#### Explanation: DNS (Domain Name System)
+#### Explanation: FTP Control Channel Port
 
-**Question:** What is the primary function of a DNS server?
+**Question:** Which of the following is the default destination port number of the FTP control channel?
+**A.** 20
+**B.** 22
+**C.** 23
+**D.** 21
 
-**Correct Answer: A. Mapping domain names to IP addresses.**
+**Correct Answer: D**
 
-**Why A is correct:**
+**Why D is correct:**
 
-Computers communicate using IP addresses, but humans prefer names. DNS acts as the "phonebook" of the internet, translating a human-readable name like `www.huawei.com` into its corresponding machine-readable IP address.
+FTP (File Transfer Protocol) is unique because it uses two separate "channels" (connections):
 
-**Why the others are incorrect:**
-
-* **B:** Mapping MAC addresses to IPs is the job of **ARP**.
-* **C:** Encrypting traffic is the job of protocols like **SSL/TLS**.
+* **Control Channel (Port 21):** Used for sending commands (login, list files, delete).
+* **Data Channel (Port 20):** Used for the actual transfer of file data.
+* *Note: Port 22 is SSH/SFTP, and Port 23 is Telnet.*
 
 ---
 
 ### Q4-C15.png
 ![Q4-C15](C12-C17/C15/Q4-C15.png)
 
-#### Explanation: HTTP and HTTPS Port Numbers
+#### Explanation: DHCP Server Parameters
 
-**Question:** Which port numbers are used by default for HTTP and HTTPS, respectively?
+**Question:** Which of the following parameters can be assigned by a DHCP server to a DHCP client? (Multiple Choice)
+**A.** Local IP address
+**B.** Mask
+**C.** DNS server address
+**D.** Gateway address
 
-**Correct Answer: C. 80 and 443**
+**Correct Answer: A, B, C, D (All of them)**
 
-**Why C is correct:**
+**Why these are all correct:**
 
-* **Port 80:** The standard port for **HTTP** (unencrypted web traffic).
-* **Port 443:** The standard port for **HTTPS** (encrypted web traffic), which uses SSL/TLS for security.
+DHCP is designed to make a device fully "network-ready" without manual configuration. A DHCP server can provide:
+
+* **IP Address and Subnet Mask:** Essential for Layer 3 communication.
+* **Default Gateway:** So the device knows how to reach other networks.
+* **DNS Servers:** So the device can resolve names (like google.com) to IPs.
+* **Lease Time:** How long the device can keep the address.
 
 ---
 
 ### Q5-C15.png
 ![Q5-C15](C12-C17/C15/Q5-C15.png)
 
-#### Explanation: FTP Transfer Modes
+#### Explanation: FTP Port 20 Usage
 
-**Question:** Which FTP mode is more "firewall-friendly" because the client initiates the data connection?
+**Question:** FTP works in active or passive mode. TCP port 20 is used in both modes.
+**A.** Right
+**B.** Wrong
 
-**Correct Answer: B. Passive Mode (PASV)**
+**Correct Answer: Wrong**
 
-**Why B is correct:**
+**Why "Wrong" is correct:**
 
-* In **Active Mode**, the server tries to connect *back* to the client, which firewalls usually block.
-* In **Passive Mode**, the client initiates both the control and data connections, making it much easier for traffic to pass through security filters.
+This is a tricky but important distinction:
+
+* **Active Mode:** The server initiates the data connection from its **Port 20** to a random port on the client.
+* **Passive Mode (PASV):** The client initiates the data connection to a **random high port** (above 1024) provided by the server.
+
+In Passive mode, Port 20 is **not** used. This mode was created to solve issues where client-side firewalls would block the incoming connection from the server in Active mode.
 
 **Total Questions:** 5
 
@@ -1628,76 +1787,118 @@ Computers communicate using IP addresses, but humans prefer names. DNS acts as t
 ### Q1-C16.png
 ![Q1-C16](C12-C17/C16/Q1-C16.png)
 
-#### Explanation: WLAN Frequency Bands
+#### Explanation: 802.11 Protocol Frequency Bands
 
-**Question:** Which frequency bands are commonly used by IEEE 802.11 wireless networks?
+**Question:** Which of the following 802.11 protocols works only on the 5 GHz frequency band?
+**A.** 802.11ax
+**B.** 802.11n
+**C.** 802.11ac
+**D.** 802.11g
 
-**Correct Answer: A and C. 2.4 GHz and 5 GHz**
+**Correct Answer: C**
 
-**Why A and C are correct:**
+**Why C is correct:**
 
-Most standard Wi-Fi deployments operate on these two unlicensed bands:
+The IEEE 802.11 standards operate on different frequency bands:
 
-* **2.4 GHz:** Known for better range and penetration through walls, but it is crowded and prone to interference (from microwaves, Bluetooth, etc.).
-* **5 GHz:** Offers higher speeds and more non-overlapping channels but has a shorter range and is easily blocked by physical obstacles.
+* **802.11g:** Operates only on **2.4 GHz**.
+* **802.11n (Wi-Fi 4):** Operates on both **2.4 GHz** and **5 GHz**.
+* **802.11ac (Wi-Fi 5):** Operates strictly on the **5 GHz** band to avoid interference and provide higher throughput.
+* **802.11ax (Wi-Fi 6):** Operates on both **2.4 GHz** and **5 GHz** (and 6 GHz for Wi-Fi 6E).
 
 ---
 
 ### Q2-C16.png
 ![Q2-C16](C12-C17/C16/Q2-C16.png)
 
-#### Explanation: WLAN Deployment Modes
+#### Explanation: CAPWAP Configuration Update
 
-**Question:** In an enterprise WLAN, what is the role of an AC (Access Controller)?
+**Question:** Which of CAPWAP message types is used by an AC to deliver configuration files to APs?
+**A.** Configuration Update Request
+**B.** Image Data Request
+**C.** Configuration Update Response
+**D.** Image Data Response
 
-**Correct Answer: A, B, and C**
+**Correct Answer: C**
 
-**Why these are correct:**
+**Why C is correct:**
 
-In "Fit AP" architectures (common in offices and campuses), the AC acts as the "brain":
+CAPWAP (Control and Provisioning of Wireless Access Points) protocol manages APs.
 
-* **A (Management):** It centrally manages all Access Points (APs), including firmware updates and configuration.
-* **B (Channel & Power):** It automatically adjusts the radio channels and power levels of APs to reduce interference.
-* **C (Security):** It handles user authentication and enforces security policies across the entire wireless network.
+* **Configuration Update Request:** Sent by an **AP** to the AC to request or report configuration status.
+* **Configuration Update Response:** Sent by the **AC** to the AP. This message carries the actual configuration parameters or files the AP needs to operate.
+* **Image Data:** Used for upgrading the AP's firmware (software image).
 
 ---
 
 ### Q3-C16.png
 ![Q3-C16](C12-C17/C16/Q3-C16.png)
 
-#### Explanation: SSID Definition
+#### Explanation: WLAN Beacon Frames
 
-**Question:** An SSID (Service Set Identifier) is used to identify a specific wireless network.
+**Question:** Which of the following data frames is used by an AP to periodically broadcast its SSID?
+**A.** Probe Request
+**B.** Probe Response
+**C.** Association Request
+**D.** Beacon
 
-**Correct Answer: Right**
+**Correct Answer: D**
 
-**Why "Right" is correct:**
+**Why D is correct:**
 
-The SSID is essentially the "name" of the Wi-Fi network that users see when they try to connect. It allows multiple wireless networks to exist in the same physical space while keeping their traffic and access requirements separate.
+WLAN management frames handle the "announcement" and "joining" of networks:
+
+* **Beacon Frame:** The AP sends this periodically (default every 100ms) to announce its presence, SSID, and supported rates.
+* **Probe Request:** Sent by a **Client** to search for a specific SSID.
+* **Probe Response:** Sent by an AP in response to a Probe Request.
+* **Association Request:** Sent by a client to join the AP after authentication.
 
 ---
 
 ### Q4-C16.png
 ![Q4-C16](C12-C17/C16/Q4-C16.png)
 
-#### Explanation: CSMA/CA in Wireless
+#### Explanation: AP Dynamic AC Discovery Modes
 
-**Question:** Wireless networks use CSMA/CD to detect collisions on the medium.
+**Question:** Which of the following modes are used by APs to dynamically discover an AC? (Multiple Choice)
+**A.** Manually specifying the AC IP address on the APs
+**B.** Broadcast mode
+**C.** DHCP mode
+**D.** DNS mode
 
-**Correct Answer: Wrong**
+**Correct Answer: B, C, and D**
 
-**Why "Wrong" is correct:**
+**Why B, C, and D are correct:**
 
-* **CSMA/CD (Collision Detection):** Used in **wired** Ethernet.
-* **CSMA/CA (Collision Avoidance):** Used in **wireless** networks.
-Because wireless radios cannot listen and transmit on the same frequency at the same time, they cannot "detect" a collision while it is happening. Instead, they use "Avoidance"—listening to see if the air is clear and then sending a "Request to Send" (RTS) to avoid the crash entirely.
+APs need to find their controller (AC) to establish a CAPWAP tunnel. **Dynamic** methods include:
+
+* **Broadcast (B):** The AP sends a Discovery Request to the local subnet broadcast address.
+* **DHCP (C):** The DHCP server provides the AC's IP address to the AP using **Option 43**.
+* **DNS (D):** The AP queries a specific domain name (like `ac-address.local`) to get the AC's IP.
+
+*Note: Manual configuration (A) is a static method, not a dynamic discovery method.*
 
 ---
 
 ### Q5-C16.png
 ![Q5-C16](C12-C17/C16/Q5-C16.png)
 
-*[Explanation not available - C10-Explanation.md contains PPP content which may belong here or Chapter 17]*
+#### Explanation: CAPWAP Tunnel Keepalive
+
+**Question:** Two CAPWAP tunnels are established: data tunnel and control tunnel. They are both kept alive using Keepalive messages.
+**A.** Right
+**B.** Wrong
+
+**Correct Answer: Wrong**
+
+**Why "Wrong" is correct:**
+
+While it is true that CAPWAP establishes two tunnels, they use different "heartbeat" mechanisms:
+
+1. **Control Tunnel:** Uses **Echo** messages (Echo Request/Response) to maintain the link.
+2. **Data Tunnel:** Uses **Keepalive** messages.
+
+Because the statement suggests *both* use Keepalive messages, it is technically incorrect according to the protocol specifications.
 
 **Total Questions:** 5
 
@@ -1710,65 +1911,110 @@ Because wireless radios cannot listen and transmit on the same frequency at the 
 ### Q1-C17.png
 ![Q1-C17](C12-C17/C17/Q1-C17.png)
 
-#### Explanation: PPP Authentication Protocols
+#### Explanation: PPPoE Session Termination
 
-**Question:** Which of the following authentication protocols are supported by PPP?
+**Question:** Which of the following packet types is used by PPPoE to terminate a session?
+**A.** PADS
+**B.** PADT
+**C.** PADO
+**D.** PADR
 
-**Correct Answer: A and B. PAP and CHAP**
+**Correct Answer: B**
 
-**Why A and B are correct:**
+**Why B is correct:**
 
-PPP is a data link layer protocol used for direct connections between two nodes. It offers two main methods of security:
+PPPoE (Point-to-Point Protocol over Ethernet) has a specific termination phase.
 
-* **A (PAP - Password Authentication Protocol):** A simple, two-way handshake where the password is sent in **cleartext**. It is less secure but consumes fewer resources.
-* **B (CHAP - Challenge Handshake Authentication Protocol):** A more secure, three-way handshake that uses a **hashed** value (MD5) so the password is never actually sent over the link.
-
-**Why the others are incorrect:**
-
-* **C (MD5):** MD5 is a hashing algorithm used *within* CHAP, but it is not a standalone PPP authentication protocol.
-* **D (WEP):** This is a legacy wireless security protocol (Layer 2 for WLAN), not used for serial point-to-point links.
+* **PADT (PPPoE Active Discovery Terminate):** This packet can be sent by either the client or the server at any time after a session is established to indicate that the PPPoE session has been terminated.
+* **Other packets:** PADO (Offer), PADR (Request), and PADS (Session-confirmation) are all part of the **Discovery Phase** used to establish the session, not end it.
 
 ---
 
 ### Q2-C17.png
 ![Q2-C17](C12-C17/C17/Q2-C17.png)
 
-#### Explanation: PPP Link Establishment
+#### Explanation: PPP LCP Negotiation Response
 
-**Question:** What is the correct order of the PPP link establishment phases?
+**Question:** If a packet with unmatched parameters is received during LCP negotiation, which of the following packet types is used by PPP to respond to the packet?
+**A.** Configure-Ack
+**B.** Configure-Reject
+**C.** Configure-Nak
+**D.** Authenticate-Nak
 
-**Correct Answer: A. Dead, Establish, Authenticate, Network, Terminate**
+**Correct Answer: C**
 
-**Why A is correct:**
+**Why C is correct:**
 
-A PPP session follows a strict lifecycle:
+During the LCP (Link Control Protocol) phase, three types of responses exist for a Configuration Request:
 
-1. **Dead:** The physical link is inactive.
-2. **Establish:** LCP (Link Control Protocol) negotiates basic link parameters.
-3. **Authenticate:** (Optional) PAP or CHAP verifies the identity of the peer.
-4. **Network:** NCP (Network Control Protocol) configures higher-layer protocols like IPv4 or IPv6.
-5. **Terminate:** The link is closed.
+* **Configure-Ack:** All parameters are recognized and accepted.
+* **Configure-Reject:** Parameters are unrecognizable or not negotiable.
+* **Configure-Nak:** The parameters are recognized but the **values** are unacceptable (unmatched). The "Nak" response includes a suggested value that the sender should use instead.
 
 ---
 
 ### Q3-C17.png
 ![Q3-C17](C12-C17/C17/Q3-C17.png)
 
-*[Explanation not available - C17-Explanation.md contains Troubleshooting content which belongs to Chapter 22]*
+#### Explanation: PPP Authentication Protocols
+
+**Question:** Which of the following authentication protocols are supported by PPP? (Multiple Choice)
+**A.** EAP-TLS
+**B.** PAP
+**C.** EAP-MD5
+**D.** CHAP
+
+**Correct Answer: B and D**
+
+**Why B and D are correct:**
+
+The two primary authentication methods defined for PPP are:
+
+* **PAP (Password Authentication Protocol):** A simple two-way handshake where the password is sent in **plaintext**.
+* **CHAP (Challenge Handshake Authentication Protocol):** A more secure three-way handshake that uses a **MD5 hashing** algorithm so the password is never sent over the link.
 
 ---
 
 ### Q4-C17.png
 ![Q4-C17](C12-C17/C17/Q4-C17.png)
 
-*[Explanation not available - C17-Explanation.md contains Troubleshooting content which belongs to Chapter 22]*
+#### Explanation: PPP Negotiation Packet Types
+
+**Question:** Which of the following packet types are used during PPP negotiation? (Multiple Choice)
+**A.** LCP
+**B.** PAP
+**C.** CHAP
+**D.** IPCP
+
+**Correct Answer: A, B, C, D (All of them)**
+
+**Why these are all correct:**
+
+A successful PPP session involves multiple layers of negotiation:
+
+1. **LCP (Link Control Protocol):** Establishes, configures, and tests the physical link.
+2. **Authentication (PAP/CHAP):** Optional phase to verify the identity of the peer.
+3. **NCP (Network Control Protocol):** Configures different network layer protocols. **IPCP** (Internet Protocol Control Protocol) is the specific NCP used to negotiate IP addresses.
 
 ---
 
 ### Q5-C17.png
 ![Q5-C17](C12-C17/C17/Q5-C17.png)
 
-*[Explanation not available - C17-Explanation.md contains Troubleshooting content which belongs to Chapter 22]*
+#### Explanation: CHAP Password Transmission
+
+**Question:** During CHAP authentication, the password configured for a user is carried by PPP packets in plaintext.
+**A.** Right
+**B.** Wrong
+
+**Correct Answer: Wrong**
+
+**Why "Wrong" is correct:**
+
+This is the fundamental difference between PAP and CHAP.
+
+* **PAP** sends the password in plaintext (unencrypted).
+* **CHAP** uses a "Challenge" and "Response" mechanism. The password is used as a "key" to create an MD5 hash, but the **actual password is never transmitted**. This protects against "snooping" or "man-in-the-middle" attacks on the WAN link.
 
 **Total Questions:** 5
 

@@ -1,90 +1,84 @@
 
+---
+
+### **Q1-C14**
+
+**Question:** Which of the following NAT technologies can only use an interface address as the post-NAT public address?
+**A.** Easy IP
+**B.** NAT Server
+**C.** Dynamic NAT
+**D.** Static NAT
+**Correct Answer: A**
+
+**Explanation:**
+**Easy IP** is a special form of NAPT (Network Address Port Translation). It is specifically designed for scenarios where the public IP address of the egress interface is assigned dynamically (e.g., via DHCP or PPPoE).
+
+* Unlike other NAT types that require an "address pool," Easy IP directly uses the **current IP address of the interface** as the translation source.
+* It is the most common NAT implementation for small-to-medium offices and home routers.
 
 ---
 
-## 1. Python Execution Modes
+### **Q2-C14**
 
-**Question:** In which of the following modes can Python be executed?
+**Question:** Which of the following NAT technologies can be deployed on egress network devices to enable external users to access only a TCP port of an intranet server?
+**A.** Static NAT
+**B.** NAT Server
+**C.** Dynamic NAT
+**D.** NAPT
+**Correct Answer: B**
 
-**Correct Answer: C. Both interactive and script (non-interactive) mode.**
+**Explanation:**
+**NAT Server** (also known as Port Forwarding or Static NAT with port mapping) allows you to map a specific public IP and port to an internal server's private IP and port.
 
-### Why C is correct:
-
-Python offers flexibility in how code is run:
-
-* **Interactive Mode:** Allows you to type commands one by one in the Python shell (`>>>`) and see immediate results. This is great for testing small snippets of code.
-* **Script Mode:** You write a complete block of code in a `.py` file and execute it all at once. This is the standard method for running complex automation tasks.
-
----
-
-## 2. Python Data Containers
-
-**Question:** Which Python data type is an unordered collection of unique elements?
-
-**Correct Answer: B. Set**
-
-### Why B is correct:
-
-Understanding data structures is vital for handling network data (like a list of IP addresses):
-
-* **Set:** An unordered collection where every item is **unique** (no duplicates).
-* **List:** An **ordered** collection that allows duplicates (e.g., `[1, 2, 2, 3]`).
-* **Dictionary:** Stores data in **Key-Value pairs** (e.g., `{'interface': 'G0/0/1'}`).
-* **Tuple:** An ordered collection that **cannot be changed** (immutable) once created.
+* This is used when you want the outside world to "see" a service (like a Web Server on port 80) without exposing the entire server.
+* By specifying the port, you maintain better security by only allowing traffic to that one specific TCP/UDP service.
 
 ---
 
-## 3. Netmiko and Paramiko
+### **Q3-C14**
 
-**Question:** Why do network engineers use the `Netmiko` library in Python?
+**Question:** Which of the following are not translated by NAPT? (Multiple Choice)
+**A.** Destination IP address
+**B.** Source port number
+**C.** Destination port number
+**D.** Source IP address
+**Correct Answer: AC**
 
-**Correct Answer: A. To simplify SSH connections and command execution on multi-vendor devices.**
+**Explanation:**
+When an internal user accesses the internet:
 
-### Why A is correct:
-
-While `Paramiko` handles the low-level SSH "tunneling," **Netmiko** is built specifically for networking. It includes "drivers" for different vendors (Huawei, Cisco, Juniper). It automatically handles tasks like entering "System-view," waiting for command prompts, and cleaning up the output so it's ready for the engineer to read.
-
----
-
-## 4. NFV vs. SDN
-
-**Question:** What is the primary focus of NFV (Network Functions Virtualization)?
-
-**Correct Answer: B. Decoupling network functions from dedicated hardware.**
-
-### Why B is correct:
-
-* **NFV** is about **moving hardware to software**. Instead of buying a physical firewall, you run a virtual firewall (VNF) on a generic x86 server.
-* **SDN** is about **centralizing control**. It separates the Control Plane from the Forwarding Plane to manage the network through a single controller.
+* **NAPT translates:** The **Source IP** (D) and the **Source Port** (B). It replaces the private IP with a public one and assigns a unique port number to keep track of the session.
+* **NAPT does NOT translate:** The **Destination IP** (A) or the **Destination Port** (C). The router needs to keep these original so the packet actually reaches the intended server on the internet (e.g., Google's IP and port 443).
 
 ---
 
-## 5. Automation Advantages
+### **Q4-C14**
 
-**Question:** Which of the following is NOT a benefit of network automation?
+**Question:** Which of the following NAT technologies can be used to enable external users to proactively access an intranet server? (Multiple Choice)
+**A.** Static NAT
+**B.** NAT Server
+**C.** NAPT
+**D.** Easy IP
+**Correct Answer: AB**
 
-**Correct Answer: D. Increased equipment hardware costs.**
+**Explanation:**
+Most NAT types (Dynamic NAT, NAPT, Easy IP) are **unidirectional**—they only work if the internal host starts the conversation.
 
-### Why D is correct:
-
-Automation actually aims to **reduce** costs.
-
-* **A (Efficiency):** Tasks that took hours now take seconds.
-* **B (Accuracy):** Eliminates "fat-finger" typos made by humans.
-* **C (Agility):** The network can respond instantly to business needs, such as spinning up new bandwidth for a video conference.
-* **D (Incorrect):** Automation focuses on software and logic; it doesn't inherently increase the cost of the routers or switches themselves.
+* **Static NAT (A):** Creates a permanent 1-to-1 mapping. An external user can type in the public IP, and it always points to the same internal host.
+* **NAT Server (B):** Creates a static mapping for a specific service (IP + Port).
+Because these mappings are fixed in the NAT table, external users can "proactively" (initiate first) reach the internal server.
 
 ---
 
-## 6. YAML and Data Serialization
+### **Q5-C14**
 
-**Question:** Why is YAML often used in network automation tools like Ansible?
+**Question:** NAPT translates not only IP addresses but also port numbers to implement 1:N mappings between public and private addresses.
+**A.** Right
+**B.** Wrong
+**Correct Answer: Right**
 
-**Correct Answer: A. It is highly human-readable and easy to write.**
-
-### Why A is correct:
-
-YAML (Yet Another Markup Language) is often preferred over XML or JSON for configuration files because it uses **indentation** rather than complex brackets or tags. This makes it very easy for network engineers to read and edit without being professional software developers.
+**Explanation:**
+This is the core definition of **NAPT** (Network Address Port Translation). By using the Layer 4 **Port Number** as an identifier, a single public IP address can support thousands of internal private hosts simultaneously. The router keeps a "NAT session table" to remember which unique port belongs to which internal PC.
 
 ---
 

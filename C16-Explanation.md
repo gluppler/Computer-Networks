@@ -1,88 +1,94 @@
 
+---
+
+### **Q1-C16**
+
+**Question:** Which of the following 802.11 protocols works only on the 5 GHz frequency band?
+**A.** 802.11ax
+**B.** 802.11n
+**C.** 802.11ac
+**D.** 802.11g
+**Correct Answer: C**
+
+**Explanation:**
+The IEEE 802.11 standards operate on different frequency bands:
+
+* **802.11g:** Operates only on **2.4 GHz**.
+* **802.11n (Wi-Fi 4):** Operates on both **2.4 GHz** and **5 GHz**.
+* **802.11ac (Wi-Fi 5):** Operates strictly on the **5 GHz** band to avoid interference and provide higher throughput.
+* **802.11ax (Wi-Fi 6):** Operates on both **2.4 GHz** and **5 GHz** (and 6 GHz for Wi-Fi 6E).
 
 ---
 
-## 1. DHCP Working Principle
+### **Q2-C16**
 
-**Question:** Which of the following is the correct order of messages exchanged between a DHCP client and a DHCP server when a client requests an IP address for the first time?
+**Question:** Which of CAPWAP message types is used by an AC to deliver configuration files to APs?
+**A.** Configuration Update Request
+**B.** Image Data Request
+**C.** Configuration Update Response
+**D.** Image Data Response
+**Correct Answer: C**
 
-**Correct Answer: A. Discover, Offer, Request, ACK**
+**Explanation:**
+CAPWAP (Control and Provisioning of Wireless Access Points) protocol manages APs.
 
-### Why A is correct:
-
-The DHCP process (often called **DORA**) follows a specific four-step handshake:
-
-1. **Discover:** The client broadcasts a message to find available DHCP servers.
-2. **Offer:** The server responds with a proposed IP address and configuration.
-3. **Request:** The client selects an offer and asks the server to "reserve" that IP.
-4. **ACK (Acknowledgment):** The server confirms the lease and provides the final configuration details.
-
----
-
-## 2. DHCP Relay Agent
-
-**Question:** Why is a DHCP Relay Agent required in some network environments?
-
-**Correct Answer: B. To allow DHCP clients to obtain IP addresses from a server located in a different broadcast domain.**
-
-### Why B is correct:
-
-DHCP "Discover" messages are Layer 2 broadcasts, which routers do not forward. If the DHCP server is not on the same local network as the client, the router acting as the **Relay Agent** intercepts the broadcast and forwards it as a **Unicast** message to the remote server.
+* **Configuration Update Request:** Sent by an **AP** to the AC to request or report configuration status.
+* **Configuration Update Response:** Sent by the **AC** to the AP. This message carries the actual configuration parameters or files the AP needs to operate.
+* **Image Data:** Used for upgrading the AP's firmware (software image).
 
 ---
 
-## 3. DNS (Domain Name System)
+### **Q3-C16**
 
-**Question:** What is the primary function of a DNS server?
+**Question:** Which of the following data frames is used by an AP to periodically broadcast its SSID?
+**A.** Probe Request
+**B.** Probe Response
+**C.** Association Request
+**D.** Beacon
+**Correct Answer: D**
 
-**Correct Answer: A. Mapping domain names to IP addresses.**
+**Explanation:**
+WLAN management frames handle the "announcement" and "joining" of networks:
 
-### Why A is correct:
-
-Computers communicate using IP addresses, but humans prefer names. DNS acts as the "phonebook" of the internet, translating a human-readable name like `www.huawei.com` into its corresponding machine-readable IP address.
-
-### Why the others are incorrect:
-
-* **B:** Mapping MAC addresses to IPs is the job of **ARP**.
-* **C:** Encrypting traffic is the job of protocols like **SSL/TLS**.
-
----
-
-## 4. HTTP and HTTPS Port Numbers
-
-**Question:** Which port numbers are used by default for HTTP and HTTPS, respectively?
-
-**Correct Answer: C. 80 and 443**
-
-### Why C is correct:
-
-* **Port 80:** The standard port for **HTTP** (unencrypted web traffic).
-* **Port 443:** The standard port for **HTTPS** (encrypted web traffic), which uses SSL/TLS for security.
+* **Beacon Frame:** The AP sends this periodically (default every 100ms) to announce its presence, SSID, and supported rates.
+* **Probe Request:** Sent by a **Client** to search for a specific SSID.
+* **Probe Response:** Sent by an AP in response to a Probe Request.
+* **Association Request:** Sent by a client to join the AP after authentication.
 
 ---
 
-## 5. FTP Transfer Modes
+### **Q4-C16**
 
-**Question:** Which FTP mode is more "firewall-friendly" because the client initiates the data connection?
+**Question:** Which of the following modes are used by APs to dynamically discover an AC? (Multiple Choice)
+**A.** Manually specifying the AC IP address on the APs
+**B.** Broadcast mode
+**C.** DHCP mode
+**D.** DNS mode
+**Correct Answer: BCD**
 
-**Correct Answer: B. Passive Mode (PASV)**
+**Explanation:**
+APs need to find their controller (AC) to establish a CAPWAP tunnel. **Dynamic** methods include:
 
-### Why B is correct:
-
-* In **Active Mode**, the server tries to connect *back* to the client, which firewalls usually block.
-* In **Passive Mode**, the client initiates both the control and data connections, making it much easier for traffic to pass through security filters.
+* **Broadcast (B):** The AP sends a Discovery Request to the local subnet broadcast address.
+* **DHCP (C):** The DHCP server provides the AC's IP address to the AP using **Option 43**.
+* **DNS (D):** The AP queries a specific domain name (like `ac-address.local`) to get the AC's IP.
+* *Note: Manual configuration (A) is a static method, not a dynamic discovery method.*
 
 ---
 
-## 6. DHCP Address Leasing (True/False)
+### **Q5-C16**
 
-**Question:** A DHCP client will attempt to renew its IP address lease when 50% of the lease time has expired.
+**Question:** Two CAPWAP tunnels are established: data tunnel and control tunnel. They are both kept alive using Keepalive messages.
+**A.** Right
+**B.** Wrong
+**Correct Answer: Wrong**
 
-**Correct Answer: Right**
+**Explanation:**
+While it is true that CAPWAP establishes two tunnels, they use different "heartbeat" mechanisms:
 
-### Why "Right" is correct:
-
-By default, the renewal process (DHCP Request) starts at the **T1 timer** (50% of the lease duration). If the server doesn't respond, the client tries again at the **T2 timer** (87.5% of the lease duration) before finally giving up the IP when the lease hits 100%.
+1. **Control Tunnel:** Uses **Echo** messages (Echo Request/Response) to maintain the link.
+2. **Data Tunnel:** Uses **Keepalive** messages.
+Because the statement suggests *both* use Keepalive messages, it is technically incorrect according to the protocol specifications.
 
 ---
 
