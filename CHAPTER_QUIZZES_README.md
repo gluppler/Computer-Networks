@@ -1,6 +1,6 @@
 # HCIA-Datacom Chapter Quizzes
 
-This document lists all chapter quiz questions (PNG images) organized by chapter in numerical order.
+This document displays all chapter quiz questions (PNG images) organized by chapter in numerical order.
 
 ## Directory Structure
 
@@ -15,10 +15,17 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C1-C6/C1/`
 
-1. `Q1-C1.png`
-2. `Q2-C1.png`
-3. `Q3-C1.png`
-4. `Q4-C1.png`
+### Q1-C1.png
+![Q1-C1](C1-C6/C1/Q1-C1.png)
+
+### Q2-C1.png
+![Q2-C1](C1-C6/C1/Q2-C1.png)
+
+### Q3-C1.png
+![Q3-C1](C1-C6/C1/Q3-C1.png)
+
+### Q4-C1.png
+![Q4-C1](C1-C6/C1/Q4-C1.png)
 
 **Total Questions:** 4
 
@@ -28,13 +35,26 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C1-C6/C2/`
 
-1. `Q1-C2.png`
-2. `Q2-C2.png`
-3. `Q3-C2.png`
-4. `Q4-C2.png`
-5. `Q5-C2.png`
-6. `Q6-C2.png`
-7. `Q7-C2.png`
+### Q1-C2.png
+![Q1-C2](C1-C6/C2/Q1-C2.png)
+
+### Q2-C2.png
+![Q2-C2](C1-C6/C2/Q2-C2.png)
+
+### Q3-C2.png
+![Q3-C2](C1-C6/C2/Q3-C2.png)
+
+### Q4-C2.png
+![Q4-C2](C1-C6/C2/Q4-C2.png)
+
+### Q5-C2.png
+![Q5-C2](C1-C6/C2/Q5-C2.png)
+
+### Q6-C2.png
+![Q6-C2](C1-C6/C2/Q6-C2.png)
+
+### Q7-C2.png
+![Q7-C2](C1-C6/C2/Q7-C2.png)
 
 **Total Questions:** 7
 
@@ -44,10 +64,17 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C1-C6/C3/`
 
-1. `Q1-C3.png`
-2. `Q2-C3.png`
-3. `Q3-C3.png`
-4. `Q4-C3.png`
+### Q1-C3.png
+![Q1-C3](C1-C6/C3/Q1-C3.png)
+
+### Q2-C3.png
+![Q2-C3](C1-C6/C3/Q2-C3.png)
+
+### Q3-C3.png
+![Q3-C3](C1-C6/C3/Q3-C3.png)
+
+### Q4-C3.png
+![Q4-C3](C1-C6/C3/Q4-C3.png)
 
 **Total Questions:** 4
 
@@ -57,11 +84,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C1-C6/C4/`
 
-1. `Q1-C4.png`
-2. `Q2-C4.png`
-3. `Q3-C4.png`
-4. `Q4-C4.png`
-5. `Q5-C4.png`
+### Q1-C4.png
+![Q1-C4](C1-C6/C4/Q1-C4.png)
+
+### Q2-C4.png
+![Q2-C4](C1-C6/C4/Q2-C4.png)
+
+### Q3-C4.png
+![Q3-C4](C1-C6/C4/Q3-C4.png)
+
+### Q4-C4.png
+![Q4-C4](C1-C6/C4/Q4-C4.png)
+
+### Q5-C4.png
+![Q5-C4](C1-C6/C4/Q5-C4.png)
 
 **Total Questions:** 5
 
@@ -71,11 +107,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C1-C6/C5/`
 
-1. `Q1-C5.png`
-2. `Q2-C5.png`
-3. `Q3-C5.png`
-4. `Q4-C5.png`
-5. `Q5-C5.png`
+### Q1-C5.png
+![Q1-C5](C1-C6/C5/Q1-C5.png)
+
+### Q2-C5.png
+![Q2-C5](C1-C6/C5/Q2-C5.png)
+
+### Q3-C5.png
+![Q3-C5](C1-C6/C5/Q3-C5.png)
+
+### Q4-C5.png
+![Q4-C5](C1-C6/C5/Q4-C5.png)
+
+### Q5-C5.png
+![Q5-C5](C1-C6/C5/Q5-C5.png)
 
 **Total Questions:** 5
 
@@ -85,11 +130,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C1-C6/C6/`
 
-1. `Q1-C6.png`
-2. `Q2-C6.png`
-3. `Q3-C6.png`
-4. `Q4-C6.png`
-5. `Q5-C6.png`
+### Q1-C6.png
+![Q1-C6](C1-C6/C6/Q1-C6.png)
+
+### Q2-C6.png
+![Q2-C6](C1-C6/C6/Q2-C6.png)
+
+### Q3-C6.png
+![Q3-C6](C1-C6/C6/Q3-C6.png)
+
+### Q4-C6.png
+![Q4-C6](C1-C6/C6/Q4-C6.png)
+
+### Q5-C6.png
+![Q5-C6](C1-C6/C6/Q5-C6.png)
 
 **Total Questions:** 5
 
@@ -99,11 +153,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C7-C11/C7/`
 
-1. `Q1-C7.png`
-2. `Q2-C7.png`
-3. `Q3-C7.png`
-4. `Q4-C7.png`
-5. `Q5-C7.png`
+### Q1-C7.png
+![Q1-C7](C7-C11/C7/Q1-C7.png)
+
+### Q2-C7.png
+![Q2-C7](C7-C11/C7/Q2-C7.png)
+
+### Q3-C7.png
+![Q3-C7](C7-C11/C7/Q3-C7.png)
+
+### Q4-C7.png
+![Q4-C7](C7-C11/C7/Q4-C7.png)
+
+### Q5-C7.png
+![Q5-C7](C7-C11/C7/Q5-C7.png)
 
 **Total Questions:** 5
 
@@ -113,11 +176,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C7-C11/C8/`
 
-1. `Q1-C8.png`
-2. `Q2-C8.png`
-3. `Q3-C8.png`
-4. `Q4-C8.png`
-5. `Q5-C8.png`
+### Q1-C8.png
+![Q1-C8](C7-C11/C8/Q1-C8.png)
+
+### Q2-C8.png
+![Q2-C8](C7-C11/C8/Q2-C8.png)
+
+### Q3-C8.png
+![Q3-C8](C7-C11/C8/Q3-C8.png)
+
+### Q4-C8.png
+![Q4-C8](C7-C11/C8/Q4-C8.png)
+
+### Q5-C8.png
+![Q5-C8](C7-C11/C8/Q5-C8.png)
 
 **Total Questions:** 5
 
@@ -127,11 +199,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C7-C11/C9/`
 
-1. `Q1-C9.png`
-2. `Q2-C9.png`
-3. `Q3-C9.png`
-4. `Q4-C9.png`
-5. `Q5-C9.png`
+### Q1-C9.png
+![Q1-C9](C7-C11/C9/Q1-C9.png)
+
+### Q2-C9.png
+![Q2-C9](C7-C11/C9/Q2-C9.png)
+
+### Q3-C9.png
+![Q3-C9](C7-C11/C9/Q3-C9.png)
+
+### Q4-C9.png
+![Q4-C9](C7-C11/C9/Q4-C9.png)
+
+### Q5-C9.png
+![Q5-C9](C7-C11/C9/Q5-C9.png)
 
 **Total Questions:** 5
 
@@ -141,11 +222,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C7-C11/C10/`
 
-1. `Q1-C10.png`
-2. `Q2-C10.png`
-3. `Q3-C10.png`
-4. `Q4-C10.png`
-5. `Q5-C10.png`
+### Q1-C10.png
+![Q1-C10](C7-C11/C10/Q1-C10.png)
+
+### Q2-C10.png
+![Q2-C10](C7-C11/C10/Q2-C10.png)
+
+### Q3-C10.png
+![Q3-C10](C7-C11/C10/Q3-C10.png)
+
+### Q4-C10.png
+![Q4-C10](C7-C11/C10/Q4-C10.png)
+
+### Q5-C10.png
+![Q5-C10](C7-C11/C10/Q5-C10.png)
 
 **Total Questions:** 5
 
@@ -155,11 +245,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C7-C11/C11/`
 
-1. `Q1-C11.png`
-2. `Q2-C11.png`
-3. `Q3-C11.png`
-4. `Q4-C11.png`
-5. `Q5-C11.png`
+### Q1-C11.png
+![Q1-C11](C7-C11/C11/Q1-C11.png)
+
+### Q2-C11.png
+![Q2-C11](C7-C11/C11/Q2-C11.png)
+
+### Q3-C11.png
+![Q3-C11](C7-C11/C11/Q3-C11.png)
+
+### Q4-C11.png
+![Q4-C11](C7-C11/C11/Q4-C11.png)
+
+### Q5-C11.png
+![Q5-C11](C7-C11/C11/Q5-C11.png)
 
 **Total Questions:** 5
 
@@ -169,11 +268,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C12-C17/C12/`
 
-1. `Q1-C12.png`
-2. `Q2-C12.png`
-3. `Q3-C12.png`
-4. `Q4-C12.png`
-5. `Q5-C12.png`
+### Q1-C12.png
+![Q1-C12](C12-C17/C12/Q1-C12.png)
+
+### Q2-C12.png
+![Q2-C12](C12-C17/C12/Q2-C12.png)
+
+### Q3-C12.png
+![Q3-C12](C12-C17/C12/Q3-C12.png)
+
+### Q4-C12.png
+![Q4-C12](C12-C17/C12/Q4-C12.png)
+
+### Q5-C12.png
+![Q5-C12](C12-C17/C12/Q5-C12.png)
 
 **Total Questions:** 5
 
@@ -183,11 +291,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C12-C17/C13/`
 
-1. `Q1-C13.png`
-2. `Q2-C13.png`
-3. `Q3-C13.png`
-4. `Q4-C13.png`
-5. `Q5-C13.png`
+### Q1-C13.png
+![Q1-C13](C12-C17/C13/Q1-C13.png)
+
+### Q2-C13.png
+![Q2-C13](C12-C17/C13/Q2-C13.png)
+
+### Q3-C13.png
+![Q3-C13](C12-C17/C13/Q3-C13.png)
+
+### Q4-C13.png
+![Q4-C13](C12-C17/C13/Q4-C13.png)
+
+### Q5-C13.png
+![Q5-C13](C12-C17/C13/Q5-C13.png)
 
 **Total Questions:** 5
 
@@ -197,11 +314,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C12-C17/C14/`
 
-1. `Q1-C14.png`
-2. `Q2-C14.png`
-3. `Q3-C14.png`
-4. `Q4-C14.png`
-5. `Q5-C14.png`
+### Q1-C14.png
+![Q1-C14](C12-C17/C14/Q1-C14.png)
+
+### Q2-C14.png
+![Q2-C14](C12-C17/C14/Q2-C14.png)
+
+### Q3-C14.png
+![Q3-C14](C12-C17/C14/Q3-C14.png)
+
+### Q4-C14.png
+![Q4-C14](C12-C17/C14/Q4-C14.png)
+
+### Q5-C14.png
+![Q5-C14](C12-C17/C14/Q5-C14.png)
 
 **Total Questions:** 5
 
@@ -211,11 +337,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C12-C17/C15/`
 
-1. `Q1-C15.png`
-2. `Q2-C15.png`
-3. `Q3-C15.png`
-4. `Q4-C15.png`
-5. `Q5-C15.png`
+### Q1-C15.png
+![Q1-C15](C12-C17/C15/Q1-C15.png)
+
+### Q2-C15.png
+![Q2-C15](C12-C17/C15/Q2-C15.png)
+
+### Q3-C15.png
+![Q3-C15](C12-C17/C15/Q3-C15.png)
+
+### Q4-C15.png
+![Q4-C15](C12-C17/C15/Q4-C15.png)
+
+### Q5-C15.png
+![Q5-C15](C12-C17/C15/Q5-C15.png)
 
 **Total Questions:** 5
 
@@ -225,11 +360,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C12-C17/C16/`
 
-1. `Q1-C16.png`
-2. `Q2-C16.png`
-3. `Q3-C16.png`
-4. `Q4-C16.png`
-5. `Q5-C16.png`
+### Q1-C16.png
+![Q1-C16](C12-C17/C16/Q1-C16.png)
+
+### Q2-C16.png
+![Q2-C16](C12-C17/C16/Q2-C16.png)
+
+### Q3-C16.png
+![Q3-C16](C12-C17/C16/Q3-C16.png)
+
+### Q4-C16.png
+![Q4-C16](C12-C17/C16/Q4-C16.png)
+
+### Q5-C16.png
+![Q5-C16](C12-C17/C16/Q5-C16.png)
 
 **Total Questions:** 5
 
@@ -239,11 +383,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C12-C17/C17/`
 
-1. `Q1-C17.png`
-2. `Q2-C17.png`
-3. `Q3-C17.png`
-4. `Q4-C17.png`
-5. `Q5-C17.png`
+### Q1-C17.png
+![Q1-C17](C12-C17/C17/Q1-C17.png)
+
+### Q2-C17.png
+![Q2-C17](C12-C17/C17/Q2-C17.png)
+
+### Q3-C17.png
+![Q3-C17](C12-C17/C17/Q3-C17.png)
+
+### Q4-C17.png
+![Q4-C17](C12-C17/C17/Q4-C17.png)
+
+### Q5-C17.png
+![Q5-C17](C12-C17/C17/Q5-C17.png)
 
 **Total Questions:** 5
 
@@ -253,11 +406,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C18-C22/C18/`
 
-1. `Q1-C18.png`
-2. `Q2-C18.png`
-3. `Q3-C18.png`
-4. `Q4-C18.png`
-5. `Q5-C18.png`
+### Q1-C18.png
+![Q1-C18](C18-C22/C18/Q1-C18.png)
+
+### Q2-C18.png
+![Q2-C18](C18-C22/C18/Q2-C18.png)
+
+### Q3-C18.png
+![Q3-C18](C18-C22/C18/Q3-C18.png)
+
+### Q4-C18.png
+![Q4-C18](C18-C22/C18/Q4-C18.png)
+
+### Q5-C18.png
+![Q5-C18](C18-C22/C18/Q5-C18.png)
 
 **Total Questions:** 5
 
@@ -267,11 +429,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C18-C22/C19/`
 
-1. `Q1-C19.png`
-2. `Q2-C19.png`
-3. `Q3-C19.png`
-4. `Q4-C19.png`
-5. `Q5-C19.png`
+### Q1-C19.png
+![Q1-C19](C18-C22/C19/Q1-C19.png)
+
+### Q2-C19.png
+![Q2-C19](C18-C22/C19/Q2-C19.png)
+
+### Q3-C19.png
+![Q3-C19](C18-C22/C19/Q3-C19.png)
+
+### Q4-C19.png
+![Q4-C19](C18-C22/C19/Q4-C19.png)
+
+### Q5-C19.png
+![Q5-C19](C18-C22/C19/Q5-C19.png)
 
 **Total Questions:** 5
 
@@ -281,11 +452,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C18-C22/C20/`
 
-1. `Q1-C20.png`
-2. `Q2-C20.png`
-3. `Q3-C20.png`
-4. `Q4-C20.png`
-5. `Q5-C20.png`
+### Q1-C20.png
+![Q1-C20](C18-C22/C20/Q1-C20.png)
+
+### Q2-C20.png
+![Q2-C20](C18-C22/C20/Q2-C20.png)
+
+### Q3-C20.png
+![Q3-C20](C18-C22/C20/Q3-C20.png)
+
+### Q4-C20.png
+![Q4-C20](C18-C22/C20/Q4-C20.png)
+
+### Q5-C20.png
+![Q5-C20](C18-C22/C20/Q5-C20.png)
 
 **Total Questions:** 5
 
@@ -295,11 +475,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C18-C22/C21/`
 
-1. `Q1-C21.png`
-2. `Q2-C21.png`
-3. `Q3-C21.png`
-4. `Q4-C21.png`
-5. `Q5-C21.png`
+### Q1-C21.png
+![Q1-C21](C18-C22/C21/Q1-C21.png)
+
+### Q2-C21.png
+![Q2-C21](C18-C22/C21/Q2-C21.png)
+
+### Q3-C21.png
+![Q3-C21](C18-C22/C21/Q3-C21.png)
+
+### Q4-C21.png
+![Q4-C21](C18-C22/C21/Q4-C21.png)
+
+### Q5-C21.png
+![Q5-C21](C18-C22/C21/Q5-C21.png)
 
 **Total Questions:** 5
 
@@ -309,11 +498,20 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 **Location:** `C18-C22/C22/`
 
-1. `Q1-C22.png`
-2. `Q2-C22.png`
-3. `Q3-C22.png`
-4. `Q4-C22.png`
-5. `Q5-C22.png`
+### Q1-C22.png
+![Q1-C22](C18-C22/C22/Q1-C22.png)
+
+### Q2-C22.png
+![Q2-C22](C18-C22/C22/Q2-C22.png)
+
+### Q3-C22.png
+![Q3-C22](C18-C22/C22/Q3-C22.png)
+
+### Q4-C22.png
+![Q4-C22](C18-C22/C22/Q4-C22.png)
+
+### Q5-C22.png
+![Q5-C22](C18-C22/C22/Q5-C22.png)
 
 **Total Questions:** 5
 
@@ -359,10 +557,9 @@ This document lists all chapter quiz questions (PNG images) organized by chapter
 
 ## Usage
 
-1. Navigate to the appropriate chapter directory
-2. Open the PNG files in order (Q1, Q2, Q3, etc.)
-3. Review the questions and test your knowledge
-4. Check the corresponding Explanation file (e.g., `C1-Explanation.md`) for detailed answers and explanations
+1. Scroll through this README to view all quiz questions as images
+2. Review the questions and test your knowledge
+3. Check the corresponding Explanation file (e.g., `C1-Explanation.md`) for detailed answers and explanations
 
 ---
 
