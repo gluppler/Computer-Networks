@@ -11,6 +11,7 @@
 **Correct Answer: C**
 
 **Explanation:**
+
 In Huawei VRP, both the **LACP System Priority** and **LACP Interface Priority** use a default value of **32768**.
 
 * The system uses this priority to elect the **Actor** (the "boss" device that makes the decisions).
@@ -29,6 +30,7 @@ In Huawei VRP, both the **LACP System Priority** and **LACP Interface Priority**
 **Correct Answer: A**
 
 **Explanation:**
+
 To form a stable Eth-Trunk, member interfaces must be consistent in their physical and basic Layer 2 attributes.
 
 * **Must be the same:** Interface rate (B), Duplex mode (C), and VLAN configurations (D). If these differ, the interface will likely be placed in an "Unselected" or error state.
@@ -46,6 +48,7 @@ To form a stable Eth-Trunk, member interfaces must be consistent in their physic
 **Correct Answer: C**
 
 **Explanation:**
+
 Statement C is **false** because of the specific wording regarding "physical interface status."
 In LACP negotiation:
 
@@ -66,6 +69,7 @@ The selection is based on **LACP configuration/priority logic**, not solely or a
 **Correct Answer: BC**
 
 **Explanation:**
+
 The **Actor** is the device that controls which links in the bundle are active. To decide which device is the Actor, LACP compares the **System ID**, which consists of:
 
 1. **LACP System Priority (C):** The primary value compared. Lower is better.
@@ -82,6 +86,7 @@ Interface-specific values (A and D) are used later to select active links, but t
 **Correct Answer: Right**
 
 **Explanation:**
+
 The `least active-linknumber` command sets a minimum requirement. If the number of "Up" physical links falls below this threshold, the entire Eth-Trunk interface goes "Down."
 This prevents a situation where an Eth-Trunk is technically "Up" but only has 1 functioning link, which might not be enough to handle the traffic load, leading to massive congestion. It's a safety mechanism to ensure quality of service.
 

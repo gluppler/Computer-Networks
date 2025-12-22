@@ -11,6 +11,7 @@
 **Correct Answer: A**
 
 **Explanation:**
+
 The Domain Name System (DNS) is structured as a hierarchy:
 
 * **Root Domain:** Represented by a dot (`.`) at the very end (usually hidden).
@@ -30,6 +31,7 @@ The Domain Name System (DNS) is structured as a hierarchy:
 **Correct Answer: A**
 
 **Explanation:**
+
 The DHCP process follows the **DORA** sequence:
 
 1. **Discover:** The client broadcasts to find a server.
@@ -49,6 +51,7 @@ The DHCP process follows the **DORA** sequence:
 **Correct Answer: D**
 
 **Explanation:**
+
 FTP (File Transfer Protocol) is unique because it uses two separate "channels" (connections):
 
 * **Control Channel (Port 21):** Used for sending commands (login, list files, delete).
@@ -67,6 +70,7 @@ FTP (File Transfer Protocol) is unique because it uses two separate "channels" (
 **Correct Answer: ABCD**
 
 **Explanation:**
+
 DHCP is designed to make a device fully "network-ready" without manual configuration. A DHCP server can provide:
 
 * **IP Address and Subnet Mask:** Essential for Layer 3 communication.
@@ -84,6 +88,7 @@ DHCP is designed to make a device fully "network-ready" without manual configura
 **Correct Answer: Wrong**
 
 **Explanation:**
+
 This is a tricky but important distinction:
 
 * **Active Mode:** The server initiates the data connection from its **Port 20** to a random port on the client.

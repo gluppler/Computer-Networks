@@ -1,5 +1,3 @@
-
-
 ---
 
 ### **Q1-C8**
@@ -12,6 +10,7 @@
 **Correct Answer: C**
 
 **Explanation:**
+
 The **TPID (Tag Protocol Identifier)** is a 16-bit field in an Ethernet frame that indicates that a VLAN tag (802.1Q) follows. The fixed value for this is **0x8100**.
 
 * **0x0800** is for standard IPv4.
@@ -30,7 +29,8 @@ The **TPID (Tag Protocol Identifier)** is a 16-bit field in an Ethernet frame th
 **Correct Answer: D**
 
 **Explanation:**
-VLAN IDs are stored in a 12-bit field within the 802.1Q tag ().
+
+VLAN IDs are stored in a 12-bit field within the 802.1Q tag (2¹² = 4096).
 
 * The range is **0 to 4095**.
 * However, **0** and **4095** are reserved for system use.
@@ -48,6 +48,7 @@ VLAN IDs are stored in a 12-bit field within the 802.1Q tag ().
 **Correct Answer: D**
 
 **Explanation:**
+
 VLANs are typically assigned based on Layer 2 or Layer 3 information:
 
 * **Interface-based (Most common):** The VLAN is tied to a physical port.
@@ -83,6 +84,7 @@ There is no standard method for assigning VLANs based on **Transport-layer proto
 **Correct Answer: Wrong**
 
 **Explanation:**
+
 This is a common misconception. When an Access interface receives a tagged frame:
 
 1. It checks if the **VLAN ID** in the tag matches its own **PVID** (Port Default VLAN ID).

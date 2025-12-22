@@ -15,10 +15,9 @@ The **Root Bridge** is elected based on the **lowest Bridge ID (BID)**. The BID 
 
 1. **Compare Priorities:** SW1, SW2, and SW3 all have a priority of **4096**. SW4 has **8192**, so it is immediately eliminated.
 2. **Compare MAC Addresses:** Since the priorities tie, we look at the MAC addresses:
-* SW1: `4c1f-aabc-102a`
-* SW2: `4c1f-aabc-102b`
-* SW3: **`4c1f-aabc-001a`**
-
+   * SW1: `4c1f-aabc-102a`
+   * SW2: `4c1f-aabc-102b`
+   * SW3: **`4c1f-aabc-001a`**
 
 3. SW3 has the lowest MAC address (001a is smaller than 102a/102b). Therefore, **SW3** is elected as the Root Bridge.
 

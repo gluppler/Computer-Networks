@@ -81,7 +81,7 @@ Each statement accurately describes the primary responsibility of that specific 
 
 ### Why "Right" is correct:
 
-A Media Access Control (MAC) address is the permanent physical address of a network interface card (NIC). It is expressed as 12 hex characters (0-9, A-F), such as `00:1A:2B:3C:4D:5E`. Since each hex digit represents 4 bits,  bits total (which equals 6 bytes).
+A Media Access Control (MAC) address is the permanent physical address of a network interface card (NIC). It is expressed as 12 hex characters (0-9, A-F), such as `00:1A:2B:3C:4D:5E`. Since each hex digit represents 4 bits, 12 × 4 = 48 bits total (which equals 6 bytes).
 
 ---
 

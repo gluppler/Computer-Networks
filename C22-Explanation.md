@@ -1,83 +1,95 @@
 
 ---
 
-## 1. Troubleshooting "Input Errors" on an Interface
+### **Q1-C22**
 
-**Question:** When checking an interface with `display interface`, you see a high number of "Input Errors" and "CRC" errors. What is the most likely cause?
+**Question:** To conserve IP addresses, what mask size is used for IP addresses on router-to-router connections on an enterprise network?
+**A.** 28
+**B.** 29
+**C.** 30
+**D.** 24
+**Correct Answer: C**
 
-**Correct Answer: A. A faulty cable or electromagnetic interference.**
+**Explanation:**
 
-### Why A is correct:
+Point-to-point links (router-to-router) only require two usable IP addresses (one for each interface).
 
-**CRC (Cyclic Redundancy Check)** errors occur when a frame is corrupted during physical transmission. This is almost always a Layer 1 issue.
-
-* **Bad Cabling:** A damaged copper wire or a dirty fiber connector.
-* **Duplex Mismatch:** One side is set to "Half" while the other is "Full."
-* **Interference:** The cable is running too close to high-voltage power lines.
-
----
-
-## 2. OSPF Router ID Conflicts
-
-**Question:** If two routers in the same OSPF area are manually configured with the same Router ID, what will happen?
-
-**Correct Answer: B. The OSPF neighbor relationship will fail to form, or the routing table will be unstable.**
-
-### Why B is correct:
-
-The **Router ID (RID)** must be unique within an OSPF autonomous system. It acts as the "legal name" for the router. If two routers have the same name, the Link State Advertisements (LSAs) will conflict, and the Dijkstra algorithm will fail to calculate a stable shortest path.
+* A **30-bit mask** () provides a total of 4 addresses: 1 Network ID, 2 Usable IPs, and 1 Broadcast address.
+* This is the most efficient traditional way to prevent wasting addresses.
+* *Note: In modern networks, /31 is also sometimes used, but /30 remains the standard answer for enterprise conservation in most certification exams.*
 
 ---
 
-## 3. Asymmetric Routing Issues
+### **Q2-C22**
 
-**Question:** What is a common symptom of "Asymmetric Routing" (where traffic goes out one path and returns through another) when a stateful firewall is present?
+**Question:** On a campus network, which of the following functions can be enabled on access switches to prevent employees from accessing the unauthorized DHCP-enabled router?
+**A.** IPSG
+**B.** DHCP relay
+**C.** DHCP snooping
+**D.** Port security
+**Correct Answer: C**
 
-**Correct Answer: C. TCP connections are dropped even though both paths are physically up.**
+**Explanation:**
 
-### Why C is correct:
+**DHCP Snooping** is a security feature that acts like a firewall between untrusted hosts and trusted DHCP servers.
 
-Firewalls are "stateful," meaning they remember the "SYN" packet going out. If the "SYN-ACK" return packet comes back through a *different* firewall or a different interface that hasn't seen the initial request, the firewall will view it as an illegal packet and drop it.
-
----
-
-## 4. DHCP Exhaustion Attacks
-
-**Question:** Which security feature should be enabled on a switch to prevent a malicious user from exhausting all available IP addresses in a DHCP pool?
-
-**Correct Answer: B. DHCP Snooping**
-
-### Why B is correct:
-
-**DHCP Snooping** builds a binding table of valid MAC-to-IP mappings. It can also limit the rate of DHCP discovery packets. This prevents "DHCP Starvation" attacks where an attacker sends thousands of fake requests to "steal" all the IPs, leaving none for legitimate users.
+1. It divides ports into **Trusted** (connected to legitimate servers) and **Untrusted** (connected to users).
+2. If an "unauthorized" router sends a DHCP Offer on an untrusted port, the switch drops the packet. This prevents "Rogue DHCP" attacks where users get wrong gateway info.
 
 ---
 
-## 5. STP "Root Bridge" Stability
+### **Q3-C22**
 
-**Question:** Why is it a "best practice" to manually configure the Core Switch with an STP priority of 0 or 4096?
+**Question:** Which of the following technologies can be used on a campus network to improve network reliability? (Multiple Choice)
+**A.** iStack
+**B.** CSS
+**C.** VRRP
+**D.** Link aggregation
+**Correct Answer: ABCD**
 
-**Correct Answer: D. To ensure the Core Switch is always the Root Bridge and prevent network topology shifts.**
+**Explanation:**
 
-### Why D is correct:
+Each of these technologies provides a different "layer" of redundancy:
 
-In STP, the switch with the **lowest priority** becomes the Root Bridge (the center of the tree). If you leave it at default (32768), a cheap access switch plugged in later might happen to have a lower MAC address and take over as the Root. This would force all network traffic to travel through the slow access switch, causing a massive performance drop.
+* **iStack / CSS:** Virtualizes multiple physical switches into one logical switch to simplify management and provide chassis-level redundancy.
+* **VRRP:** Provides a virtual "gateway" IP so that if one router fails, another takes over without users losing internet access.
+* **Link Aggregation (Eth-Trunk):** Protects against a single cable or port failure by bundling multiple links together.
 
 ---
 
-## 6. Project Handover: The Configuration File
+### **Q4-C22**
 
-**Question:** Before completing a project, which command must be run to ensure the configuration is saved and will persist after a power failure?
+**Question:** Which of the following are stages in the lifecycle of a campus network project? (Multiple Choice)
+**A.** Planning and design
+**B.** Deployment and implementation
+**C.** Network O&M
+**D.** Network optimization
+**Correct Answer: ABCD**
 
-**Correct Answer: A. save**
+**Explanation:**
 
-### Why A is correct:
+A network is not just "built and forgotten." The standard lifecycle (PPDIOO or similar models) includes:
 
-Huawei VRP devices have two configuration files:
+1. **Planning/Design:** Assessing requirements and drawing the architecture.
+2. **Deployment:** Physical installation and configuration.
+3. **O&M (Operation and Maintenance):** Monitoring and fixing daily issues.
+4. **Optimization:** Upgrading and tuning performance based on usage patterns.
 
-1. **Current-configuration:** Resides in RAM (temporary).
-2. **Saved-configuration:** Resides in Flash/NVRAM (permanent).
-If you don't run the `save` command, all your hard work disappears the moment the router is turned off.
+---
+
+### **Q5-C22**
+
+**Question:** Certain terminals, such as servers and printers, can be allocated fixed IP addresses.
+**A.** Right
+**B.** Wrong
+**Correct Answer: Right**
+
+**Explanation:**
+
+Devices that provide services (like servers) or are shared resources (like printers) should have **Static (Fixed) IP addresses**.
+
+* If a printer's IP changed via DHCP every day, users would constantly lose their connection to it.
+* This can be done via manual configuration on the device or "DHCP Reservation" on the server.
 
 ---
 

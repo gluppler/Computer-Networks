@@ -1,5 +1,4 @@
-Based on the screenshot and your specific request, here is the explanation for **Q1-C4**.
-
+---
 ### **Q1-C4**
 
 **Question:** Which of the following is a private IP address?
@@ -42,12 +41,14 @@ To identify the correct answer, you must remember the three specific ranges rese
 **Correct Answer: C**
 
 **Explanation:**
-To find the number of **available** (usable) host addresses, we use the formula , where  is the number of host bits.
 
-1. A **/30** prefix means 30 bits are for the network, leaving **2 bits** for hosts ().
-2. Total addresses = .
+To find the number of **available** (usable) host addresses, we use the formula 2^n - 2, where n is the number of host bits.
+
+1. A **/30** prefix means 30 bits are for the network, leaving **2 bits** for hosts (32 - 30 = 2).
+2. Total addresses = 2² = 4.
 3. We must subtract **2** (one for the Network ID `172.16.0.0` and one for the Broadcast address `172.16.0.3`).
-4. Available host addresses = .
+4. Available host addresses = 4 - 2 = 2.
+
 *Note: /30 subnets are commonly used for point-to-point links between two routers.*
 
 ---

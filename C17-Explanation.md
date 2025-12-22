@@ -11,6 +11,7 @@
 **Correct Answer: B**
 
 **Explanation:**
+
 PPPoE (Point-to-Point Protocol over Ethernet) has a specific termination phase.
 
 * **PADT (PPPoE Active Discovery Terminate):** This packet can be sent by either the client or the server at any time after a session is established to indicate that the PPPoE session has been terminated.
@@ -28,6 +29,7 @@ PPPoE (Point-to-Point Protocol over Ethernet) has a specific termination phase.
 **Correct Answer: C**
 
 **Explanation:**
+
 During the LCP (Link Control Protocol) phase, three types of responses exist for a Configuration Request:
 
 * **Configure-Ack:** All parameters are recognized and accepted.
@@ -46,6 +48,7 @@ During the LCP (Link Control Protocol) phase, three types of responses exist for
 **Correct Answer: BD**
 
 **Explanation:**
+
 The two primary authentication methods defined for PPP are:
 
 * **PAP (Password Authentication Protocol):** A simple two-way handshake where the password is sent in **plaintext**.
@@ -63,6 +66,7 @@ The two primary authentication methods defined for PPP are:
 **Correct Answer: ABCD**
 
 **Explanation:**
+
 A successful PPP session involves multiple layers of negotiation:
 
 1. **LCP (Link Control Protocol):** Establishes, configures, and tests the physical link.
@@ -79,6 +83,7 @@ A successful PPP session involves multiple layers of negotiation:
 **Correct Answer: Wrong**
 
 **Explanation:**
+
 This is the fundamental difference between PAP and CHAP.
 
 * **PAP** sends the password in plaintext (unencrypted).

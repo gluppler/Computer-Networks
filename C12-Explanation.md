@@ -11,6 +11,7 @@
 **Correct Answer: C**
 
 **Explanation:**
+
 In Huawei VRP, ACL rules are identified by IDs (e.g., rule 5, rule 10). The **default increment is 5**.
 
 * This gap allows administrators to insert new rules between existing ones (for example, inserting a rule with ID 7 between 5 and 10) without having to delete and recreate the entire list.
@@ -28,6 +29,7 @@ In Huawei VRP, ACL rules are identified by IDs (e.g., rule 5, rule 10). The **de
 **Correct Answer: B**
 
 **Explanation:**
+
 Huawei classifies ACLs into specific number ranges based on their capabilities:
 
 * **2000–2999: Basic ACLs** (Filters based only on Source IP).
@@ -46,6 +48,7 @@ Huawei classifies ACLs into specific number ranges based on their capabilities:
 **Correct Answer: C**
 
 **Explanation:**
+
 As noted in Q2, the range **4000–4999** is reserved for **Layer 2 ACLs**. Unlike Basic or Advanced ACLs which look at Layer 3 (IP) and Layer 4 (Port) information, Layer 2 ACLs focus on the Ethernet frame header. They are used to permit or deny traffic based on physical hardware addresses (MAC) and the protocol type field in the frame.
 
 ---
@@ -60,6 +63,7 @@ As noted in Q2, the range **4000–4999** is reserved for **Layer 2 ACLs**. Unli
 **Correct Answer: CD**
 
 **Explanation:**
+
 Let's break down the rule requirements:
 
 1. **Protocol:** Must be **TCP**. (Eliminates B, which is UDP).
@@ -69,7 +73,6 @@ Let's break down the rule requirements:
 
 * **C matches all:** TCP + 192.168.1.1 + Port 80.
 * **D matches all:** TCP + 192.168.1.1 + Port 80 (Different source IP is allowed because of `source any`).
-
 
 ---
 
@@ -81,6 +84,7 @@ Let's break down the rule requirements:
 **Correct Answer: Right**
 
 **Explanation:**
+
 This is one of the primary differences between Basic and Advanced ACLs.
 
 * **Basic ACLs (2000-2999):** Can only check the Source IP address.

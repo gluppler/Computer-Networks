@@ -10,7 +10,9 @@
 **D.** LSU
 **Correct Answer: C**
 
-**Explanation:** OSPF uses five types of packets, but only the **Hello packet** is used for discovery and maintenance.
+**Explanation:**
+
+OSPF uses five types of packets, but only the **Hello packet** is used for discovery and maintenance.
 
 * **Hello:** Sent periodically (default every 10s on broadcast networks) to find neighbors and act as a "keepalive" to ensure they are still active.
 * **DD (Database Description):** Used during the exchange phase to describe the contents of the database.
@@ -29,12 +31,15 @@
 **D.** 64, 1, 1
 **Correct Answer: D**
 
-**Explanation:** OSPF calculates cost using the formula: .
+**Explanation:**
+
+OSPF calculates cost using the formula: Cost = Reference Bandwidth / Interface Bandwidth.
 In Huawei VRP, the default **Reference Bandwidth** is **100 Mbit/s**.
 
-1. **Serial (1.544 Mbit/s):**  Integer value is **64**.
-2. **Fast Ethernet (100 Mbit/s):** .
-3. **Gigabit Ethernet (1000 Mbit/s):** . Since the minimum cost is 1, it becomes **1**.
+1. **Serial (1.544 Mbit/s):** 100 / 1.544 ≈ 64. Integer value is **64**.
+2. **Fast Ethernet (100 Mbit/s):** 100 / 100 = 1.
+3. **Gigabit Ethernet (1000 Mbit/s):** 100 / 1000 = 0.1. Since the minimum cost is 1, it becomes **1**.
+
 *Note: This is why many engineers increase the reference bandwidth to 1000 or 10000 on modern networks so GE/10GE can have different costs.*
 
 ---
@@ -48,7 +53,9 @@ In Huawei VRP, the default **Reference Bandwidth** is **100 Mbit/s**.
 **D.** OSPF adjaceny table
 **Correct Answer: A**
 
-**Explanation:** OSPF maintains three distinct databases/tables:
+**Explanation:**
+
+OSPF maintains three distinct databases/tables:
 
 1. **Peer Table (Neighbor Table):** Lists discovered neighbors.
 2. **LSDB (Link State Database):** This is the "map" of the entire area. It stores all received **LSAs (Link State Advertisements)**. This is where link status information lives.
@@ -65,7 +72,9 @@ In Huawei VRP, the default **Reference Bandwidth** is **100 Mbit/s**.
 **D.** P2MP
 **Correct Answer: ABCD**
 
-**Explanation:** OSPF adapts its behavior based on the underlying Layer 2 technology:
+**Explanation:**
+
+OSPF adapts its behavior based on the underlying Layer 2 technology:
 
 * **P2P (Point-to-Point):** Used for PPP or HDLC links. No DR/BDR election.
 * **Broadcast:** Default for Ethernet. Requires **DR/BDR** election.
@@ -81,7 +90,9 @@ In Huawei VRP, the default **Reference Bandwidth** is **100 Mbit/s**.
 **B.** Wrong
 **Correct Answer: Right**
 
-**Explanation:** On a Multi-Access (MA) network like Ethernet, routers only reach the **FULL** state with the **DR (Designated Router)** and the **BDR (Backup Designated Router)**.
+**Explanation:**
+
+On a Multi-Access (MA) network like Ethernet, routers only reach the **FULL** state with the **DR (Designated Router)** and the **BDR (Backup Designated Router)**.
 Two "ordinary" routers (known as **DR Others**) do not need to synchronize their entire databases with each other. They stop their state machine at **2-way**, meaning they know each other exists but they rely on the DR to pass them the routing updates. This reduces the amount of OSPF traffic on the segment.
 
 ---

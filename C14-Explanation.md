@@ -11,6 +11,7 @@
 **Correct Answer: A**
 
 **Explanation:**
+
 **Easy IP** is a special form of NAPT (Network Address Port Translation). It is specifically designed for scenarios where the public IP address of the egress interface is assigned dynamically (e.g., via DHCP or PPPoE).
 
 * Unlike other NAT types that require an "address pool," Easy IP directly uses the **current IP address of the interface** as the translation source.
@@ -28,6 +29,7 @@
 **Correct Answer: B**
 
 **Explanation:**
+
 **NAT Server** (also known as Port Forwarding or Static NAT with port mapping) allows you to map a specific public IP and port to an internal server's private IP and port.
 
 * This is used when you want the outside world to "see" a service (like a Web Server on port 80) without exposing the entire server.
@@ -45,6 +47,7 @@
 **Correct Answer: AC**
 
 **Explanation:**
+
 When an internal user accesses the internet:
 
 * **NAPT translates:** The **Source IP** (D) and the **Source Port** (B). It replaces the private IP with a public one and assigns a unique port number to keep track of the session.
@@ -62,6 +65,7 @@ When an internal user accesses the internet:
 **Correct Answer: AB**
 
 **Explanation:**
+
 Most NAT types (Dynamic NAT, NAPT, Easy IP) are **unidirectional**—they only work if the internal host starts the conversation.
 
 * **Static NAT (A):** Creates a permanent 1-to-1 mapping. An external user can type in the public IP, and it always points to the same internal host.
@@ -78,6 +82,7 @@ Because these mappings are fixed in the NAT table, external users can "proactive
 **Correct Answer: Right**
 
 **Explanation:**
+
 This is the core definition of **NAPT** (Network Address Port Translation). By using the Layer 4 **Port Number** as an identifier, a single public IP address can support thousands of internal private hosts simultaneously. The router keeps a "NAT session table" to remember which unique port belongs to which internal PC.
 
 ---

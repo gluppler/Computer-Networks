@@ -1,73 +1,93 @@
 
+---
+
+### **Q1-C20**
+
+**Question:** In the standard NFV architecture, which of the following modules is responsible for virtualization of the underlying hardware?
+**A.** OSS
+**B.** MANO
+**C.** VNF
+**D.** NFVI
+**Correct Answer: D**
+
+**Explanation:**
+
+The **NFVI (Network Functions Virtualization Infrastructure)** is the foundation of the NFV model. It consists of the physical hardware (compute, storage, and network) and the **virtualization layer** (Hypervisor). This layer abstracts the physical resources and presents them as virtual resources to run the virtual functions.
+
+* **VNF (Virtual Network Function):** The software-based application (like a virtual firewall).
+* **MANO:** The management and orchestration layer.
+* **OSS:** Operational Support Systems (the high-level business management).
 
 ---
 
-## 1. Integrated Network Forwarding
+### **Q2-C20**
 
-**Question:** When a data packet travels from a source host to a destination host across multiple routers, which of the following is true?
+**Question:** In the SDN architecture, which of the following interfaces is used for communication between the controller and an SDN switch?
+**A.** RESTCONF interface
+**B.** RESTful interface
+**C.** Northbound interface
+**D.** Southbound interface
+**Correct Answer: D**
 
-**Correct Answer: B. The destination IP address remains the same, but the destination MAC address changes at each hop.**
+**Explanation:**
 
-### Why B is correct:
+SDN uses a directional naming convention for its interfaces:
 
-This is a core "Day in the Life of a Packet" concept:
-
-* **IP Address (Layer 3):** Acts like a mailing address. It stays the same from the start to the end so the routers know the ultimate destination.
-* **MAC Address (Layer 2):** Acts like a "delivery truck." It only gets the packet to the *next* router. Once it arrives, the router strips the old MAC and adds a new one to reach the next neighbor.
-
----
-
-## 2. Default Route Application
-
-**Question:** In a campus network, which device is the most appropriate place to configure a "Default Route" (0.0.0.0/0) pointing toward the ISP?
-
-**Correct Answer: D. The Egress Router**
-
-### Why D is correct:
-
-Internal routers use specific routes (like OSPF) to find internal buildings or VLANs. However, the internal routers don't know the path to every website on the Internet. The **Egress Router** (at the network exit) is configured with a default route that essentially says: "If the destination isn't inside our company, send it out to the Internet Service Provider."
+* **Southbound Interface (SBI):** Connects the **Controller to the physical/virtual switches** (the Data Plane). Common protocols here include OpenFlow and NETCONF.
+* **Northbound Interface (NBI):** Connects the **Controller to applications** and business logic. This typically uses RESTful APIs.
 
 ---
 
-## 3. Troubleshooting with "Display" Commands
+### **Q3-C20**
 
-**Question:** You have configured OSPF, but the neighbor relationship is stuck in the "Exchange" state. Which command would you use first to investigate?
+**Question:** In the OpenFlow architecture, which of the following packets are sent from the controller to a switch? (Multiple Choice)
+**A.** Controller-to-Switch
+**B.** Symmetric
+**C.** Switch-to-Controller
+**D.** Asynchronous
+**Correct Answer: AB**
 
-**Correct Answer: C. `display ospf peer**`
+**Explanation:**
 
-### Why C is correct:
+The OpenFlow protocol defines three main categories of messages:
 
-In Huawei’s VRP system, `display` commands are your primary diagnostic tools.
-
-* `display ospf peer` shows the current state of neighbors.
-* If they are stuck, it might indicate an MTU mismatch or a problem with the Link State Database (LSDB) synchronization.
-
----
-
-## 4. VLAN Routing: Sub-interfaces vs. VLANIF
-
-**Question:** Which method of inter-VLAN routing is commonly referred to as "Router-on-a-Stick"?
-
-**Correct Answer: A. Configuring sub-interfaces on a router with dot1q encapsulation.**
-
-### Why A is correct:
-
-In "Router-on-a-Stick," a single physical link between a switch and a router carries traffic for multiple VLANs. The router's physical port is divided into **logical sub-interfaces** (e.g., `G0/0/0.10`), each acting as the gateway for a specific VLAN.
+1. **Controller-to-Switch (A):** Initiated exclusively by the controller to manage or inspect the switch state.
+2. **Symmetric (B):** Can be initiated by **either** the switch or the controller (e.g., Hello or Echo/Keepalive messages).
+3. **Asynchronous:** Initiated by the **switch** to inform the controller of events (e.g., packet-in or port status changes).
+Since both A and B can be sent from the controller to the switch, they are the correct choices.
 
 ---
 
-## 5. Network Optimization: Link Aggregation
+### **Q4-C20**
 
-**Question:** To prevent a single point of failure and double the bandwidth between two switches, an engineer should use:
+**Question:** Which of the following are NFV features? (Multiple Choice)
+**A.** Partition division
+**B.** Isolation
+**C.** Encapsulation
+**D.** Hardware independence
+**Correct Answer: ABCD**
 
-**Correct Answer: B. Eth-Trunk**
+**Explanation:**
 
-### Why B is correct:
+NFV leverages standard IT virtualization features to transform networking:
 
-By bundling two 1Gbps physical links into one **Eth-Trunk** logical link, you get:
+* **Partitioning (A):** Multiple VNFs can share the same physical server.
+* **Isolation (B):** VNFs on the same hardware are logically separated; a failure in one does not affect the others.
+* **Encapsulation (C):** A VNF is essentially a file (VM/container), making it easy to move or copy.
+* **Hardware Independence (D):** VNFs run on general-purpose "White Box" or COTS (Commercial Off-The-Shelf) hardware rather than proprietary appliances.
 
-1. **2Gbps of bandwidth.**
-2. **Redundancy:** If one cable is cut, the traffic instantly switches to the other without the STP protocol having to recalculate, which prevents network downtime.
+---
+
+### **Q5-C20**
+
+**Question:** An OpenFlow switch forwards packets based on the flow table, and matches the destination MAC and IP addresses and other fields in the packets.
+**A.** Right
+**B.** Wrong
+**Correct Answer: Right**
+
+**Explanation:**
+
+Traditional switches use separate tables for MACs and IPs. In contrast, an **OpenFlow switch** uses one or more **Flow Tables**. Each entry in the table contains "Match Fields" that can include Layer 2 info (MACs, VLANs), Layer 3 info (IPs), and even Layer 4 info (TCP/UDP ports). This allows for highly granular control over how specific "flows" of traffic are handled.
 
 ---
 

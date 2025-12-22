@@ -11,6 +11,7 @@
 **Correct Answer: C**
 
 **Explanation:**
+
 The IEEE 802.11 standards operate on different frequency bands:
 
 * **802.11g:** Operates only on **2.4 GHz**.
@@ -30,6 +31,7 @@ The IEEE 802.11 standards operate on different frequency bands:
 **Correct Answer: C**
 
 **Explanation:**
+
 CAPWAP (Control and Provisioning of Wireless Access Points) protocol manages APs.
 
 * **Configuration Update Request:** Sent by an **AP** to the AC to request or report configuration status.
@@ -48,6 +50,7 @@ CAPWAP (Control and Provisioning of Wireless Access Points) protocol manages APs
 **Correct Answer: D**
 
 **Explanation:**
+
 WLAN management frames handle the "announcement" and "joining" of networks:
 
 * **Beacon Frame:** The AP sends this periodically (default every 100ms) to announce its presence, SSID, and supported rates.
@@ -67,6 +70,7 @@ WLAN management frames handle the "announcement" and "joining" of networks:
 **Correct Answer: BCD**
 
 **Explanation:**
+
 APs need to find their controller (AC) to establish a CAPWAP tunnel. **Dynamic** methods include:
 
 * **Broadcast (B):** The AP sends a Discovery Request to the local subnet broadcast address.
@@ -84,6 +88,7 @@ APs need to find their controller (AC) to establish a CAPWAP tunnel. **Dynamic**
 **Correct Answer: Wrong**
 
 **Explanation:**
+
 While it is true that CAPWAP establishes two tunnels, they use different "heartbeat" mechanisms:
 
 1. **Control Tunnel:** Uses **Echo** messages (Echo Request/Response) to maintain the link.

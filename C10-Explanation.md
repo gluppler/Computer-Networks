@@ -11,6 +11,7 @@
 **Correct Answer: C**
 
 **Explanation:**
+
 When using a router for inter-VLAN routing (Router-on-a-Stick), the router's physical interface is divided into logical sub-interfaces. Since the switch sends tagged traffic to the router, the router must know which VLAN tag corresponds to which sub-interface. The command **`dot1q termination vid vlan-id`** tells the router to:
 
 1. Remove the 802.1Q tag from incoming frames of that specific VLAN.
@@ -28,6 +29,7 @@ When using a router for inter-VLAN routing (Router-on-a-Stick), the router's phy
 **Correct Answer: A**
 
 **Explanation:**
+
 Layer 3 switches are "multi-layer" devices. They possess the hardware (ASICs) to perform **wire-speed Layer 2 switching** (using MAC tables) and **Layer 3 routing** (using IP routing tables). Statement A is false because it ignores the switch's fundamental ability to perform standard Layer 2 switching within the same VLAN.
 
 ---
@@ -42,6 +44,7 @@ Layer 3 switches are "multi-layer" devices. They possess the hardware (ASICs) to
 **Correct Answer: C**
 
 **Explanation:**
+
 Statement C is **false** because every time a packet is routed (moved from one subnet/VLAN to another), the Layer 2 Ethernet header must be rebuilt. The switch **must re-encapsulate** the frame with a new Source MAC (the MAC of the switch's outgoing interface) and a new Destination MAC (the MAC of the next hop or the end host).
 
 ---
@@ -56,6 +59,7 @@ Statement C is **false** because every time a packet is routed (moved from one s
 **Correct Answer: AB**
 
 **Explanation:**
+
 To support sub-interfaces on a router, the link between the switch and the router must be able to carry **tagged frames** from multiple VLANs.
 
 * **Trunk (B):** The standard choice for carrying multiple tagged VLANs.
@@ -71,6 +75,7 @@ To support sub-interfaces on a router, the link between the switch and the route
 **Correct Answer: Right**
 
 **Explanation:**
+
 IP addresses are end-to-end identifiers and generally do not change (unless NAT is used). However, MAC addresses are **local identifiers**. Each time a packet crosses a router (a Layer 3 device), the router strips the old Layer 2 header and adds a new one to get the packet to the next physical hop. Therefore, the MAC addresses are swapped at every router along the path.
 
 ---

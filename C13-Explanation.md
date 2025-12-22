@@ -11,6 +11,7 @@
 **Correct Answer: D**
 
 **Explanation:**
+
 The standard AAA architecture consists of three core components:
 
 1. **User:** The client/device requesting access.
@@ -30,6 +31,7 @@ While a **Portal Server** is often used in web-based authentication (like hotel 
 **Correct Answer: B**
 
 **Explanation:**
+
 RADIUS (Remote Authentication Dial-In User Service) is the most common open-standard AAA protocol.
 
 * **Protocol:** It uses **UDP** for speed and efficiency.
@@ -49,6 +51,7 @@ RADIUS (Remote Authentication Dial-In User Service) is the most common open-stan
 **Correct Answer: C**
 
 **Explanation:**
+
 AAA supports several ways to grant permissions:
 
 * **Local:** The NAS (router/switch) checks its own internal database.
@@ -68,6 +71,7 @@ AAA supports several ways to grant permissions:
 **Correct Answer: ABC**
 
 **Explanation:**
+
 AAA stands for:
 
 * **Authentication:** **Who** are you? (Verifying identity via username/password).
@@ -85,6 +89,7 @@ AAA stands for:
 **Correct Answer: Right**
 
 **Explanation:**
+
 Huawei devices use a **domain-based** management system. When a user logs in (e.g., `user1@huawei`), the NAS looks at the string after the `@` symbol to identify the domain. Each domain is mapped to specific AAA schemes (e.g., use RADIUS for authentication but Local for authorization). This allows a single device to handle different types of users (e.g., internal staff vs. guests) using different security rules.
 
 ---

@@ -10,7 +10,9 @@
 **D.** AdvRouter
 **Correct Answer: D**
 
-**Explanation:** When you run the `display ip routing-table` command on a Huawei VRP device, the brief output shows the fundamental information needed for packet forwarding:
+**Explanation:**
+
+When you run the `display ip routing-table` command on a Huawei VRP device, the brief output shows the fundamental information needed for packet forwarding:
 
 * **Destination/Mask:** The target network and its prefix length.
 * **Proto:** The protocol that learned the route (e.g., Direct, Static, OSPF).
@@ -33,7 +35,9 @@
 **D.** 0
 **Correct Answer: C**
 
-**Explanation:** Preference (also known as Administrative Distance) determines which protocol is "trusted" most when multiple protocols provide a path to the same destination. **Lower values are preferred.**
+**Explanation:**
+
+Preference (also known as Administrative Distance) determines which protocol is "trusted" most when multiple protocols provide a path to the same destination. **Lower values are preferred.**
 
 * **Direct:** 0 (Most trusted)
 * **OSPF:** 10
@@ -52,7 +56,9 @@
 **D.** 172.17.10.0/24
 **Correct Answer: B**
 
-**Explanation:** The **Longest Match Rule** states that if a packet matches multiple entries in the routing table, the router will choose the one with the **highest mask length** (the most specific route).
+**Explanation:**
+
+The **Longest Match Rule** states that if a packet matches multiple entries in the routing table, the router will choose the one with the **highest mask length** (the most specific route).
 
 * **A:** Does not match (172.16.10.2 is a different host than 172.16.10.1).
 * **B:** Matches. The first 24 bits (172.16.10) match perfectly.
@@ -71,7 +77,9 @@
 **D.** Static route
 **Correct Answer: BC**
 
-**Explanation:** Routing protocols are categorized by how they share information:
+**Explanation:**
+
+Routing protocols are categorized by how they share information:
 
 * **Link-State (B & C):** OSPF and IS-IS. These protocols share the entire "map" (topology) of the network. Every router calculates the best path independently using the SPF (Dijkstra) algorithm.
 * **Distance-Vector:** RIP and BGP (BGP is technically Path-Vector). These protocols share their routing tables with neighbors ("routing by rumor").
@@ -86,7 +94,9 @@
 **B.** Wrong
 **Correct Answer: Wrong**
 
-**Explanation:** To summarize these routes, we look at the third octet in binary:
+**Explanation:**
+
+To summarize these routes, we look at the third octet in binary:
 
 * 1: `0000 0001`
 * 2: `0000 0010`
