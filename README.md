@@ -1,2 +1,2 @@
-# HCIA-Datacom-Cheat
-The Lazy Cheatsheet for Huawei HCIA Datacom
+# Computer-Networks
+The Lazy Cheatsheet for Computer Networks
